@@ -2,6 +2,8 @@
 
 A straightforward task management app built with vanilla HTML, CSS, and JavaScript. It lets you organize tasks across three columns using drag-and-drop sticky notes that save automatically in your browser.
 
+**Live Demo:** [https://thechillbasu.github.io/Kanban-Sticky-Notes/](https://thechillbasu.github.io/Kanban-Sticky-Notes/)
+
 ## What It Does
 
 The app gives you a simple kanban board with three columns: To Do, In Progress, and Done. You can create sticky notes, drag them between columns as your work progresses, and delete them when you're finished. Everything saves to your browser's local storage, so your notes are there when you come back.
