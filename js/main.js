@@ -36,15 +36,15 @@ export function init() {
 
 function handleFormSubmit(event) {
   event.preventDefault();
-  
+
   const noteInput = document.getElementById('noteText');
   const prioritySelect = document.getElementById('prioritySelect');
   const columnSelect = document.getElementById('columnSelect');
-  
+
   const text = noteInput.value.trim();
   const priority = prioritySelect.value;
   const column = columnSelect.value;
-  
+
   if (text.length === 0) {
     noteInput.classList.add('invalidInput');
     setTimeout(() => noteInput.classList.remove('invalidInput'), 500);
@@ -58,7 +58,7 @@ function handleFormSubmit(event) {
 
 export function addNote(text, column, priority = 'medium') {
   const newNote = {
-    id: Date.now(), // timestamp as unique id
+    id: Date.now(),               // unique id
     text: text,
     column: column,
     priority: priority,
@@ -67,7 +67,7 @@ export function addNote(text, column, priority = 'medium') {
     completedAt: null,
     timeSpent: 0
   };
-  
+
   notes.push(newNote);
   saveNotes(notes);
   renderNotes(notes);
@@ -76,15 +76,19 @@ export function addNote(text, column, priority = 'medium') {
 
 function handleDeleteClick(event) {
   const deleteBtn = event.target.closest('.deleteBtn');
-  
+
   if (deleteBtn) {
     const noteElement = deleteBtn.closest('.stickyNote');
     const noteId = parseInt(noteElement.getAttribute('data-note-id'));
+
     deleteNote(noteId);
   }
 }
 
 export function deleteNote(noteId) {
+  // Stop timer if running
+  timerManager.stopTimer(noteId);
+  
   notes = notes.filter(note => note.id !== noteId);
   saveNotes(notes);
   renderNotes(notes);
@@ -309,8 +313,8 @@ export function renderNotes(notesToRender) {
   const todoContainer = document.querySelector('#todo .notesContainer');
   const inprogressContainer = document.querySelector('#inprogress .notesContainer');
   const doneContainer = document.querySelector('#done .notesContainer');
-  
-  // clear all columns
+
+  // clear existing
   todoContainer.innerHTML = '';
   inprogressContainer.innerHTML = '';
   doneContainer.innerHTML = '';
@@ -320,7 +324,7 @@ export function renderNotes(notesToRender) {
   
   sortedNotes.forEach(note => {
     const noteElement = createNoteElement(note);
-    
+
     if (note.column === 'todo') {
       todoContainer.appendChild(noteElement);
     } else if (note.column === 'inprogress') {
@@ -329,8 +333,8 @@ export function renderNotes(notesToRender) {
       doneContainer.appendChild(noteElement);
     }
   });
-  
-  initDragAndDrop();
+
+  initDragAndDrop(); // re-enable drag/drop after DOM updated
 }
 
 function sortNotesByPriority(notesToSort) {
@@ -345,7 +349,6 @@ function sortNotesByPriority(notesToSort) {
 
 export function updateEmptyState() {
   const emptyState = document.getElementById('emptyState');
-  
   if (notes.length > 0) {
     emptyState.style.display = 'none';
   } else {
@@ -356,8 +359,9 @@ export function updateEmptyState() {
 function showStorageWarning() {
   const warning = document.createElement('div');
   warning.className = 'storageWarning';
-  warning.innerHTML = '<p><i class="fas fa-exclamation-triangle"></i> Warning: Your notes will not be saved.</p>';
-  
+  warning.innerHTML =
+    '<p><i class="fas fa-exclamation-triangle"></i> Warning: Your notes will not be saved.</p>';
+
   const container = document.querySelector('.container');
   container.insertBefore(warning, container.firstChild);
 }
