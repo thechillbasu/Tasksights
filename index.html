@@ -38,35 +38,35 @@
 <body>
 
 <!-- Header with clock, title, and theme toggle -->
-<header class="app-header">
+<header class="appHeader">
   <!-- Live clock display -->
-  <div class="app-header__left">
-    <div class="live-clock" id="clockWidget">
-      <div class="clock-time" id="liveTime">00:00:00</div>
-      <div class="clock-date" id="liveDate">LOADING...</div>
+  <div class="appHeaderLeft">
+    <div class="liveClock" id="clockWidget">
+      <div class="clockTime" id="liveTime">00:00:00</div>
+      <div class="clockDate" id="liveDate">LOADING...</div>
     </div>
   </div>
 
   <!-- App title -->
-  <div class="app-header__center">
-    <h1 class="app-title">
-      <span class="word-kanban">Kanban</span>
-      <span class="word-sticky"> Sticky</span>
-      <span class="word-notes"> Notes</span>
+  <div class="appHeaderCenter">
+    <h1 class="appTitle">
+      <span class="wordKanban">Kanban</span>
+      <span class="wordSticky"> Sticky</span>
+      <span class="wordNotes"> Notes</span>
     </h1>
-    <div class="title-underline"></div>
-    <p class="app-subtitle">Visualize your tasks with drag-and-drop notes</p>
+    <div class="titleUnderline"></div>
+    <p class="appSubtitle">Visualize your tasks with drag-and-drop notes</p>
   </div>
 
   <!-- Theme toggle and My Events buttons -->
-  <div class="app-header__right">
-    <button id="myEventsBtn" class="my-events-btn" title="View My Events" type="button">
+  <div class="appHeaderRight">
+    <button id="myEventsBtn" class="myEventsBtn" title="View My Events" type="button">
       <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-      <span class="my-events-btn__label">My Events</span>
+      <span class="myEventsBtnLabel">My Events</span>
     </button>
-    <button id="themeToggle" class="theme-toggle" type="button">
+    <button id="themeToggle" class="themeToggle" type="button">
       <i class="fas fa-moon" aria-hidden="true"></i>
-      <span class="theme-toggle__label">Dark mode</span>
+      <span class="themeToggleLabel">Dark mode</span>
     </button>
   </div>
 </header>
@@ -120,16 +120,16 @@
 </div>
 
 <!-- Google Calendar Events Panel -->
-<div id="googleCalendarPanel" class="google-calendar-panel hidden">
-  <div class="google-calendar-panel__backdrop"></div>
-  <div class="google-calendar-panel__container">
-    <div class="google-calendar-panel__header">
+<div id="googleCalendarPanel" class="googleCalendarPanel hidden">
+  <div class="googleCalendarPanelBackdrop"></div>
+  <div class="googleCalendarPanelContainer">
+    <div class="googleCalendarPanelHeader">
       <h2 id="googleCalendarPanelTitle">Google Calendar</h2>
-      <button id="closeGooglePanelBtn" class="close-btn" aria-label="Close">
+      <button id="closeGooglePanelBtn" class="closeBtn" aria-label="Close">
         &times;
       </button>
     </div>
-    <div id="googleCalendarIframeContainer" class="google-calendar-panel__content">
+    <div id="googleCalendarIframeContainer" class="googleCalendarPanelContent">
       <iframe
         src="https://calendar.google.com/calendar/embed?src=en-gb.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata"
         style="border: 0"
@@ -138,11 +138,11 @@
         frameborder="0"
         scrolling="no"
         id="googleHolidayCalendarIframe"
-        class="google-holiday-calendar-iframe"
+        class="googleHolidayCalendarIframe"
       ></iframe>
     </div>
-    <div id="googleEventsListContainer" class="google-events-list-container hidden">
-      <div id="googleEventsList" class="google-events-list">
+    <div id="googleEventsListContainer" class="googleEventsListContainer hidden">
+      <div id="googleEventsList" class="googleEventsList">
         <!-- Events will be populated here -->
       </div>
     </div>

@@ -247,15 +247,16 @@ export function openTaskDetailsModal(note, getTimerManagerCallback, openTaskModa
   
   const priorityLabels = { high: 'High', medium: 'Medium', low: 'Low' };
   const columnLabels = { todo: 'To Do', inprogress: 'In Progress', done: 'Done' };
+  const priorityClasses = { high: 'priorityHigh', medium: 'priorityMedium', low: 'priorityLow' };
+  const statusClasses = { todo: 'statusTodo', inprogress: 'statusInprogress', done: 'statusDone' };
   
   // Calculate time spent for display
   let timeSpentDisplay = '';
   if (note.startedAt && (note.timeSpent > 0 || note.column === 'inprogress')) {
     if (note.column === 'inprogress' && getTimerManagerCallback) {
       const timerManager = getTimerManagerCallback();
-      const currentSessionTime = Date.now() - timerManager.getTimerStartTime(note.id);
-      const totalTime = (note.timeSpent || 0) + currentSessionTime;
-      timeSpentDisplay = formatElapsedTime(totalTime);
+      const elapsedTime = timerManager.getElapsedTime(note.id);
+      timeSpentDisplay = formatCompletedTime(elapsedTime);
     } else {
       timeSpentDisplay = formatCompletedTime(note.timeSpent);
     }
@@ -283,12 +284,12 @@ export function openTaskDetailsModal(note, getTimerManagerCallback, openTaskModa
             <div class="detailSection">
               <div class="detailLabel"><i class="fas fa-flag"></i> Priority</div>
               <div class="detailValue">
-                <span class="priorityBadge priority-${note.priority}">${priorityLabels[note.priority]}</span>
+                <span class="priorityBadge ${priorityClasses[note.priority]}">${priorityLabels[note.priority]}</span>
               </div>
             </div>
             <div class="detailSection">
               <div class="detailLabel"><i class="fas fa-columns"></i> Status</div>
-              <div class="detailValue statusBadge status-${note.column}">${columnLabels[note.column]}</div>
+              <div class="detailValue statusBadge ${statusClasses[note.column]}">${columnLabels[note.column]}</div>
             </div>
           </div>
           ${note.dueDate ? `
@@ -313,9 +314,9 @@ export function openTaskDetailsModal(note, getTimerManagerCallback, openTaskModa
               <div class="detailValue">${formatTimestamp(note.startedAt)}</div>
             </div>
           ` : ''}
-          ${timeSpentDisplay ? `
+          ${timeSpentDisplay && note.column !== 'done' ? `
             <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-hourglass-half"></i> Time Spent So Far</div>
+              <div class="detailLabel"><i class="fas fa-hourglass-half"></i> Time Spent On Task</div>
               <div class="detailValue">${timeSpentDisplay}</div>
             </div>
           ` : ''}
@@ -325,7 +326,7 @@ export function openTaskDetailsModal(note, getTimerManagerCallback, openTaskModa
               <div class="detailValue">${formatTimestamp(note.completedAt)}</div>
             </div>
             <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-clock"></i> Total Time Spent</div>
+              <div class="detailLabel"><i class="fas fa-clock"></i> Total Time Spent On Task</div>
               <div class="detailValue">${formatCompletedTime(note.timeSpent)}</div>
             </div>
           ` : ''}

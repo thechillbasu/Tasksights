@@ -11,7 +11,7 @@ import { formatElapsedTime, formatCompletedTime } from './timer.js';
 // Create a task card DOM element
 export function createNoteElement(note, timerManager) {
   const noteDiv = document.createElement('div');
-  noteDiv.className = `stickyNote column-${note.column}`;
+  noteDiv.className = `stickyNote column${note.column.charAt(0).toUpperCase() + note.column.slice(1)}`;
   noteDiv.setAttribute('data-note-id', note.id);
   
   // Add priority badge
@@ -73,24 +73,42 @@ export function createNoteElement(note, timerManager) {
   }
   
   // Add live timer for In Progress column
-  if (note.column === 'inprogress' && note.startedAt) {
+  if (note.column === 'inprogress') {
     const timerDiv = document.createElement('div');
     timerDiv.className = 'timerDisplay';
     let elapsedTime = 0;
+    
     if (timerManager && timerManager.isTimerActive(note.id)) {
       elapsedTime = timerManager.getElapsedTime(note.id);
     } else {
-      elapsedTime = Date.now() - note.startedAt;
+      // If timer is not active but task is in progress, show accumulated time
+      elapsedTime = note.timeSpent || 0;
     }
+    
     timerDiv.textContent = `⏱ ${formatElapsedTime(elapsedTime)}`;
     noteDiv.appendChild(timerDiv);
+    
+    // Add creation timestamp below timer
+    if (note.createdAt) {
+      const timestampDiv = document.createElement('div');
+      timestampDiv.className = 'noteTimestamp';
+      timestampDiv.textContent = formatTimestamp(note.createdAt);
+      noteDiv.appendChild(timestampDiv);
+    }
   }
   
   // Add completion info for Done column
   if (note.column === 'done') {
     const timeDisplay = document.createElement('div');
     timeDisplay.className = 'completedTimeDisplay';
-    timeDisplay.textContent = `Completed in ${formatCompletedTime(note.timeSpent)}`;
+    
+    // Check if time was tracked
+    if (note.timeSpent && note.timeSpent > 0) {
+      timeDisplay.textContent = `Completed in ${formatCompletedTime(note.timeSpent)}`;
+    } else {
+      timeDisplay.textContent = 'Completed [Completion Time Not Tracked]';
+    }
+    
     noteDiv.appendChild(timeDisplay);
     
     if (note.completedAt) {
@@ -107,7 +125,8 @@ export function createNoteElement(note, timerManager) {
 // Create a priority badge element
 export function createPriorityBadge(priority) {
   const badge = document.createElement('span');
-  badge.className = `priorityBadge priority-${priority}`;
+  const priorityClasses = { high: 'priorityHigh', medium: 'priorityMedium', low: 'priorityLow' };
+  badge.className = `priorityBadge ${priorityClasses[priority] || 'priorityMedium'}`;
   badge.setAttribute('data-priority', priority);
   
   // Set badge text based on priority level

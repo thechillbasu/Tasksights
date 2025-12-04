@@ -124,7 +124,7 @@
   border-top: 1px solid rgba(160, 168, 192, 0.1);
   background: rgba(19, 24, 36, 0.5);
 }
-body:not(.dark-mode) .modalFooter {
+body:not(.darkMode) .modalFooter {
   background: rgba(246, 248, 250, 0.8);
   border-top: 1px solid rgba(31, 35, 40, 0.15);
 }

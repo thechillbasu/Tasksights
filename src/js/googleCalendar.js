@@ -112,7 +112,7 @@ export async function fetchAndDisplayEvents() {
     console.error('Error fetching events', e);
     const container = document.getElementById('googleEventsList');
     if (container) {
-      container.innerHTML = '<p class="google-events-empty">Error loading events. Please try again.</p>';
+      container.innerHTML = '<p class="googleEventsEmpty">Error loading events. Please try again.</p>';
     }
   }
 }
@@ -122,7 +122,7 @@ function renderGoogleEvents(events) {
   if (!container) return;
 
   if (!events.length) {
-    container.innerHTML = '<p class="google-events-empty">No upcoming events</p>';
+    container.innerHTML = '<p class="googleEventsEmpty">No upcoming events</p>';
     return;
   }
 
@@ -140,12 +140,12 @@ function renderGoogleEvents(events) {
           minute: '2-digit',
         });
 
-    const location = event.location ? `<p class="google-event-location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(event.location)}</p>` : '';
+    const location = event.location ? `<p class="googleEventLocation"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(event.location)}</p>` : '';
 
     return `
-      <div class="google-event-item">
-        <p class="google-event-title">${escapeHtml(event.summary || 'Untitled event')}</p>
-        <p class="google-event-time">
+      <div class="googleEventItem">
+        <p class="googleEventTitle">${escapeHtml(event.summary || 'Untitled event')}</p>
+        <p class="googleEventTime">
           <i class="fas fa-clock"></i>
           ${timeString}
         </p>

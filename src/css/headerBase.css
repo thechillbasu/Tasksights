@@ -7,7 +7,7 @@
 
 /* Header base structure */
 
-.app-header {
+.appHeader {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -32,7 +32,7 @@
   flex-wrap: wrap;
 }
 
-.app-header::after {
+.appHeader::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -54,13 +54,13 @@
   50% { opacity: 0.6; }
 }
 
-.app-header__left {
+.appHeaderLeft {
   position: relative;
   flex-shrink: 0;
   flex-basis: 260px;
 }
 
-.app-header__center {
+.appHeaderCenter {
   text-align: center;
   position: absolute;
   left: 50%;
@@ -69,7 +69,7 @@
   min-width: 250px;
 }
 
-.app-header__right {
+.appHeaderRight {
   display: flex;
   align-items: center;
   gap: var(--space-lg);
@@ -78,7 +78,7 @@
   justify-content: flex-end;
 }
 
-.calendar-popup {
+.calendarPopup {
   position: absolute;
   top: calc(100% + var(--space-sm));
   left: 0;
@@ -95,7 +95,7 @@
   transition: all var(--transition-base);
 }
 
-.calendar-popup.active {
+.calendarPopup.active {
   opacity: 1;
   pointer-events: all;
   transform: translateY(0);
@@ -103,7 +103,7 @@
 
 /* Live clock widget */
 
-.live-clock {
+.liveClock {
   position: relative;
   padding: var(--space-md) var(--space-xl);
   background: linear-gradient(135deg, 
@@ -126,7 +126,7 @@
   cursor: pointer;
 }
 
-.live-clock:hover {
+.liveClock:hover {
   border-color: var(--accent-neon-cyan);
   background: linear-gradient(135deg, 
     rgba(0, 240, 255, 0.18) 0%,
@@ -140,7 +140,7 @@
   transform: translateY(-2px);
 }
 
-.clock-time {
+.clockTime {
   font-family: var(--font-mono);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
@@ -151,7 +151,7 @@
   margin-bottom: var(--space-sm);
 }
 
-.clock-date {
+.clockDate {
   font-size: 10px;
   font-weight: var(--font-weight-medium);
   color: var(--text-muted);
@@ -161,7 +161,7 @@
   margin-bottom: var(--space-xs);
 }
 
-.clock-hint {
+.clockHint {
   font-size: 9px;
   color: var(--text-muted);
   opacity: 0.5;
@@ -173,13 +173,13 @@
   margin-top: 2px;
 }
 
-.live-clock:hover .clock-hint {
+.liveClock:hover .clockHint {
   opacity: 0.8;
 }
 
 /* App title section */
 
-.app-title {
+.appTitle {
   font-size: 2rem;
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.02em;
@@ -189,7 +189,7 @@
   animation: titleGlow 4s ease-in-out infinite;
 }
 
-.app-title .word-kanban {
+.appTitle .wordKanban {
   background: linear-gradient(135deg, var(--accent-neon-cyan), var(--accent-neon-lime));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -197,7 +197,7 @@
   text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
 }
 
-.app-title .word-sticky {
+.appTitle .wordSticky {
   background: linear-gradient(135deg, var(--accent-neon-lime), var(--accent-neon-violet));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -205,7 +205,7 @@
   text-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
 }
 
-.app-title .word-notes {
+.appTitle .wordNotes {
   background: linear-gradient(135deg, var(--accent-neon-violet), var(--accent-neon-cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -218,7 +218,7 @@
   50% { filter: brightness(1.15); }
 }
 
-.title-underline {
+.titleUnderline {
   width: 120px;
   height: 2px;
   margin: 4px auto;
@@ -236,7 +236,7 @@
   50% { opacity: 1; }
 }
 
-.app-subtitle {
+.appSubtitle {
   font-size: 10px;
   color: var(--text-muted);
   margin: 0;
@@ -247,7 +247,7 @@
 
 /* Theme toggle button */
 
-.theme-toggle {
+.themeToggle {
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-lg);
   border: 2px solid rgba(0, 240, 255, 0.3);
@@ -272,7 +272,7 @@
   flex-shrink: 0;
 }
 
-.theme-toggle:hover {
+.themeToggle:hover {
   border-color: var(--accent-neon-cyan);
   background: linear-gradient(135deg, 
     rgba(0, 240, 255, 0.12) 0%,
@@ -286,11 +286,11 @@
   transform: translateY(-2px);
 }
 
-.theme-toggle i {
+.themeToggle i {
   font-size: var(--font-size-lg);
 }
 
-.theme-toggle__label {
+.themeToggleLabel {
   font-size: 14px;
   letter-spacing: 0.5px;
   white-space: nowrap;

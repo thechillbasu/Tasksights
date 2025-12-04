@@ -22,53 +22,59 @@
   transition: all var(--transition-base);
   backdrop-filter: blur(10px);
 }
-.priority-high {
+
+.priorityHigh {
   background: var(--priority-high-bg);
   color: var(--priority-high);
   border: 1px solid var(--priority-high);
   box-shadow: 0 0 10px var(--priority-high-glow);
 }
-.priority-high:hover {
+
+.priorityHigh:hover {
   box-shadow: 0 0 20px var(--priority-high-glow);
   transform: scale(1.05);
 }
-.priority-medium {
+
+.priorityMedium {
   background: var(--priority-medium-bg);
   color: var(--priority-medium);
   border: 1px solid var(--priority-medium);
   box-shadow: 0 0 10px var(--priority-medium-glow);
 }
-.priority-medium:hover {
+
+.priorityMedium:hover {
   box-shadow: 0 0 20px var(--priority-medium-glow);
   transform: scale(1.05);
 }
-.priority-low {
+
+.priorityLow {
   background: var(--priority-low-bg);
   color: var(--priority-low);
   border: 1px solid var(--priority-low);
   box-shadow: 0 0 10px var(--priority-low-glow);
 }
-.priority-low:hover {
+
+.priorityLow:hover {
   box-shadow: 0 0 20px var(--priority-low-glow);
   transform: scale(1.05);
 }
 
 /* Disable hover effects in details modal */
-.detailsView .priorityBadge.priority-high:hover,
-.detailsView .priorityBadge.priority-medium:hover,
-.detailsView .priorityBadge.priority-low:hover {
+.detailsView .priorityBadge.priorityHigh:hover,
+.detailsView .priorityBadge.priorityMedium:hover,
+.detailsView .priorityBadge.priorityLow:hover {
   transform: none;
   box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
 }
 
-.detailsView .priorityBadge.priority-high:hover {
+.detailsView .priorityBadge.priorityHigh:hover {
   box-shadow: 0 0 10px rgba(255, 0, 102, 0.2);
 }
 
-.detailsView .priorityBadge.priority-medium:hover {
+.detailsView .priorityBadge.priorityMedium:hover {
   box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
 }
 
-.detailsView .priorityBadge.priority-low:hover {
+.detailsView .priorityBadge.priorityLow:hover {
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }

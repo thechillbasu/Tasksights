@@ -1,11 +1,11 @@
 /* Header Light Mode Theme Overrides
  * 
- * Light mode styling overrides for all header components.
- * Provides alternative color schemes and styling for light theme.
+ * Light mode styling overrides for all header components providing
+ * alternative color schemes and styling for light theme.
  */
 
 /* Header container light mode */
-body:not(.dark-mode) .app-header {
+body:not(.darkMode) .appHeader {
   background: linear-gradient(180deg, 
     #ffffff 0%, 
     #f8f9fa 50%, 
@@ -18,7 +18,7 @@ body:not(.dark-mode) .app-header {
     0 4px 24px rgba(31, 35, 40, 0.08);
 }
 
-body:not(.dark-mode) .app-header::after {
+body:not(.darkMode) .appHeader::after {
   background: linear-gradient(90deg, 
     transparent 0%,
     rgba(9, 105, 218, 0.3) 20%,
@@ -29,7 +29,7 @@ body:not(.dark-mode) .app-header::after {
 }
 
 /* Clock light mode */
-body:not(.dark-mode) .live-clock {
+body:not(.darkMode) .liveClock {
   background: linear-gradient(135deg, 
     rgba(9, 105, 218, 0.08) 0%,
     rgba(130, 80, 223, 0.08) 100%
@@ -37,7 +37,7 @@ body:not(.dark-mode) .live-clock {
   border-color: rgba(9, 105, 218, 0.25);
 }
 
-body:not(.dark-mode) .live-clock:hover {
+body:not(.darkMode) .liveClock:hover {
   border-color: rgba(0, 240, 255, 0.5);
   background: linear-gradient(135deg, 
     rgba(9, 105, 218, 0.18) 0%,
@@ -51,47 +51,47 @@ body:not(.dark-mode) .live-clock:hover {
   transform: translateY(-2px);
 }
 
-body:not(.dark-mode) .clock-time {
+body:not(.darkMode) .clockTime {
   color: #0969da;
   text-shadow: 0 0 10px rgba(9, 105, 218, 0.2);
 }
 
-body:not(.dark-mode) .clock-date {
+body:not(.darkMode) .clockDate {
   color: #57606a;
 }
 
-body:not(.dark-mode) .clock-hint {
+body:not(.darkMode) .clockHint {
   color: #57606a;
   opacity: 0.8;
 }
 
-body:not(.dark-mode) .live-clock:hover .clock-hint {
+body:not(.darkMode) .liveClock:hover .clockHint {
   opacity: 1;
 }
 
 /* Title light mode */
-body:not(.dark-mode) .app-title .word-kanban {
+body:not(.darkMode) .appTitle .wordKanban {
   background: linear-gradient(135deg, #0969da, #1a7f37);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-body:not(.dark-mode) .app-title .word-sticky {
+body:not(.darkMode) .appTitle .wordSticky {
   background: linear-gradient(135deg, #1a7f37, #8250df);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-body:not(.dark-mode) .app-title .word-notes {
+body:not(.darkMode) .appTitle .wordNotes {
   background: linear-gradient(135deg, #8250df, #0969da);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-body:not(.dark-mode) .title-underline {
+body:not(.darkMode) .titleUnderline {
   background: linear-gradient(90deg, 
     transparent 0%,
     #0969da 50%,
@@ -100,13 +100,13 @@ body:not(.dark-mode) .title-underline {
   box-shadow: 0 0 8px rgba(9, 105, 218, 0.3);
 }
 
-body:not(.dark-mode) .app-subtitle {
+body:not(.darkMode) .appSubtitle {
   color: #57606a;
   opacity: 1;
 }
 
 /* Theme toggle light mode */
-body:not(.dark-mode) .theme-toggle {
+body:not(.darkMode) .themeToggle {
   border-color: rgba(9, 105, 218, 0.3);
   background: linear-gradient(135deg, 
     rgba(9, 105, 218, 0.08) 0%,
@@ -119,7 +119,7 @@ body:not(.dark-mode) .theme-toggle {
     0 0 20px rgba(9, 105, 218, 0.1);
 }
 
-body:not(.dark-mode) .theme-toggle:hover {
+body:not(.darkMode) .themeToggle:hover {
   border-color: #0969da;
   background: linear-gradient(135deg, 
     rgba(9, 105, 218, 0.12) 0%,
@@ -133,12 +133,12 @@ body:not(.dark-mode) .theme-toggle:hover {
 }
 
 /* Connect popup light mode */
-body:not(.dark-mode) .google-calendar-popup {
+body:not(.darkMode) .googleCalendarPopup {
   border-color: rgba(9, 105, 218, 0.3);
   box-shadow: 0 8px 24px rgba(31, 35, 40, 0.15), 0 0 40px rgba(9, 105, 218, 0.08);
 }
 
-body:not(.dark-mode) .btn-connect-google {
+body:not(.darkMode) .btnConnectGoogle {
   border-color: rgba(9, 105, 218, 0.3);
   background: linear-gradient(135deg, 
     rgba(9, 105, 218, 0.12) 0%,
@@ -149,7 +149,7 @@ body:not(.dark-mode) .btn-connect-google {
     0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-body:not(.dark-mode) .btn-connect-google:hover {
+body:not(.darkMode) .btnConnectGoogle:hover {
   border-color: #0969da;
   background: linear-gradient(135deg, 
     rgba(9, 105, 218, 0.16) 0%,
@@ -161,43 +161,43 @@ body:not(.dark-mode) .btn-connect-google:hover {
     0 0 20px rgba(9, 105, 218, 0.2);
 }
 
-body:not(.dark-mode) .btn-cancel-popup {
+body:not(.darkMode) .btnCancelPopup {
   border-color: rgba(31, 35, 40, 0.2);
 }
 
-body:not(.dark-mode) .btn-cancel-popup:hover {
+body:not(.darkMode) .btnCancelPopup:hover {
   border-color: rgba(31, 35, 40, 0.4);
   background: rgba(31, 35, 40, 0.05);
 }
 
 /* Calendar panel light mode */
-body:not(.dark-mode) .google-calendar-panel {
+body:not(.darkMode) .googleCalendarPanel {
   border-color: rgba(9, 105, 218, 0.2);
   box-shadow: 0 8px 24px rgba(31, 35, 40, 0.15), 0 0 40px rgba(9, 105, 218, 0.08);
 }
 
-body:not(.dark-mode) .google-calendar-panel__header {
+body:not(.darkMode) .googleCalendarPanelHeader {
   background: rgba(9, 105, 218, 0.05);
   border-bottom-color: rgba(9, 105, 218, 0.1);
 }
 
-body:not(.dark-mode) .close-btn:hover {
+body:not(.darkMode) .closeBtn:hover {
   background: rgba(9, 105, 218, 0.1);
   color: #0969da;
 }
 
-body:not(.dark-mode) .btn-sign-out {
+body:not(.darkMode) .btnSignOut {
   border-color: rgba(31, 35, 40, 0.2);
   color: var(--text-secondary);
 }
 
-body:not(.dark-mode) .btn-sign-out:hover {
+body:not(.darkMode) .btnSignOut:hover {
   background: rgba(207, 34, 46, 0.1);
   border-color: #cf222e;
   color: #cf222e;
 }
 
-body:not(.dark-mode) .my-events-btn {
+body:not(.darkMode) .myEventsBtn {
   border-color: rgba(9, 105, 218, 0.3);
   background: linear-gradient(135deg, 
     rgba(9, 105, 218, 0.08) 0%,
@@ -205,7 +205,7 @@ body:not(.dark-mode) .my-events-btn {
   );
 }
 
-body:not(.dark-mode) .my-events-btn:hover {
+body:not(.darkMode) .myEventsBtn:hover {
   border-color: #0969da;
   background: linear-gradient(135deg, 
     rgba(9, 105, 218, 0.12) 0%,
@@ -218,10 +218,10 @@ body:not(.dark-mode) .my-events-btn:hover {
     0 0 30px rgba(9, 105, 218, 0.15);
 }
 
-body:not(.dark-mode) .google-event-item {
+body:not(.darkMode) .googleEventItem {
   border-color: rgba(9, 105, 218, 0.1);
 }
 
-body:not(.dark-mode) .google-event-item:hover {
+body:not(.darkMode) .googleEventItem:hover {
   border-color: rgba(9, 105, 218, 0.3);
 }

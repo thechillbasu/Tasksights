@@ -57,7 +57,7 @@ export function init() {
   function showCalendarPanel(view) {
     if (!calendarPanel) return;
     
-    const container = calendarPanel.querySelector('.google-calendar-panel__container');
+    const container = calendarPanel.querySelector('.googleCalendarPanelContainer');
     if (container) {
       container.classList.remove('closing');
     }
@@ -106,7 +106,7 @@ export function init() {
   // Close calendar panel on backdrop click
   if (calendarPanel) {
     calendarPanel.addEventListener('click', (e) => {
-      if (e.target.classList.contains('google-calendar-panel__backdrop')) {
+      if (e.target.classList.contains('googleCalendarPanelBackdrop')) {
         closeGooglePanel();
       }
     });
@@ -177,9 +177,15 @@ function handleDeleteNote(noteId) {
 
 // Start timers for all tasks in progress
 function initializeTimers() {
+  // Clear all existing timers first
+  timerManager.clearAllTimers();
+  
   notes.forEach(note => {
-    if (note.column === 'inprogress' && note.startedAt) {
-      timerManager.startTimer(note.id, note.startedAt);
+    if (note.column === 'inprogress') {
+      // Calculate adjusted start time to account for previously accumulated time
+      const previousTimeSpent = note.timeSpent || 0;
+      const adjustedStartTime = Date.now() - previousTimeSpent;
+      timerManager.startTimer(note.id, adjustedStartTime);
     }
   });
 }

@@ -47,7 +47,7 @@
   background-position: right var(--space-md) center;
   background-size: 12px;
 }
-body:not(.dark-mode) .formGroup select {
+body:not(.darkMode) .formGroup select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230969da' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
 }
 .formGroup input[type="text"]:focus,
@@ -108,7 +108,7 @@ body:not(.dark-mode) .formGroup select {
   font-size: var(--font-size-base);
   margin-bottom: var(--space-md);
 }
-body:not(.dark-mode) .dueDateGroup {
+body:not(.darkMode) .dueDateGroup {
   background: linear-gradient(135deg, rgba(9, 105, 218, 0.08), rgba(130, 80, 223, 0.08));
   border-color: rgba(9, 105, 218, 0.3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 4px 12px rgba(9, 105, 218, 0.15);

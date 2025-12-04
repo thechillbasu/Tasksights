@@ -20,6 +20,12 @@ export function isStorageAvailable() {
 
 // Add missing fields to old notes for backward compatibility
 export function migrateNote(note) {
+  // If task is in done column but has no completedAt, set it to createdAt or now
+  let completedAt = note.completedAt || null;
+  if (note.column === 'done' && !completedAt) {
+    completedAt = note.createdAt || Date.now();
+  }
+  
   return {
     id: note.id,
     text: note.text,
@@ -30,7 +36,7 @@ export function migrateNote(note) {
     createdAt: note.createdAt || Date.now(),
     lastEditedAt: note.lastEditedAt || null,
     startedAt: note.startedAt || null,
-    completedAt: note.completedAt || null,
+    completedAt: completedAt,
     timeSpent: note.timeSpent || 0
   };
 }

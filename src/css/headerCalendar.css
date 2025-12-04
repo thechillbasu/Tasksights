@@ -1,11 +1,11 @@
 /* Header Google Calendar Integration
  * 
- * Styles for Google Calendar connection popup and events panel.
- * Includes connect popup, calendar panel, event items, and related components.
+ * Styles for Google Calendar connection popup and events panel including
+ * connect popup, calendar panel, event items, and related components.
  */
 
 /* Google Calendar connect popup */
-.google-calendar-popup {
+.googleCalendarPopup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -21,32 +21,32 @@
   backdrop-filter: blur(20px);
 }
 
-.google-calendar-popup.hidden {
+.googleCalendarPopup.hidden {
   display: none;
 }
 
-.google-calendar-popup__content {
+.googleCalendarPopupContent {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
   text-align: center;
 }
 
-.google-calendar-popup__content h3 {
+.googleCalendarPopupContent h3 {
   margin: 0 0 var(--space-sm) 0;
   font-size: var(--font-size-lg);
   color: var(--text-primary);
   font-weight: var(--font-weight-semibold);
 }
 
-.google-calendar-popup__content p {
+.googleCalendarPopupContent p {
   margin: 0;
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
   line-height: 1.5;
 }
 
-.btn-connect-google {
+.btnConnectGoogle {
   padding: var(--space-md) var(--space-lg);
   border-radius: var(--radius-md);
   border: 2px solid rgba(0, 240, 255, 0.3);
@@ -68,7 +68,7 @@
   gap: var(--space-sm);
 }
 
-.btn-connect-google:hover {
+.btnConnectGoogle:hover {
   border-color: var(--accent-neon-cyan);
   background: linear-gradient(135deg, 
     rgba(0, 240, 255, 0.16) 0%,
@@ -81,7 +81,7 @@
   transform: translateY(-2px);
 }
 
-.btn-cancel-popup {
+.btnCancelPopup {
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-md);
   border: 1px solid rgba(160, 168, 192, 0.3);
@@ -92,14 +92,14 @@
   transition: all var(--transition-fast);
 }
 
-.btn-cancel-popup:hover {
+.btnCancelPopup:hover {
   border-color: var(--text-secondary);
   color: var(--text-primary);
   background: rgba(160, 168, 192, 0.1);
 }
 
-/* My Events button - styled similar to theme toggle */
-.my-events-btn {
+/* My Events button */
+.myEventsBtn {
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-lg);
   border: 2px solid rgba(0, 240, 255, 0.3);
@@ -124,7 +124,7 @@
   flex-shrink: 0;
 }
 
-.my-events-btn:hover {
+.myEventsBtn:hover {
   border-color: var(--accent-neon-cyan);
   background: linear-gradient(135deg, 
     rgba(0, 240, 255, 0.12) 0%,
@@ -138,18 +138,18 @@
   transform: translateY(-2px);
 }
 
-.my-events-btn i {
+.myEventsBtn i {
   font-size: var(--font-size-lg);
 }
 
-.my-events-btn__label {
+.myEventsBtnLabel {
   font-size: 14px;
   letter-spacing: 0.5px;
   white-space: nowrap;
 }
 
 /* Google Calendar events panel */
-.google-calendar-panel {
+.googleCalendarPanel {
   position: fixed;
   top: 0;
   left: 0;
@@ -161,11 +161,11 @@
   justify-content: center;
 }
 
-.google-calendar-panel.hidden {
+.googleCalendarPanel.hidden {
   display: none;
 }
 
-.google-calendar-panel__backdrop {
+.googleCalendarPanelBackdrop {
   position: absolute;
   top: 0;
   left: 0;
@@ -181,7 +181,7 @@
   to { opacity: 1; }
 }
 
-.google-calendar-panel__container {
+.googleCalendarPanelContainer {
   position: relative;
   width: 800px;
   height: 650px;
@@ -210,7 +210,7 @@
   }
 }
 
-.google-calendar-panel__container.closing {
+.googleCalendarPanelContainer.closing {
   animation: slideDown var(--transition-base);
 }
 
@@ -225,11 +225,7 @@
   }
 }
 
-.google-calendar-panel.hidden {
-  display: none;
-}
-
-.google-calendar-panel__header {
+.googleCalendarPanelHeader {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -241,7 +237,7 @@
   position: relative;
 }
 
-.google-calendar-panel__header h2 {
+.googleCalendarPanelHeader h2 {
   margin: 0 auto;
   font-size: 1.5rem;
   color: var(--text-primary);
@@ -250,7 +246,7 @@
   width: 100%;
 }
 
-.close-btn {
+.closeBtn {
   background: none;
   border: none;
   color: var(--text-secondary);
@@ -271,13 +267,13 @@
   z-index: 10;
 }
 
-.close-btn:hover {
+.closeBtn:hover {
   background: rgba(239, 68, 68, 0.1);
   color: var(--color-danger);
   transform: translateY(-50%) rotate(90deg);
 }
 
-.btn-sign-out {
+.btnSignOut {
   background: none;
   border: 1px solid rgba(160, 168, 192, 0.3);
   color: var(--text-secondary);
@@ -293,13 +289,13 @@
   font-weight: var(--font-weight-medium);
 }
 
-.btn-sign-out:hover {
+.btnSignOut:hover {
   background: rgba(239, 68, 68, 0.1);
   border-color: var(--color-danger);
   color: var(--color-danger);
 }
 
-.google-calendar-panel__content {
+.googleCalendarPanelContent {
   flex: 1;
   overflow: hidden;
   display: flex;
@@ -317,7 +313,7 @@
   );
 }
 
-.google-holiday-calendar-iframe {
+.googleHolidayCalendarIframe {
   width: 100%;
   max-width: 720px;
   height: 540px;
@@ -337,7 +333,7 @@
   overflow: hidden;
 }
 
-.google-holiday-calendar-iframe:hover {
+.googleHolidayCalendarIframe:hover {
   box-shadow: 
     0 12px 32px rgba(0, 0, 0, 0.5),
     0 0 60px rgba(0, 240, 255, 0.25),
@@ -345,7 +341,7 @@
   transform: translateY(-2px);
 }
 
-.google-events-list-container {
+.googleEventsListContainer {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
@@ -354,45 +350,45 @@
   min-height: 0;
 }
 
-.google-events-list-container.hidden {
+.googleEventsListContainer.hidden {
   display: none;
 }
 
 /* Custom scrollbar for events list */
-.google-events-list-container::-webkit-scrollbar {
+.googleEventsListContainer::-webkit-scrollbar {
   width: 8px;
 }
 
-.google-events-list-container::-webkit-scrollbar-track {
+.googleEventsListContainer::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.2);
   border-radius: var(--radius-sm);
   margin: var(--space-xs);
 }
 
-.google-events-list-container::-webkit-scrollbar-thumb {
+.googleEventsListContainer::-webkit-scrollbar-thumb {
   background: rgba(0, 240, 255, 0.3);
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
 }
 
-.google-events-list-container::-webkit-scrollbar-thumb:hover {
+.googleEventsListContainer::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 240, 255, 0.5);
 }
 
 /* Firefox scrollbar */
-.google-events-list-container {
+.googleEventsListContainer {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 240, 255, 0.3) rgba(0, 0, 0, 0.2);
 }
 
-.google-events-list {
+.googleEventsList {
   padding: var(--space-md);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
 }
 
-.google-event-item {
+.googleEventItem {
   background: var(--bg-card);
   border: 2px solid rgba(0, 240, 255, 0.25);
   border-radius: var(--radius-md);
@@ -400,29 +396,29 @@
   transition: all var(--transition-fast);
 }
 
-.google-event-item:hover {
+.googleEventItem:hover {
   border-color: rgba(0, 240, 255, 0.5);
   background: var(--bg-card-hover);
   transform: translateX(4px);
 }
 
-/* Light mode - darker borders for better visibility */
-body:not(.dark-mode) .google-event-item {
+/* Light mode darker borders */
+body:not(.darkMode) .googleEventItem {
   border: 2px solid #1f2328;
 }
 
-body:not(.dark-mode) .google-event-item:hover {
+body:not(.darkMode) .googleEventItem:hover {
   border-color: #0969da;
 }
 
-.google-event-title {
+.googleEventTitle {
   margin: 0 0 var(--space-xs) 0;
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   font-size: var(--font-size-sm);
 }
 
-.google-event-time {
+.googleEventTime {
   margin: 0;
   font-size: var(--font-size-xs);
   color: var(--text-secondary);
@@ -431,7 +427,7 @@ body:not(.dark-mode) .google-event-item:hover {
   gap: var(--space-xs);
 }
 
-.google-event-location {
+.googleEventLocation {
   margin: var(--space-xs) 0 0 0;
   font-size: var(--font-size-xs);
   color: var(--text-secondary);
@@ -441,14 +437,14 @@ body:not(.dark-mode) .google-event-item:hover {
   gap: var(--space-xs);
 }
 
-.google-events-empty {
+.googleEventsEmpty {
   text-align: center;
   color: var(--text-secondary);
   padding: var(--space-xl) var(--space-md);
   font-size: var(--font-size-sm);
 }
 
-.google-events-loading {
+.googleEventsLoading {
   text-align: center;
   color: var(--text-secondary);
   padding: var(--space-md);

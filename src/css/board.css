@@ -26,6 +26,7 @@
   transition: all var(--transition-base);
   position: relative;
   backdrop-filter: blur(10px);
+  overflow: hidden;
 }
 
 /* Gradient overlay for each column */
@@ -70,8 +71,8 @@
 .boardColumn h2 {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-xl);
-  padding-bottom: var(--space-lg);
+  margin: calc(-1 * var(--space-xl)) calc(-1 * var(--space-xl)) var(--space-xl);
+  padding: var(--space-xl) var(--space-xl) var(--space-lg);
   border-bottom: 3px solid rgba(160, 168, 192, 0.2);
   color: var(--text-primary);
   display: flex;
@@ -81,6 +82,9 @@
   text-transform: uppercase;
   letter-spacing: 1.5px;
   text-shadow: 0 0 20px currentColor;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* Color-coded column headers */
@@ -103,27 +107,34 @@
   overflow-y: auto;
   overflow-x: hidden;
   max-height: calc(100vh - 400px);
-  padding-right: var(--space-xs);
+  padding-right: var(--space-md);
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  margin-right: calc(-1 * var(--space-md));
 }
 
 /* Custom scrollbar for board columns */
 .notesContainer::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .notesContainer::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.2);
   border-radius: var(--radius-sm);
+  margin: var(--space-sm) 0;
 }
 
 .notesContainer::-webkit-scrollbar-thumb {
   background: rgba(0, 240, 255, 0.3);
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 .notesContainer::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 240, 255, 0.5);
+  background-clip: padding-box;
 }
 
 /* Firefox scrollbar */

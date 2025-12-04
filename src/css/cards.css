@@ -35,13 +35,33 @@
 
 /* Hover effect - lift card with glow */
 .stickyNote:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 .stickyNote:hover::before {
-  opacity: 1;
-  box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.05);
+  opacity: 0;
+}
+
+/* Column-specific hover glow colors */
+.stickyNote.columnTodo:hover {
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 2px rgba(0, 240, 255, 0.6);
+  border-color: rgba(0, 240, 255, 0.8);
+}
+
+.stickyNote.columnInprogress:hover {
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 2px rgba(204, 255, 0, 0.6);
+  border-color: rgba(204, 255, 0, 0.8);
+}
+
+.stickyNote.columnDone:hover {
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 2px rgba(157, 0, 255, 0.6);
+  border-color: rgba(157, 0, 255, 0.8);
 }
 
 /* Visual feedback while dragging */
@@ -55,13 +75,13 @@
 }
 
 /* Color-coded left border based on column */
-.stickyNote.column-todo {
+.stickyNote.columnTodo {
   border-left: 3px solid var(--status-todo);
 }
-.stickyNote.column-inprogress {
+.stickyNote.columnInprogress {
   border-left: 3px solid var(--status-inprogress);
 }
-.stickyNote.column-done {
+.stickyNote.columnDone {
   border-left: 3px solid var(--status-done);
 }
 
@@ -169,8 +189,8 @@
 .stickyNote:hover .deleteBtn {
   opacity: 1;
 }
-body:not(.dark-mode) .editBtn,
-body:not(.dark-mode) .deleteBtn {
+body:not(.darkMode) .editBtn,
+body:not(.darkMode) .deleteBtn {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(31, 35, 40, 0.25);
   color: var(--text-primary);
@@ -196,22 +216,22 @@ body:not(.dark-mode) .deleteBtn {
   box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
   transform: scale(1.1);
 }
-body:not(.dark-mode) .editBtn:hover {
+body:not(.darkMode) .editBtn:hover {
   color: #0969da;
   border-color: #0969da;
   background: linear-gradient(135deg, rgba(9, 105, 218, 0.1), rgba(130, 80, 223, 0.1));
   box-shadow: 0 4px 12px rgba(9, 105, 218, 0.3), 0 0 20px rgba(9, 105, 218, 0.2);
   transform: scale(1.15) translateY(-2px);
 }
-body:not(.dark-mode) .deleteBtn:hover {
+body:not(.darkMode) .deleteBtn:hover {
   color: #cf222e;
   border-color: #cf222e;
   background: linear-gradient(135deg, rgba(207, 34, 46, 0.1), rgba(251, 133, 0, 0.1));
   box-shadow: 0 4px 12px rgba(207, 34, 46, 0.3), 0 0 20px rgba(207, 34, 46, 0.2);
   transform: scale(1.15) translateY(-2px);
 }
-body:not(.dark-mode) .editBtn:active,
-body:not(.dark-mode) .deleteBtn:active {
+body:not(.darkMode) .editBtn:active,
+body:not(.darkMode) .deleteBtn:active {
   transform: scale(1.05) translateY(0);
 }
 @media (max-width: 768px) {

@@ -100,37 +100,37 @@
   height: 44px;
   box-sizing: border-box;
 }
-.statusBadge.status-todo {
+.statusBadge.statusTodo {
   background: rgba(0, 240, 255, 0.15);
   color: var(--status-todo);
   border: 1px solid rgba(0, 240, 255, 0.4);
   box-shadow: 0 0 10px var(--status-todo-glow);
 }
-.statusBadge.status-inprogress {
+.statusBadge.statusInprogress {
   background: rgba(204, 255, 0, 0.15);
   color: var(--status-inprogress);
   border: 1px solid rgba(204, 255, 0, 0.4);
   box-shadow: 0 0 10px var(--status-inprogress-glow);
 }
-.statusBadge.status-done {
+.statusBadge.statusDone {
   background: rgba(157, 0, 255, 0.15);
   color: var(--status-done);
   border: 1px solid rgba(157, 0, 255, 0.4);
   box-shadow: 0 0 10px var(--status-done-glow);
 }
-body:not(.dark-mode) .statusBadge.status-todo {
+body:not(.darkMode) .statusBadge.statusTodo {
   background: rgba(9, 105, 218, 0.1);
   color: #0969da;
   border: 1px solid rgba(9, 105, 218, 0.3);
   box-shadow: 0 0 10px rgba(9, 105, 218, 0.15);
 }
-body:not(.dark-mode) .statusBadge.status-inprogress {
+body:not(.darkMode) .statusBadge.statusInprogress {
   background: rgba(26, 127, 55, 0.1);
   color: #1a7f37;
   border: 1px solid rgba(26, 127, 55, 0.3);
   box-shadow: 0 0 10px rgba(26, 127, 55, 0.15);
 }
-body:not(.dark-mode) .statusBadge.status-done {
+body:not(.darkMode) .statusBadge.statusDone {
   background: rgba(130, 80, 223, 0.1);
   color: #8250df;
   border: 1px solid rgba(130, 80, 223, 0.3);
@@ -153,19 +153,19 @@ body:not(.dark-mode) .statusBadge.status-done {
   height: 44px;
   box-sizing: border-box;
 }
-.detailsView .priorityBadge.priority-high {
+.detailsView .priorityBadge.priorityHigh {
   background: linear-gradient(135deg, rgba(255, 0, 102, 0.2), rgba(255, 51, 119, 0.2));
   color: #ff0066;
   border: 1px solid rgba(255, 0, 102, 0.4);
   box-shadow: 0 0 10px rgba(255, 0, 102, 0.2);
 }
-.detailsView .priorityBadge.priority-medium {
+.detailsView .priorityBadge.priorityMedium {
   background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2));
   color: #fbbf24;
   border: 1px solid rgba(251, 191, 36, 0.4);
   box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
 }
-.detailsView .priorityBadge.priority-low {
+.detailsView .priorityBadge.priorityLow {
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(64, 224, 208, 0.2));
   color: #00ffff;
   border: 1px solid rgba(0, 255, 255, 0.4);

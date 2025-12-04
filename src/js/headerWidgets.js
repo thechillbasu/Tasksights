@@ -54,7 +54,7 @@ export function openGooglePanel() {
 // Close the Google Calendar panel with animation
 export function closeGooglePanel() {
   const panel = document.getElementById('googleCalendarPanel');
-  const container = panel?.querySelector('.google-calendar-panel__container');
+  const container = panel?.querySelector('.googleCalendarPanelContainer');
   
   if (panel && container) {
     container.classList.add('closing');

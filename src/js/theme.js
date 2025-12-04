@@ -30,7 +30,7 @@ function applyTheme(theme) {
   const isDark = theme === "dark";
   
   // Toggle dark mode class on body
-  document.body.classList.toggle("dark-mode", isDark);
+  document.body.classList.toggle("darkMode", isDark);
   
   // Set data attribute for additional styling
   if (isDark) {
@@ -44,7 +44,7 @@ function applyTheme(theme) {
   if (!btn) return;
   
   const icon = btn.querySelector("i");
-  const label = btn.querySelector(".theme-toggle__label");
+  const label = btn.querySelector(".themeToggleLabel");
   
   if (icon) {
     icon.className = isDark ? "fas fa-sun" : "fas fa-moon";

@@ -20,17 +20,18 @@ export function setNotes(newNotes) {
 
 // Create and add a new task
 export function addNote(text, column, priority = 'medium', description = '', dueDate = null, timerManager, renderCallback, updateEmptyStateCallback) {
+  const now = Date.now();
   const newNote = {
-    id: Date.now(), // Unique ID based on timestamp
+    id: now, // Unique ID based on timestamp
     text: text,
     description: description,
     column: column,
     priority: priority,
     dueDate: dueDate,
-    createdAt: Date.now(),
+    createdAt: now,
     lastEditedAt: null,
-    startedAt: column === 'inprogress' ? Date.now() : null, // Track when task starts
-    completedAt: null,
+    startedAt: column === 'inprogress' ? now : null, // Track when task starts
+    completedAt: column === 'done' ? now : null, // Set completedAt if adding directly to Done
     timeSpent: 0 // Accumulated time in milliseconds
   };
   
@@ -38,7 +39,8 @@ export function addNote(text, column, priority = 'medium', description = '', due
   
   // Start timer if adding directly to In Progress
   if (column === 'inprogress' && timerManager) {
-    timerManager.startTimer(newNote.id, newNote.startedAt);
+    // Start timer from current time (no previous time spent)
+    timerManager.startTimer(newNote.id, now);
   }
   
   saveNotes(notes);
