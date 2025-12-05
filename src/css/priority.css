@@ -64,17 +64,16 @@
 .detailsView .priorityBadge.priorityMedium:hover,
 .detailsView .priorityBadge.priorityLow:hover {
   transform: none;
-  box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
 }
 
 .detailsView .priorityBadge.priorityHigh:hover {
-  box-shadow: 0 0 10px rgba(255, 0, 102, 0.2);
+  box-shadow: 0 0 10px var(--priority-high-glow);
 }
 
 .detailsView .priorityBadge.priorityMedium:hover {
-  box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+  box-shadow: 0 0 10px var(--priority-medium-glow);
 }
 
 .detailsView .priorityBadge.priorityLow:hover {
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 10px var(--priority-low-glow);
 }

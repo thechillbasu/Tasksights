@@ -20,12 +20,14 @@ let timerManager = new TimerManager(); // Manages time tracking for in-progress 
 export function init() {
   notes = loadNotes();
   setNotes(notes);
-  renderNotes(notes, timerManager);
-  updateEmptyState(notes);
   
-  // Start timers for tasks already in progress
+  // Start timers for tasks already in progress BEFORE rendering
   initializeTimers();
   timerManager.startUpdateLoop(updateTimerDisplays);
+  
+  // Now render with timers already running
+  renderNotes(notes, timerManager);
+  updateEmptyState(notes);
   
   // Show warning if localStorage is not available
   if (!isStorageAvailable()) {
@@ -133,8 +135,9 @@ export function init() {
   window.addEventListener('notesUpdated', () => {
     notes = loadNotes();
     setNotes(notes);
-    renderNotes(notes, timerManager);
+    // Re-initialize timers BEFORE rendering to prevent flicker
     initializeTimers();
+    renderNotes(notes, timerManager);
   });
 }
 
@@ -149,6 +152,8 @@ function handleTaskSave(note, newText, newDescription, newPriority, newDueDate, 
       dueDate: newDueDate
     }, () => {
       notes = getNotes();
+      // Re-initialize timers BEFORE rendering to prevent flicker
+      initializeTimers();
       renderNotes(notes, timerManager);
       updateEmptyState(notes);
     });
@@ -156,6 +161,8 @@ function handleTaskSave(note, newText, newDescription, newPriority, newDueDate, 
     // Create new note
     addNote(newText, taskColumn, newPriority, newDescription, newDueDate, timerManager, () => {
       notes = getNotes();
+      // Re-initialize timers BEFORE rendering to prevent flicker
+      initializeTimers();
       renderNotes(notes, timerManager);
       updateEmptyState(notes);
     }, () => {
@@ -168,6 +175,8 @@ function handleTaskSave(note, newText, newDescription, newPriority, newDueDate, 
 function handleDeleteNote(noteId) {
   deleteNote(noteId, timerManager, () => {
     notes = getNotes();
+    // Re-initialize timers BEFORE rendering to prevent flicker
+    initializeTimers();
     renderNotes(notes, timerManager);
     updateEmptyState(notes);
   }, () => {
@@ -182,12 +191,26 @@ function initializeTimers() {
   
   notes.forEach(note => {
     if (note.column === 'inprogress') {
-      // Calculate adjusted start time to account for previously accumulated time
-      const previousTimeSpent = note.timeSpent || 0;
-      const adjustedStartTime = Date.now() - previousTimeSpent;
+      // Use stored timer start time if available, otherwise calculate it
+      let adjustedStartTime;
+      
+      if (note.timerStartTime) {
+        // Use the stored timer start time from when task was moved to In Progress
+        adjustedStartTime = note.timerStartTime;
+      } else {
+        // Fallback: calculate adjusted start time (for backward compatibility)
+        const previousTimeSpent = note.timeSpent || 0;
+        adjustedStartTime = Date.now() - previousTimeSpent;
+        // Store it for future use
+        note.timerStartTime = adjustedStartTime;
+      }
+      
       timerManager.startTimer(note.id, adjustedStartTime);
     }
   });
+  
+  // Save notes to persist any timerStartTime updates
+  saveNotes(notes);
 }
 
 // Update timer displays for all active timers

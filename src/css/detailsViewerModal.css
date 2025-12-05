@@ -154,22 +154,22 @@ body:not(.darkMode) .statusBadge.statusDone {
   box-sizing: border-box;
 }
 .detailsView .priorityBadge.priorityHigh {
-  background: linear-gradient(135deg, rgba(255, 0, 102, 0.2), rgba(255, 51, 119, 0.2));
-  color: #ff0066;
-  border: 1px solid rgba(255, 0, 102, 0.4);
-  box-shadow: 0 0 10px rgba(255, 0, 102, 0.2);
+  background: var(--priority-high-bg);
+  color: var(--priority-high);
+  border: 1px solid var(--priority-high);
+  box-shadow: 0 0 10px var(--priority-high-glow);
 }
 .detailsView .priorityBadge.priorityMedium {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2));
-  color: #fbbf24;
-  border: 1px solid rgba(251, 191, 36, 0.4);
-  box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+  background: var(--priority-medium-bg);
+  color: var(--priority-medium);
+  border: 1px solid var(--priority-medium);
+  box-shadow: 0 0 10px var(--priority-medium-glow);
 }
 .detailsView .priorityBadge.priorityLow {
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(64, 224, 208, 0.2));
-  color: #00ffff;
-  border: 1px solid rgba(0, 255, 255, 0.4);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  background: var(--priority-low-bg);
+  color: var(--priority-low);
+  border: 1px solid var(--priority-low);
+  box-shadow: 0 0 10px var(--priority-low-glow);
 }
 .taskDetailsModal .modalFooter {
   justify-content: space-between;

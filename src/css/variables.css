@@ -30,9 +30,9 @@
   --priority-medium: #ff6b00;
   --priority-medium-bg: rgba(255, 107, 0, 0.1);
   --priority-medium-glow: rgba(255, 107, 0, 0.3);
-  --priority-low: #00e5cc;
-  --priority-low-bg: rgba(0, 229, 204, 0.1);
-  --priority-low-glow: rgba(0, 229, 204, 0.3);
+  --priority-low: #00b4ff;
+  --priority-low-bg: rgba(0, 180, 255, 0.1);
+  --priority-low-glow: rgba(0, 180, 255, 0.3);
   
   /* Status colors for columns */
   --status-todo: #00f0ff;
@@ -131,9 +131,9 @@ body:not(.darkMode) {
   --priority-medium: #fb8500;
   --priority-medium-bg: #fff8dc;
   --priority-medium-glow: rgba(251, 133, 0, 0.2);
-  --priority-low: #00b8a9;
-  --priority-low-bg: #e0f7f5;
-  --priority-low-glow: rgba(0, 184, 169, 0.2);
+  --priority-low: #0088cc;
+  --priority-low-bg: #e3f2fd;
+  --priority-low-glow: rgba(0, 136, 204, 0.2);
   
   --status-todo: #0969da;
   --status-todo-glow: rgba(9, 105, 218, 0.15);

@@ -37,7 +37,8 @@ export function migrateNote(note) {
     lastEditedAt: note.lastEditedAt || null,
     startedAt: note.startedAt || null,
     completedAt: completedAt,
-    timeSpent: note.timeSpent || 0
+    timeSpent: note.timeSpent || 0,
+    timerStartTime: note.timerStartTime || null
   };
 }
 

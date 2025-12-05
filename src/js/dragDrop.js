@@ -69,13 +69,15 @@ function handleDrop(event) {
     // Start timer when moving to In Progress
     if (newColumn === 'inprogress' && oldColumn !== 'inprogress') {
       // Calculate start time to account for previously accumulated time
-      // Timer should continue from where it left off
       const previousTimeSpent = note.timeSpent || 0;
       const adjustedStartTime = Date.now() - previousTimeSpent;
       
       if (!note.startedAt) {
         note.startedAt = Date.now();
       }
+      
+      // Store the timer start time in the note
+      note.timerStartTime = adjustedStartTime;
       
       timerManager.startTimer(noteId, adjustedStartTime);
     }
@@ -84,6 +86,7 @@ function handleDrop(event) {
     if (oldColumn === 'inprogress' && newColumn !== 'inprogress') {
       const elapsedTime = timerManager.stopTimer(noteId);
       note.timeSpent = elapsedTime;
+      note.timerStartTime = null;
       
       // Mark as completed if moving to Done
       if (newColumn === 'done') {

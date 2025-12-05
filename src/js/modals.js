@@ -398,6 +398,3 @@ export function openTaskDetailsModal(note, getTimerManagerCallback, openTaskModa
 
 
 
-
-
-
