@@ -197,3 +197,8 @@ export function updateEmptyState(notesArray) {
 
 
 
+
+
+
+
+
