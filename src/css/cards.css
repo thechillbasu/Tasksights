@@ -10,7 +10,7 @@
 .stickyNote {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  padding: var(--space-md);
+  padding: var(--space-md) var(--space-md) var(--space-sm) var(--space-md);
   position: relative;
   cursor: grab;
   border: 2px solid rgba(160, 168, 192, 0.2);
@@ -19,7 +19,9 @@
   word-wrap: break-word;
   backdrop-filter: blur(10px);
   min-height: auto;
+  flex-shrink: 0;
 }
+
 .stickyNote::before {
   content: '';
   position: absolute;
@@ -38,27 +40,28 @@
   transform: translateY(-6px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
+
 .stickyNote:hover::before {
   opacity: 0;
 }
 
 /* Column-specific hover glow colors */
 .stickyNote.columnTodo:hover {
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.6),
     inset 0 0 0 2px rgba(0, 240, 255, 0.6);
   border-color: rgba(0, 240, 255, 0.8);
 }
 
 .stickyNote.columnInprogress:hover {
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.6),
     inset 0 0 0 2px rgba(204, 255, 0, 0.6);
   border-color: rgba(204, 255, 0, 0.8);
 }
 
 .stickyNote.columnDone:hover {
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.6),
     inset 0 0 0 2px rgba(157, 0, 255, 0.6);
   border-color: rgba(157, 0, 255, 0.8);
@@ -78,9 +81,11 @@
 .stickyNote.columnTodo {
   border-left: 3px solid var(--status-todo);
 }
+
 .stickyNote.columnInprogress {
   border-left: 3px solid var(--status-inprogress);
 }
+
 .stickyNote.columnDone {
   border-left: 3px solid var(--status-done);
 }
@@ -91,7 +96,7 @@
   color: var(--text-primary);
   line-height: 1.4;
   margin-bottom: var(--space-xs);
-  margin-top: var(--space-xl);
+  margin-top: var(--space-lg);
   padding-right: var(--space-sm);
   padding-left: var(--space-xs);
   position: relative;
@@ -114,10 +119,12 @@
   opacity: 0.6;
   transition: all var(--transition-fast);
 }
+
 .noteText:hover .descriptionIndicator {
   opacity: 1;
   text-shadow: var(--glow-neon-cyan);
 }
+
 .noteTimestamp,
 .timerDisplay,
 .completedTimeDisplay,
@@ -127,9 +134,16 @@
   color: var(--text-muted);
   margin-top: calc(var(--space-xs) + 2px);
   padding-left: var(--space-xs);
+  padding-right: var(--space-md);
   font-style: italic;
   clear: both;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: calc(100% - 90px);
+  display: block;
+  white-space: normal;
 }
+
 .timerDisplay,
 .completedTimeDisplay {
   font-family: var(--font-mono);
@@ -137,6 +151,13 @@
   color: var(--accent-neon-lime);
   font-style: normal;
 }
+
+.noteTimestamp,
+.completedDate {
+  display: block;
+  max-width: calc(100% - 90px);
+}
+
 .noteDueDate {
   font-family: var(--font-mono);
   font-weight: var(--font-weight-semibold);
@@ -147,30 +168,45 @@
   background: rgba(0, 240, 255, 0.08);
   border-radius: var(--radius-sm);
   border-left: 2px solid var(--accent-neon-cyan);
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 3px;
   margin-top: var(--space-xs);
+  max-width: calc(100% - 90px);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
+
 .noteDueDate i {
   font-size: 9px;
 }
+
 .noteDueDate.urgent {
   color: #fbbf24;
   background: rgba(251, 191, 36, 0.1);
   border-left-color: #fbbf24;
   animation: pulse 2s ease-in-out infinite;
 }
+
 .noteDueDate.overdue {
   color: var(--color-danger);
   background: rgba(239, 68, 68, 0.1);
   border-left-color: var(--color-danger);
   animation: pulse 1.5s ease-in-out infinite;
 }
+
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
 }
+
 .editBtn,
 .deleteBtn {
   position: absolute;
@@ -191,10 +227,12 @@
   align-items: center;
   justify-content: center;
 }
+
 .stickyNote:hover .editBtn,
 .stickyNote:hover .deleteBtn {
   opacity: 1;
 }
+
 body:not(.darkMode) .editBtn,
 body:not(.darkMode) .deleteBtn {
   background: rgba(255, 255, 255, 0.95);
@@ -202,12 +240,15 @@ body:not(.darkMode) .deleteBtn {
   color: var(--text-primary);
   box-shadow: 0 2px 8px rgba(31, 35, 40, 0.15);
 }
+
 .editBtn {
   right: 46px;
 }
+
 .deleteBtn {
   right: 8px;
 }
+
 .editBtn:hover {
   color: var(--accent-neon-cyan);
   border-color: var(--accent-neon-cyan);
@@ -215,6 +256,7 @@ body:not(.darkMode) .deleteBtn {
   box-shadow: var(--glow-neon-cyan);
   transform: scale(1.1);
 }
+
 .deleteBtn:hover {
   color: var(--color-danger);
   border-color: var(--color-danger);
@@ -222,6 +264,7 @@ body:not(.darkMode) .deleteBtn {
   box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
   transform: scale(1.1);
 }
+
 body:not(.darkMode) .editBtn:hover {
   color: #0969da;
   border-color: #0969da;
@@ -229,6 +272,7 @@ body:not(.darkMode) .editBtn:hover {
   box-shadow: 0 4px 12px rgba(9, 105, 218, 0.3), 0 0 20px rgba(9, 105, 218, 0.2);
   transform: scale(1.15) translateY(-2px);
 }
+
 body:not(.darkMode) .deleteBtn:hover {
   color: #cf222e;
   border-color: #cf222e;
@@ -236,19 +280,21 @@ body:not(.darkMode) .deleteBtn:hover {
   box-shadow: 0 4px 12px rgba(207, 34, 46, 0.3), 0 0 20px rgba(207, 34, 46, 0.2);
   transform: scale(1.15) translateY(-2px);
 }
+
 body:not(.darkMode) .editBtn:active,
 body:not(.darkMode) .deleteBtn:active {
   transform: scale(1.05) translateY(0);
 }
+
 /* Tablet responsive */
 @media (max-width: 1024px) {
   .stickyNote {
     padding: var(--space-md);
   }
-  
+
   .noteText {
     font-size: var(--font-size-sm);
-    margin-top: var(--space-xl);
+    margin-top: var(--space-md);
   }
 }
 
@@ -256,15 +302,15 @@ body:not(.darkMode) .deleteBtn:active {
 @media (max-width: 768px) {
   .stickyNote {
     padding: var(--space-md);
-    min-height: 80px;
+    min-height: 120px;
   }
-  
+
   .noteText {
     font-size: var(--font-size-sm);
-    margin-top: var(--space-xl);
+    margin-top: var(--space-md);
     padding-right: 80px;
   }
-  
+
   .editBtn,
   .deleteBtn {
     top: 8px;
@@ -272,22 +318,23 @@ body:not(.darkMode) .deleteBtn:active {
     font-size: 11px;
     min-width: 40px;
   }
-  
+
   .editBtn {
     right: 58px;
   }
-  
+
   .deleteBtn {
     right: 8px;
   }
-  
+
   .noteTimestamp,
   .timerDisplay,
   .completedTimeDisplay,
   .completedDate {
     font-size: 10px;
+    padding-right: var(--space-md);
   }
-  
+
   .noteDueDate {
     font-size: 10px;
     padding: 4px var(--space-sm);
@@ -298,18 +345,18 @@ body:not(.darkMode) .deleteBtn:active {
 @media (max-width: 480px) {
   .stickyNote {
     padding: var(--space-sm) var(--space-md);
-    min-height: 70px;
+    min-height: 90px;
   }
-  
+
   .noteText {
     font-size: var(--font-size-sm);
-    margin-top: var(--space-xl);
+    margin-top: var(--space-lg);
     padding-right: 70px;
     -webkit-line-clamp: 3;
     line-clamp: 3;
     max-height: 4.2em;
   }
-  
+
   .editBtn,
   .deleteBtn {
     opacity: 1;
@@ -318,31 +365,32 @@ body:not(.darkMode) .deleteBtn:active {
     top: 6px;
     min-width: 38px;
   }
-  
+
   .editBtn {
     right: 54px;
   }
-  
+
   .deleteBtn {
     right: 6px;
   }
-  
+
   .descriptionIndicator {
     font-size: 11px;
   }
-  
+
   .noteTimestamp,
   .timerDisplay,
   .completedTimeDisplay,
   .completedDate {
     font-size: 9px;
+    padding-right: var(--space-sm);
   }
-  
+
   .noteDueDate {
     font-size: 9px;
     padding: 3px 6px;
   }
-  
+
   .noteDueDate i {
     font-size: 8px;
   }
@@ -352,25 +400,26 @@ body:not(.darkMode) .deleteBtn:active {
 @media (max-width: 360px) {
   .stickyNote {
     padding: var(--space-sm);
+    min-height: 85px;
   }
-  
+
   .noteText {
     font-size: 13px;
-    margin-top: var(--space-lg);
-    padding-right: 64px;
+    margin-top: var(--space-xl);
+    padding-right: 58px;
   }
-  
+
   .editBtn,
   .deleteBtn {
-    padding: 5px 8px;
+    padding: 4px 7px;
     font-size: 9px;
-    min-width: 36px;
+    min-width: 32px;
   }
-  
+
   .editBtn {
-    right: 50px;
+    right: 44px;
   }
-  
+
   .deleteBtn {
     right: 5px;
   }
