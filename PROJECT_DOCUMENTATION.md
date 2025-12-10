@@ -1,5 +1,8 @@
 # Kanby - Technical Documentation
 
+**Version:** 3.1.0  
+**Last Updated:** December 10, 2025
+
 ## Table of Contents
 
 1. [Project Overview](#project-overview)

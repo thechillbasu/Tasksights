@@ -1,7 +1,7 @@
 {
   "name": "kanby",
-  "version": "3.0.0",
-  "description": "A modern, feature-rich Kanban task management application with drag-and-drop functionality, time tracking, Google Calendar integration, and dark/light theme support",
+  "version": "3.1.0",
+  "description": "A modern, feature-rich Kanban task management application with 7-tier responsive design, viewport auto-scroll drag-and-drop, time tracking, Google Calendar integration, and dark/light theme support",
   "type": "module",
   "main": "index.html",
   "scripts": {
@@ -18,6 +18,8 @@
     "drag-and-drop",
     "time-tracking",
     "google-calendar",
+    "responsive-design",
+    "mobile-first",
     "localstorage",
     "vanilla-javascript"
   ],

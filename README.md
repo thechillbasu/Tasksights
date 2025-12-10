@@ -1,6 +1,8 @@
 # Kanby
 
-A modern, feature-rich Kanban task management application with drag-and-drop functionality, time tracking, and Google Calendar integration. Built with vanilla JavaScript, HTML, and CSS.
+**Version 3.1.0** | [Release Notes](RELEASE_NOTES.md)
+
+A modern, feature-rich Kanban task management application with 7-tier responsive design, viewport auto-scroll drag-and-drop, time tracking, and Google Calendar integration. Built with vanilla JavaScript, HTML, and CSS.
 
 ## Live Demo
 
