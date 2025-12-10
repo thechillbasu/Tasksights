@@ -1,6 +1,6 @@
 # Kanby
 
-**Version 3.1.0** | [Release Notes](RELEASE_NOTES.md)
+**Version 3.1.0**
 
 A modern, feature-rich Kanban task management application with 7-tier responsive design, viewport auto-scroll drag-and-drop, time tracking, and Google Calendar integration. Built with vanilla JavaScript, HTML, and CSS.
 
@@ -10,7 +10,7 @@ A modern, feature-rich Kanban task management application with 7-tier responsive
 
 ## Documentation
 
-**[PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md)** - Comprehensive technical documentation covering architecture, modules, data flow, and development guidelines.
+**[PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md)** - Comprehensive technical documentation covering architecture, modules, data flow, development guidelines, and complete version history.
 
 ## Features
 
