@@ -1,27 +1,29 @@
-<!-- Kanban Sticky Notes Board - Main HTML Structure
+<!-- Kanby - Main HTML Structure
      
-     This is the main HTML file that defines the structure of the kanban board application.
+     This is the main HTML file that defines the structure of the Kanban board application.
      It includes the header with live clock and theme toggle, the task creation form,
      and the three-column board layout (To Do, In Progress, Done). All styling is loaded
      from modular CSS files, and functionality is provided by JavaScript modules.
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Kanban Sticky Notes Board</title>
+  <title>Kanby - Kanban Task Management</title>
 
   <!-- Font Awesome icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Google Identity Services and API -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://apis.google.com/js/api.js" async defer></script>
-  
+
   <!-- Modular CSS imports -->
   <link rel="stylesheet" href="src/css/variables.css">
   <link rel="stylesheet" href="src/css/base.css">
@@ -39,175 +41,168 @@
   <link rel="stylesheet" href="src/css/utilities.css">
   <link rel="stylesheet" href="src/css/responsive.css">
 </head>
+
 <body>
 
-<!-- Header with clock, title, and theme toggle -->
-<header class="appHeader">
-  <!-- Live clock display -->
-  <div class="appHeaderLeft">
-    <div class="liveClock" id="clockWidget">
-      <div class="clockTime" id="liveTime">00:00:00</div>
-      <div class="clockDate" id="liveDate">LOADING...</div>
-    </div>
-  </div>
-
-  <!-- App title -->
-  <div class="appHeaderCenter">
-    <h1 class="appTitle">
-      <span class="wordKanban">Kanban</span>
-      <span class="wordSticky"> Sticky</span>
-      <span class="wordNotes"> Notes</span>
-    </h1>
-    <div class="titleUnderline"></div>
-    <p class="appSubtitle">Visualize your tasks with drag-and-drop notes</p>
-  </div>
-
-  <!-- Theme toggle and My Events buttons -->
-  <div class="appHeaderRight">
-    <button id="myEventsBtn" class="myEventsBtn" title="View My Events" type="button">
-      <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-      <span class="myEventsBtnLabel">My Events</span>
-    </button>
-    <button id="themeToggle" class="themeToggle" type="button">
-      <i class="fas fa-moon" aria-hidden="true"></i>
-      <span class="themeToggleLabel">Dark mode</span>
-    </button>
-  </div>
-</header>
-
-<div class="container">
-
-  <!-- Form to add new tasks -->
-  <form id="addNoteForm">
-    <input type="text" id="noteText" placeholder="Enter note text..." required>
-
-    <select id="prioritySelect">
-      <option value="high">High Priority</option>
-      <option value="medium" selected>Medium Priority</option>
-      <option value="low">Low Priority</option>
-    </select>
-
-    <select id="columnSelect">
-      <option value="todo">To Do</option>
-      <option value="inprogress">In Progress</option>
-      <option value="done">Done</option>
-    </select>
-
-    <button type="submit">Add Note</button>
-  </form>
-
-  <!-- Kanban board with three columns -->
-  <div class="board">
-
-    <div class="boardColumn" id="todo">
-      <h2>To Do</h2>
-      <div class="notesContainer"></div>
+  <!-- Header with clock, title, and theme toggle -->
+  <header class="appHeader">
+    <!-- Live clock display -->
+    <div class="appHeaderLeft">
+      <div class="liveClock" id="clockWidget">
+        <div class="clockTime" id="liveTime">00:00:00</div>
+        <div class="clockDate" id="liveDate">LOADING...</div>
+      </div>
     </div>
 
-    <div class="boardColumn" id="inprogress">
-      <h2>In Progress</h2>
-      <div class="notesContainer"></div>
+    <!-- App title -->
+    <div class="appHeaderCenter">
+      <h1 class="appTitle">
+        <span class="wordKanban">Kan</span><span class="wordSticky">b</span><span class="wordNotes">y</span>
+      </h1>
+      <div class="titleUnderline"></div>
     </div>
 
-    <div class="boardColumn" id="done">
-      <h2>Done</h2>
-      <div class="notesContainer"></div>
-    </div>
-
-  </div>
-
-  <!-- Empty state message -->
-  <div id="emptyState" class="emptyState">
-    <p>Your board is empty. Add your first note!</p>
-  </div>
-
-</div>
-
-<!-- Google Calendar Events Panel -->
-<div id="googleCalendarPanel" class="googleCalendarPanel hidden">
-  <div class="googleCalendarPanelBackdrop"></div>
-  <div class="googleCalendarPanelContainer">
-    <div class="googleCalendarPanelHeader">
-      <h2 id="googleCalendarPanelTitle">Google Calendar</h2>
-      <button id="closeGooglePanelBtn" class="closeBtn" aria-label="Close">
-        &times;
+    <!-- Theme toggle and My Events buttons -->
+    <div class="appHeaderRight">
+      <button id="myEventsBtn" class="myEventsBtn" title="View My Events" type="button">
+        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+        <span class="myEventsBtnLabel">My Events</span>
+      </button>
+      <button id="themeToggle" class="themeToggle" type="button">
+        <i class="fas fa-moon" aria-hidden="true"></i>
+        <span class="themeToggleLabel">Dark mode</span>
       </button>
     </div>
-    <div id="googleCalendarIframeContainer" class="googleCalendarPanelContent">
-      <iframe
-        src="https://calendar.google.com/calendar/embed?src=en-gb.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata"
-        style="border: 0"
-        width="800"
-        height="600"
-        frameborder="0"
-        scrolling="no"
-        id="googleHolidayCalendarIframe"
-        class="googleHolidayCalendarIframe"
-      ></iframe>
+  </header>
+
+  <div class="container">
+
+    <!-- Form to add new tasks -->
+    <form id="addNoteForm">
+      <input type="text" id="noteText" placeholder="Enter note text..." required>
+
+      <select id="prioritySelect">
+        <option value="high">High Priority</option>
+        <option value="medium" selected>Medium Priority</option>
+        <option value="low">Low Priority</option>
+      </select>
+
+      <select id="columnSelect">
+        <option value="todo">To Do</option>
+        <option value="inprogress">In Progress</option>
+        <option value="done">Done</option>
+      </select>
+
+      <button type="submit">Add Note</button>
+    </form>
+
+    <!-- Kanban board with three columns -->
+    <div class="board">
+
+      <div class="boardColumn" id="todo">
+        <h2>To Do</h2>
+        <div class="notesContainer"></div>
+      </div>
+
+      <div class="boardColumn" id="inprogress">
+        <h2>In Progress</h2>
+        <div class="notesContainer"></div>
+      </div>
+
+      <div class="boardColumn" id="done">
+        <h2>Done</h2>
+        <div class="notesContainer"></div>
+      </div>
+
     </div>
-    <div id="googleEventsListContainer" class="googleEventsListContainer hidden">
-      <div id="googleEventsList" class="googleEventsList">
-        <!-- Events will be populated here -->
+
+    <!-- Empty state message -->
+    <div id="emptyState" class="emptyState">
+      <p>Your board is empty. Add your first note!</p>
+    </div>
+
+  </div>
+
+  <!-- Google Calendar Events Panel -->
+  <div id="googleCalendarPanel" class="googleCalendarPanel hidden">
+    <div class="googleCalendarPanelBackdrop"></div>
+    <div class="googleCalendarPanelContainer">
+      <div class="googleCalendarPanelHeader">
+        <h2 id="googleCalendarPanelTitle">Google Calendar</h2>
+        <button id="closeGooglePanelBtn" class="closeBtn" aria-label="Close">
+          &times;
+        </button>
+      </div>
+      <div id="googleCalendarIframeContainer" class="googleCalendarPanelContent">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=en-gb.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata"
+          style="border: 0" width="800" height="600" frameborder="0" scrolling="no" id="googleHolidayCalendarIframe"
+          class="googleHolidayCalendarIframe"></iframe>
+      </div>
+      <div id="googleEventsListContainer" class="googleEventsListContainer hidden">
+        <div id="googleEventsList" class="googleEventsList">
+          <!-- Events will be populated here -->
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- JavaScript modules -->
-<script src="src/js/storage.js"></script>
-<script src="src/js/dragDrop.js"></script>
-<script src="src/js/theme.js"></script>
-<script type="module" src="src/js/headerWidgets.js"></script>
-<script type="module" src="src/js/main.js"></script>
+  <!-- JavaScript modules -->
+  <script src="src/js/storage.js"></script>
+  <script src="src/js/dragDrop.js"></script>
+  <script src="src/js/theme.js"></script>
+  <script type="module" src="src/js/headerWidgets.js"></script>
+  <script type="module" src="src/js/main.js"></script>
 
-<!-- Initialize Google APIs after modules load -->
-<script>
-  // Initialize Google APIs when they become available
-  function initializeGoogleAPIs() {
-    // Check for Google Identity Services
-    if (typeof google !== 'undefined' && google.accounts && typeof window.gisLoaded === 'function') {
-      window.gisLoaded();
-    }
-    
-    // Check for Google API client
-    if (typeof gapi !== 'undefined' && typeof window.gapiLoaded === 'function') {
-      window.gapiLoaded();
-    }
-  }
-  
-  // Try initialization immediately (in case scripts already loaded)
-  initializeGoogleAPIs();
-  
-  // Also try after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeGoogleAPIs);
-  } else {
-    initializeGoogleAPIs();
-  }
-  
-  // And try after window load (in case scripts load late)
-  window.addEventListener('load', () => {
-    setTimeout(initializeGoogleAPIs, 100);
-  });
-  
-  // Poll for Google APIs (fallback for async scripts)
-  let pollCount = 0;
-  const pollInterval = setInterval(() => {
-    pollCount++;
-    if (pollCount > 50) {
-      clearInterval(pollInterval);
-      return;
-    }
-    
-    if ((typeof google !== 'undefined' && google.accounts && typeof window.gisLoaded === 'function') ||
-        (typeof gapi !== 'undefined' && typeof window.gapiLoaded === 'function')) {
-      initializeGoogleAPIs();
-      if (typeof google !== 'undefined' && google.accounts && typeof gapi !== 'undefined') {
-        clearInterval(pollInterval);
+  <!-- Initialize Google APIs after modules load -->
+  <script>
+    // Initialize Google APIs when they become available
+    function initializeGoogleAPIs() {
+      // Check for Google Identity Services
+      if (typeof google !== 'undefined' && google.accounts && typeof window.gisLoaded === 'function') {
+        window.gisLoaded();
+      }
+
+      // Check for Google API client
+      if (typeof gapi !== 'undefined' && typeof window.gapiLoaded === 'function') {
+        window.gapiLoaded();
       }
     }
-  }, 200);
-</script>
-<script type="module" src="src/js/googleCalendar.js"></script>
+
+    // Try initialization immediately (in case scripts already loaded)
+    initializeGoogleAPIs();
+
+    // Also try after DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeGoogleAPIs);
+    } else {
+      initializeGoogleAPIs();
+    }
+
+    // And try after window load (in case scripts load late)
+    window.addEventListener('load', () => {
+      setTimeout(initializeGoogleAPIs, 100);
+    });
+
+    // Poll for Google APIs (fallback for async scripts)
+    let pollCount = 0;
+    const pollInterval = setInterval(() => {
+      pollCount++;
+      if (pollCount > 50) {
+        clearInterval(pollInterval);
+        return;
+      }
+
+      if ((typeof google !== 'undefined' && google.accounts && typeof window.gisLoaded === 'function') ||
+        (typeof gapi !== 'undefined' && typeof window.gapiLoaded === 'function')) {
+        initializeGoogleAPIs();
+        if (typeof google !== 'undefined' && google.accounts && typeof gapi !== 'undefined') {
+          clearInterval(pollInterval);
+        }
+      }
+    }, 200);
+  </script>
+  <script type="module" src="src/js/googleCalendar.js"></script>
 </body>
+
 </html>

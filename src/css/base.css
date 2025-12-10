@@ -79,13 +79,13 @@ body::before {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 430px) {
   .container {
     padding: var(--space-sm);
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 375px) {
   .container {
     padding: var(--space-xs) var(--space-sm);
   }

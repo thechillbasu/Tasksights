@@ -38,6 +38,14 @@ export function openTaskModal(note, taskText, taskColumn, taskPriority, taskDueD
             <option value="low" ${(note ? note.priority : taskPriority) === 'low' ? 'selected' : ''}>Low</option>
           </select>
         </div>
+        <div class="formGroup">
+          <label for="modalTaskStatus">Status</label>
+          <select id="modalTaskStatus">
+            <option value="todo" ${(note ? note.column : taskColumn) === 'todo' ? 'selected' : ''}>To Do</option>
+            <option value="inprogress" ${(note ? note.column : taskColumn) === 'inprogress' ? 'selected' : ''}>In Progress</option>
+            <option value="done" ${(note ? note.column : taskColumn) === 'done' ? 'selected' : ''}>Done</option>
+          </select>
+        </div>
         <div class="formGroup dueDateGroup">
           <label for="modalTaskDueDate">
             <i class="fas fa-calendar-check"></i> Due Date & Time
@@ -104,6 +112,7 @@ export function openTaskModal(note, taskText, taskColumn, taskPriority, taskDueD
     const newText = taskNameInput.value.trim();
     const newDescription = modal.querySelector('#modalTaskDescription').value.trim();
     const newPriority = modal.querySelector('#modalTaskPriority').value;
+    const newStatus = modal.querySelector('#modalTaskStatus').value;
     const dueDateInput = modal.querySelector('#modalTaskDueDate').value;
     const newDueDate = dueDateInput ? new Date(dueDateInput).getTime() : null;
     
@@ -115,7 +124,7 @@ export function openTaskModal(note, taskText, taskColumn, taskPriority, taskDueD
     }
     
     if (saveCallback) {
-      saveCallback(note, newText, newDescription, newPriority, newDueDate, taskColumn);
+      saveCallback(note, newText, newDescription, newPriority, newDueDate, newStatus);
     }
     
     closeModal();

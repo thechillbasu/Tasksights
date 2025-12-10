@@ -90,7 +90,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 430px) {
   .emptyState {
     padding: var(--space-lg) var(--space-md);
     border-width: 2px;
@@ -110,7 +110,7 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 375px) {
   .emptyState {
     padding: var(--space-md);
   }

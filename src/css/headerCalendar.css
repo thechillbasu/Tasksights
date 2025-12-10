@@ -50,16 +50,15 @@
   padding: var(--space-md) var(--space-lg);
   border-radius: var(--radius-md);
   border: 2px solid rgba(0, 240, 255, 0.3);
-  background: linear-gradient(135deg, 
-    rgba(0, 240, 255, 0.12) 0%,
-    rgba(157, 0, 255, 0.12) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(0, 240, 255, 0.12) 0%,
+      rgba(157, 0, 255, 0.12) 100%);
   color: var(--text-primary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition: all var(--transition-base);
-  box-shadow: 
+  box-shadow:
     inset 0 1px 2px rgba(0, 0, 0, 0.2),
     0 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -70,11 +69,10 @@
 
 .btnConnectGoogle:hover {
   border-color: var(--accent-neon-cyan);
-  background: linear-gradient(135deg, 
-    rgba(0, 240, 255, 0.16) 0%,
-    rgba(157, 0, 255, 0.16) 100%
-  );
-  box-shadow: 
+  background: linear-gradient(135deg,
+      rgba(0, 240, 255, 0.16) 0%,
+      rgba(157, 0, 255, 0.16) 100%);
+  box-shadow:
     inset 0 1px 2px rgba(0, 0, 0, 0.2),
     0 4px 12px rgba(0, 0, 0, 0.3),
     0 0 20px rgba(0, 240, 255, 0.2);
@@ -103,10 +101,9 @@
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-lg);
   border: 2px solid rgba(0, 240, 255, 0.3);
-  background: linear-gradient(135deg, 
-    rgba(0, 240, 255, 0.08) 0%,
-    rgba(157, 0, 255, 0.08) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(0, 240, 255, 0.08) 0%,
+      rgba(157, 0, 255, 0.08) 100%);
   color: var(--text-primary);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
@@ -115,22 +112,22 @@
   align-items: center;
   gap: var(--space-sm);
   transition: all var(--transition-base);
-  box-shadow: 
+  box-shadow:
     inset 0 1px 2px rgba(0, 0, 0, 0.2),
     inset 0 -1px 0 rgba(0, 240, 255, 0.15),
     0 4px 12px rgba(0, 0, 0, 0.3),
     0 0 20px rgba(0, 240, 255, 0.1);
   white-space: nowrap;
   flex-shrink: 0;
+  height: 81px;
 }
 
 .myEventsBtn:hover {
   border-color: var(--accent-neon-cyan);
-  background: linear-gradient(135deg, 
-    rgba(0, 240, 255, 0.12) 0%,
-    rgba(157, 0, 255, 0.12) 100%
-  );
-  box-shadow: 
+  background: linear-gradient(135deg,
+      rgba(0, 240, 255, 0.12) 0%,
+      rgba(157, 0, 255, 0.12) 100%);
+  box-shadow:
     inset 0 1px 2px rgba(0, 0, 0, 0.2),
     inset 0 -1px 0 rgba(0, 240, 255, 0.2),
     0 6px 16px rgba(0, 0, 0, 0.4),
@@ -139,11 +136,11 @@
 }
 
 .myEventsBtn i {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
 }
 
 .myEventsBtnLabel {
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 0.5px;
   white-space: nowrap;
 }
@@ -177,8 +174,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .googleCalendarPanelContainer {
@@ -204,6 +206,7 @@
     opacity: 0;
     transform: translateY(-20px) scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -219,6 +222,7 @@
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+
   to {
     opacity: 0;
     transform: translateY(-20px) scale(0.95);
@@ -307,10 +311,9 @@
   margin: 0;
   width: 100%;
   box-sizing: border-box;
-  background: linear-gradient(135deg, 
-    rgba(0, 240, 255, 0.02) 0%,
-    rgba(157, 0, 255, 0.02) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(0, 240, 255, 0.02) 0%,
+      rgba(157, 0, 255, 0.02) 100%);
 }
 
 .googleHolidayCalendarIframe {
@@ -325,7 +328,7 @@
   padding: 0;
   box-sizing: border-box;
   border-radius: var(--radius-lg);
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.4),
     0 0 40px rgba(0, 240, 255, 0.15),
     inset 0 0 0 1px rgba(0, 240, 255, 0.2);
@@ -334,7 +337,7 @@
 }
 
 .googleHolidayCalendarIframe:hover {
-  box-shadow: 
+  box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.5),
     0 0 60px rgba(0, 240, 255, 0.25),
     inset 0 0 0 1px rgba(0, 240, 255, 0.3);
@@ -458,76 +461,76 @@ body:not(.darkMode) .googleEventItem:hover {
     max-width: none;
     max-height: 88vh;
   }
-  
+
   .googleCalendarPanelHeader {
     padding: var(--space-md);
   }
-  
+
   .googleCalendarPanelHeader h2 {
     font-size: var(--font-size-lg);
   }
-  
+
   .googleHolidayCalendarIframe {
     height: 450px;
     min-height: 350px;
   }
-  
+
   .googleEventsList {
     padding: var(--space-sm);
   }
-  
+
   .googleEventItem {
     padding: var(--space-sm) var(--space-md);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 430px) {
   .googleCalendarPanelContainer {
     width: calc(100vw - 24px);
     max-height: 90vh;
     border-radius: var(--radius-md);
   }
-  
+
   .googleCalendarPanelHeader {
     padding: var(--space-sm) var(--space-md);
   }
-  
+
   .googleCalendarPanelHeader h2 {
     font-size: var(--font-size-base);
   }
-  
+
   .closeBtn {
     width: 32px;
     height: 32px;
     font-size: 24px;
   }
-  
+
   .googleHolidayCalendarIframe {
     height: 400px;
     min-height: 300px;
   }
-  
+
   .googleCalendarPanelContent {
     padding: var(--space-xs);
   }
-  
+
   .googleEventsList {
     padding: var(--space-xs) var(--space-sm);
   }
-  
+
   .googleEventItem {
     padding: var(--space-sm);
   }
-  
+
   .googleEventTitle {
     font-size: 13px;
   }
-  
+
   .googleEventTime,
   .googleEventLocation {
     font-size: 11px;
   }
-  
+
   .googleEventsEmpty,
   .googleEventsLoading {
     font-size: 13px;
@@ -535,24 +538,24 @@ body:not(.darkMode) .googleEventItem:hover {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 375px) {
   .googleCalendarPanelContainer {
     width: calc(100vw - 16px);
   }
-  
+
   .googleCalendarPanelHeader {
     padding: var(--space-xs) var(--space-sm);
   }
-  
+
   .googleCalendarPanelHeader h2 {
     font-size: var(--font-size-sm);
   }
-  
+
   .googleHolidayCalendarIframe {
     height: 350px;
     min-height: 280px;
   }
-  
+
   .googleEventItem {
     padding: var(--space-xs) var(--space-sm);
   }

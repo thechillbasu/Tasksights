@@ -1,6 +1,6 @@
 // Main Application Logic - Orchestration Module
 // 
-// Core module that orchestrates the entire kanban board application.
+// Core module that orchestrates the entire Kanby application.
 // Coordinates between notes, rendering, modals, storage, drag-drop, and timer modules.
 // Initializes the app and sets up event listeners. Manages timer updates.
 
@@ -142,14 +142,49 @@ export function init() {
 }
 
 // Handle task save from modal
-function handleTaskSave(note, newText, newDescription, newPriority, newDueDate, taskColumn) {
+function handleTaskSave(note, newText, newDescription, newPriority, newDueDate, newStatus) {
   if (note) {
+    const oldColumn = note.column;
+    const newColumn = newStatus;
+    
+    // Handle timer state when status changes
+    if (oldColumn !== newColumn) {
+      // Stop timer when leaving In Progress
+      if (oldColumn === 'inprogress' && newColumn !== 'inprogress') {
+        if (note.inProgressSince) {
+          const sessionTime = Date.now() - note.inProgressSince;
+          note.timeSpent = (note.timeSpent || 0) + sessionTime;
+        }
+        note.timerStartTime = null;
+        note.inProgressSince = null;
+        timerManager.stopTimer(note.id);
+        
+        // Mark as completed if moving to Done
+        if (newColumn === 'done') {
+          note.completedAt = Date.now();
+        }
+      }
+      
+      // Start timer when moving to In Progress
+      if (newColumn === 'inprogress' && oldColumn !== 'inprogress') {
+        if (!note.startedAt) {
+          note.startedAt = Date.now();
+        }
+        note.inProgressSince = Date.now();
+        const previousTimeSpent = note.timeSpent || 0;
+        const adjustedStartTime = Date.now() - previousTimeSpent;
+        note.timerStartTime = adjustedStartTime;
+        timerManager.startTimer(note.id, adjustedStartTime);
+      }
+    }
+    
     // Update existing note
     updateNote(note.id, {
       text: newText,
       description: newDescription,
       priority: newPriority,
-      dueDate: newDueDate
+      dueDate: newDueDate,
+      column: newColumn
     }, () => {
       notes = getNotes();
       // Re-initialize timers BEFORE rendering to prevent flicker
@@ -158,8 +193,8 @@ function handleTaskSave(note, newText, newDescription, newPriority, newDueDate, 
       updateEmptyState(notes);
     });
   } else {
-    // Create new note
-    addNote(newText, taskColumn, newPriority, newDescription, newDueDate, timerManager, () => {
+    // Create new note (newStatus is the selected column)
+    addNote(newText, newStatus, newPriority, newDescription, newDueDate, timerManager, () => {
       notes = getNotes();
       // Re-initialize timers BEFORE rendering to prevent flicker
       initializeTimers();

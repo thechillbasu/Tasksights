@@ -254,7 +254,7 @@ body:not(.darkMode) .statusBadge.statusDone {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 430px) {
   .taskDetailsModal .modalFooter {
     flex-direction: column-reverse;
     gap: var(--space-sm);
@@ -282,11 +282,6 @@ body:not(.darkMode) .statusBadge.statusDone {
     font-size: 14px;
   }
 
-  .priorityBadge {
-    font-size: 14px;
-    padding: 4px 10px;
-  }
-
   .statusBadge {
     font-size: 14px;
     padding: 4px 10px;
@@ -300,7 +295,7 @@ body:not(.darkMode) .statusBadge.statusDone {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 375px) {
   .detailSection {
     padding: var(--space-xs) var(--space-sm);
   }

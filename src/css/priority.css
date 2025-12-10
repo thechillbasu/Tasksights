@@ -8,11 +8,11 @@
 /* Base priority badge */
 .priorityBadge {
   position: absolute;
-  top: 7px;
-  left: 7px;
-  font-size: 9px;
+  top: 8px;
+  left: 8px;
+  font-size: 11px;
   font-weight: var(--font-weight-bold);
-  padding: 3px 8px;
+  padding: 4px 8px;
   border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
@@ -21,6 +21,14 @@
   text-transform: uppercase;
   transition: all var(--transition-base);
   backdrop-filter: blur(10px);
+}
+
+/* Responsive adjustment for mobile - smaller size */
+@media (max-width: 430px) {
+  .priorityBadge {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
 }
 
 .priorityHigh {
@@ -76,36 +84,4 @@
 
 .detailsView .priorityBadge.priorityLow:hover {
   box-shadow: 0 0 10px var(--priority-low-glow);
-}
-
-/* Responsive priority badges */
-@media (max-width: 768px) {
-  .priorityBadge {
-    font-size: 9px;
-    padding: 3px 8px;
-    top: 8px;
-    left: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .priorityBadge {
-    font-size: 1.5px;
-    padding: 0.5px 1px;
-    top: 6px;
-    left: 6px;
-    letter-spacing: 0px;
-    border-width: 0.5px;
-  }
-}
-
-@media (max-width: 360px) {
-  .priorityBadge {
-    font-size: 2.5px;
-    padding: 0.5px 1.5px;
-    top: 6px;
-    left: 6px;
-    letter-spacing: 0px;
-    border-width: 0.5px;
-  }
 }

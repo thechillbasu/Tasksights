@@ -1,11 +1,11 @@
 // Local Storage Management
 // 
-// Handles all localStorage operations for persisting kanban notes in the browser.
+// Handles all localStorage operations for persisting Kanby notes in the browser.
 // Provides functions to save and load notes, check storage availability, and
 // migrate old note data to ensure backward compatibility when new fields are added.
 // All data is stored as JSON in the browser's localStorage.
 
-export const STORAGE_KEY = 'kanbanNotes';
+export const STORAGE_KEY = 'kanbyNotes';
 
 // Check if localStorage is available in the browser
 export function isStorageAvailable() {

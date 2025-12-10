@@ -3,10 +3,16 @@
 // Implements HTML5 drag and drop API for moving task cards between columns.
 // Handles drag start, drag over, drop, and drag end events. Automatically manages
 // timer state when tasks move to/from "In Progress" column. Provides visual feedback
-// during dragging with highlight effects on drop targets.
+// during dragging with highlight effects on drop targets. Auto-scrolls viewport when
+// dragging near edges on devices ≤1280px.
 
 import { getNotes, setNotes, getTimerManager } from './main.js';
 import { saveNotes } from './storage.js';
+
+// Auto-scroll configuration
+let autoScrollInterval = null;
+const SCROLL_ZONE = 80; // Pixels from edge to trigger scroll
+const SCROLL_SPEED = 34; // Pixels per frame
 
 // Initialize drag and drop for all notes and columns
 export function initDragAndDrop() {
@@ -26,6 +32,11 @@ export function initDragAndDrop() {
     column.addEventListener('drop', handleDrop);
     column.addEventListener('dragleave', handleDragLeave);
   });
+  
+  // Add document-level drag listener for auto-scroll on devices ≤1280px
+  if (window.innerWidth <= 1280) {
+    document.addEventListener('drag', handleAutoScroll);
+  }
 }
 
 // Store note ID when drag starts
@@ -33,6 +44,46 @@ function handleDragStart(event) {
   const noteId = event.currentTarget.getAttribute('data-note-id');
   event.dataTransfer.setData('text/plain', noteId);
   event.currentTarget.classList.add('dragging');
+  
+  // Start auto-scroll monitoring on devices ≤1280px
+  if (window.innerWidth <= 1280) {
+    startAutoScrollMonitoring();
+  }
+}
+
+// Auto-scroll when dragging near viewport edges
+function handleAutoScroll(event) {
+  // Only on devices ≤1280px
+  if (window.innerWidth > 1280) return;
+  
+  const mouseY = event.clientY;
+  const viewportHeight = window.innerHeight;
+  
+  // Check if near top edge
+  if (mouseY < SCROLL_ZONE && mouseY > 0) {
+    window.scrollBy(0, -SCROLL_SPEED);
+  }
+  // Check if near bottom edge
+  else if (mouseY > viewportHeight - SCROLL_ZONE && mouseY < viewportHeight) {
+    window.scrollBy(0, SCROLL_SPEED);
+  }
+}
+
+// Start monitoring for auto-scroll
+function startAutoScrollMonitoring() {
+  if (autoScrollInterval) return;
+  
+  autoScrollInterval = setInterval(() => {
+    // Interval runs but actual scrolling happens in handleAutoScroll
+  }, 16); // ~60fps
+}
+
+// Stop auto-scroll monitoring
+function stopAutoScrollMonitoring() {
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+    autoScrollInterval = null;
+  }
 }
 
 // Allow drop by preventing default behavior
@@ -120,4 +171,7 @@ function handleDragEnd(event) {
   
   const columns = document.querySelectorAll('.boardColumn');
   columns.forEach(column => column.classList.remove('dropTarget'));
+  
+  // Stop auto-scroll monitoring
+  stopAutoScrollMonitoring();
 }

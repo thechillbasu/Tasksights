@@ -5,7 +5,7 @@
 // Updates UI elements (icons, labels) when theme changes. Listens for system theme
 // changes and auto-switches if user hasn't manually selected a theme.
 
-const THEME_STORAGE_KEY = "kanban-theme";
+const THEME_STORAGE_KEY = "kanby-theme";
 
 // Get user's preferred theme from storage or system preference
 function getPreferredTheme() {

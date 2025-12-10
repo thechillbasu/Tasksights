@@ -1,7 +1,7 @@
 {
-  "name": "kanban-sticky-notes",
+  "name": "kanby",
   "version": "3.0.0",
-  "description": "A modern, feature-rich task management application with drag-and-drop Kanban board, time tracking, Google Calendar integration, and dark/light theme support",
+  "description": "A modern, feature-rich Kanban task management application with drag-and-drop functionality, time tracking, Google Calendar integration, and dark/light theme support",
   "type": "module",
   "main": "index.html",
   "scripts": {
@@ -21,13 +21,13 @@
     "localstorage",
     "vanilla-javascript"
   ],
-  "author": "",
+  "author": "thechillbasu",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thechillbasu/Kanban-Sticky-Notes"
+    "url": "https://github.com/thechillbasu/Kanby"
   },
-  "homepage": "https://thechillbasu.github.io/Kanban-Sticky-Notes/",
+  "homepage": "https://thechillbasu.github.io/Kanby/",
   "devDependencies": {
     "vitest": "^1.0.0",
     "fast-check": "^3.15.0",

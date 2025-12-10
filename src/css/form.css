@@ -130,9 +130,41 @@
 
 /* Shake animation for validation errors */
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-8px); }
-  75% { transform: translateX(8px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-8px);
+  }
+
+  75% {
+    transform: translateX(8px);
+  }
+}
+
+/* Medium screens - prevent button overflow and improve selector visibility */
+@media (max-width: 1024px) {
+  #addNoteForm {
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  #noteText {
+    flex: 1 1 100%;
+  }
+
+  #prioritySelect,
+  #columnSelect {
+    flex: 1;
+    min-width: 160px;
+  }
+
+  #addNoteForm button {
+    flex: 1 1 100%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -141,13 +173,13 @@
     padding: var(--space-lg);
     gap: var(--space-md);
   }
-  
+
   #noteText {
     flex: 1 1 100%;
     padding: var(--space-md);
     font-size: var(--font-size-base);
   }
-  
+
   #prioritySelect,
   #columnSelect {
     flex: 1;
@@ -156,7 +188,7 @@
     padding-right: var(--space-xl);
     font-size: var(--font-size-sm);
   }
-  
+
   #addNoteForm button {
     flex: 1 1 100%;
     padding: var(--space-md) var(--space-xl);
@@ -164,16 +196,17 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 430px) {
   #addNoteForm {
     padding: var(--space-md);
     gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
   }
-  
+
   #noteText {
     padding: var(--space-sm) var(--space-md);
   }
-  
+
   #prioritySelect,
   #columnSelect {
     flex: 1 1 100%;
@@ -181,7 +214,7 @@
     padding: var(--space-sm) var(--space-md);
     padding-right: var(--space-xl);
   }
-  
+
   #addNoteForm button {
     padding: var(--space-sm) var(--space-lg);
   }

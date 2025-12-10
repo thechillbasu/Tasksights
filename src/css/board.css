@@ -183,7 +183,7 @@
 }
 
 /* Large tablet - 2 columns */
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   .board {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-xl);
@@ -235,8 +235,29 @@
   }
 }
 
+/* Mobile compact - smooth transition */
+@media (max-width: 640px) {
+  .board {
+    gap: var(--space-lg);
+    padding: var(--space-xs);
+  }
+  
+  .boardColumn {
+    padding: var(--space-lg);
+    min-height: 290px;
+  }
+  
+  .boardColumn h2 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .notesContainer {
+    max-height: 380px;
+  }
+}
+
 /* Small mobile view - compact layout */
-@media (max-width: 480px) {
+@media (max-width: 430px) {
   .board {
     gap: var(--space-md);
     padding: 0;
@@ -265,7 +286,7 @@
 }
 
 /* Extra small mobile */
-@media (max-width: 360px) {
+@media (max-width: 375px) {
   .board {
     gap: var(--space-sm);
   }

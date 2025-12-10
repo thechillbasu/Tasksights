@@ -1,222 +1,195 @@
-# Kanban Sticky Notes Board
+# Kanby
 
-A modern, feature-rich task management application built with vanilla HTML, CSS, and JavaScript. Organize and track your tasks across three columns using an intuitive drag-and-drop interface with automatic browser storage. The application features a sleek dark/light theme with cyberpunk aesthetics, real-time clock display, Google Calendar integration, and comprehensive time tracking.
+A modern, feature-rich Kanban task management application with drag-and-drop functionality, time tracking, and Google Calendar integration. Built with vanilla JavaScript, HTML, and CSS.
 
-**Current Version:** 3.0.0
+## Live Demo
 
-**Live Demo:** [https://thechillbasu.github.io/Kanban-Sticky-Notes/](https://thechillbasu.github.io/Kanban-Sticky-Notes/)
+**[https://thechillbasu.github.io/Kanby/](https://thechillbasu.github.io/Kanby/)**
+
+## Documentation
+
+**[PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md)** - Comprehensive technical documentation covering architecture, modules, data flow, and development guidelines.
 
 ## Features
 
-### Task Management
-- Drag-and-drop task organization across To Do, In Progress, and Done columns
-- Priority levels (High, Medium, Low) with distinct color-coded badges
-  - High: Red for urgent tasks
-  - Medium: Orange for normal priority
-  - Low: Blue for less urgent tasks
-- Task descriptions with rich text support
-- Due dates with color-coded urgency indicators (overdue, urgent, upcoming)
-- Automatic sorting by priority within each column
-- Comprehensive task details modal with all task information
+### Core Functionality
+- **Drag and Drop Interface** - Move tasks seamlessly between To Do, In Progress, and Done columns
+- **Priority Management** - Organize tasks with High, Medium, and Low priority levels with color-coded badges
+- **Time Tracking** - Automatic timer for tasks in progress with persistent tracking across sessions
+- **Task Details** - Add descriptions, due dates, and track completion times
+- **Local Storage** - All data persists in your browser with automatic saving
 
-### Time Tracking
-- Automatic timer for tasks moved to In Progress column
-- Real-time elapsed time display for active tasks (HH:MM:SS format)
-- Real-world time tracking that continues even when browser is closed
-- Persistent time tracking across page refreshes and sessions
-- Accumulative time tracking when tasks move in and out of In Progress
-- Completion time display for finished tasks in human-readable format
-- Timer state preserved during all operations (add, edit, delete tasks)
+### Advanced Features
+- **Google Calendar Integration** - View holiday calendar and connect your personal calendar via OAuth 2.0
+- **Dark/Light Theme** - Toggle between cyberpunk neon dark mode and clean professional light mode
+- **Live Clock Widget** - Real-time display with clickable access to calendar
+- **Responsive Design** - Fully optimized for desktop, tablet, and mobile devices
+- **Smart Sorting** - Tasks automatically sorted by priority within each column
 
-### User Interface
-- Modern dark/light theme toggle with cyberpunk neon aesthetics
-- Live clock capsule displaying current time and date
-- **Fully responsive design optimized for all screen sizes**:
-  - Desktop (> 1024px): Full 3-column layout with optimal spacing
-  - Tablet (768px - 1024px): Adaptive stacked columns
-  - Mobile (480px - 768px): Optimized card heights and touch-friendly buttons
-  - Small Mobile (360px - 480px): Compact priority badges and efficient spacing
-  - Ultra-small (≤ 360px): Fine-tuned layout preventing text overlap
-- **Enhanced card responsiveness**:
-  - Consistent card heights regardless of task count
-  - Smart text wrapping to prevent timestamp overflow
-  - Optimized spacing between priority badges and task names
-  - Flex-based layout preventing card compression
-- Smooth animations and visual feedback for all interactions
-- Custom styled scrollbars with color-coded accents
-- Enhanced modal dialogs with improved scrolling behavior
-- Empty state messages and helpful UI hints
-
-### Google Calendar Integration
-- View public holiday calendar in an embedded iframe
-- Connect your Google Calendar account via OAuth 2.0 for personal events
-- View upcoming calendar events in a side panel
-- Read-only access to your primary calendar
-- Event details including title, date, time, and location
-- Improved iframe styling with glowing borders and hover effects
-- Better visibility for event items in both dark and light modes
-
-### Data Persistence
-- Automatic localStorage persistence for all tasks and timer states
-- Data migration support for backward compatibility with older versions
-- Real-world timestamps persisted to track time even when browser is closed
-- Storage availability detection with user warnings
-- All task data stored locally in browser (no external servers)
+### Time Tracking Details
+- Automatic start when task moves to In Progress
+- Real-world time tracking (continues even when browser is closed)
+- Accumulative tracking across multiple sessions
+- Live timer display in HH:MM:SS format
+- Completion time summary for finished tasks
 
 ## Getting Started
 
 ### Prerequisites
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- Python 3 (for local development server)
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+- Python 3 (optional, for local development server)
 
-### Local Development
+### Installation
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd KanbanStickyNotes-SimpleCopy
+git clone https://github.com/thechillbasu/Kanby.git
+cd Kanby
 ```
 
-2. Open the application in your browser:
+2. Open in browser:
 
-Option 1: Direct file access
-- Open `index.html` directly in your browser
-
-Option 2: Local server (recommended)
+**Option 1: Direct file access**
 ```bash
-python3 -m http.server 8000
+# Simply open index.html in your browser
+open index.html
 ```
-Then navigate to `http://localhost:8000` in your browser
 
-### Production Deployment
+**Option 2: Local server (recommended)**
+```bash
+# Start a local server
+python3 -m http.server 8000
 
-The application is deployed on GitHub Pages and accessible at:
-[https://thechillbasu.github.io/Kanban-Sticky-Notes/](https://thechillbasu.github.io/Kanban-Sticky-Notes/)
+# Navigate to http://localhost:8000
+```
+
+### Usage
+
+#### Creating Tasks
+1. Enter task name in the input field
+2. Select priority level (High, Medium, Low)
+3. Choose initial column (To Do, In Progress, Done)
+4. Click "Add Note" to open the editor
+5. Add optional description and due date
+6. Click "Add Task" to create
+
+#### Managing Tasks
+- **Move Tasks** - Drag and drop cards between columns
+- **Edit Task** - Click the pencil icon on any card
+- **View Details** - Click anywhere on a card to see full information
+- **Delete Task** - Click the trash icon on any card
+
+#### Time Tracking
+- Timer starts automatically when task moves to In Progress
+- Time accumulates across multiple sessions
+- Timer continues even when browser is closed
+- Completed tasks show total time spent
+
+#### Google Calendar
+1. Click the live clock widget to view holiday calendar
+2. Click "My Events" to connect your personal calendar
+3. Authorize the application (OAuth 2.0)
+4. View upcoming events with details
+
+#### Theme Switching
+- Click the theme toggle button in the header
+- Preference is saved automatically
 
 ## Project Structure
 
 ```
-KanbanStickyNotes-SimpleCopy/
-├── index.html                     # Main HTML entry point
+Kanby/
+├── index.html                      # Main HTML structure
 ├── src/
-│   ├── css/                       # Modular CSS files
-│   │   ├── variables.css          # Design tokens and CSS variables
-│   │   ├── base.css               # Base styles and global layout
-│   │   ├── headerBase.css         # Header container and components
-│   │   ├── headerCalendar.css     # Google Calendar integration styles
-│   │   ├── headerThemes.css       # Light mode theme overrides
-│   │   ├── headerResponsive.css   # Responsive media queries
-│   │   ├── form.css               # Task creation form styles
-│   │   ├── board.css              # Kanban board layout with custom scrollbars
-│   │   ├── cards.css              # Task card styles and interactions
-│   │   ├── priority.css           # Priority badge styles
-│   │   ├── modalBase.css          # Base modal styles with custom scrollbars
-│   │   ├── detailsViewerModal.css # Task details viewer modal
-│   │   ├── detailsEditorModal.css # Task editor modal
-│   │   └── utilities.css          # Utility classes and helpers
-│   └── js/                        # JavaScript modules
-│       ├── main.js                # Application orchestration
-│       ├── notes.js               # Notes state and CRUD operations
-│       ├── rendering.js           # DOM rendering and element creation
-│       ├── modals.js              # Modal dialogs management
-│       ├── formatters.js          # Date and time formatting utilities
-│       ├── storage.js             # localStorage management
-│       ├── dragDrop.js            # Drag and drop functionality
-│       ├── timer.js               # Time tracking system
-│       ├── theme.js               # Theme switching
-│       ├── headerWidgets.js       # Live clock widget
-│       └── googleCalendar.js      # Google Calendar OAuth integration
-├── package.json
-├── CHANGELOG.md
-├── LICENSE
-└── README.md
+│   ├── css/                        # Modular CSS files
+│   │   ├── variables.css           # Design tokens and CSS variables
+│   │   ├── base.css                # Global styles and resets
+│   │   ├── headerBase.css          # Header structure
+│   │   ├── headerCalendar.css      # Calendar integration styles
+│   │   ├── headerThemes.css        # Light mode overrides
+│   │   ├── headerResponsive.css    # Header responsive breakpoints
+│   │   ├── form.css                # Task creation form
+│   │   ├── board.css               # Kanban board layout
+│   │   ├── cards.css               # Task card styles
+│   │   ├── priority.css            # Priority badge styles
+│   │   ├── modalBase.css           # Base modal styles
+│   │   ├── detailsViewerModal.css  # Task details viewer
+│   │   ├── detailsEditorModal.css  # Task editor with date picker
+│   │   ├── utilities.css           # Utility classes
+│   │   └── responsive.css          # Additional responsive styles
+│   └── js/                         # JavaScript modules
+│       ├── main.js                 # Application orchestration
+│       ├── notes.js                # Task CRUD operations
+│       ├── rendering.js            # DOM manipulation
+│       ├── dragDrop.js             # Drag and drop functionality
+│       ├── storage.js              # localStorage management
+│       ├── timer.js                # Time tracking system
+│       ├── modals.js               # Modal dialogs
+│       ├── formatters.js           # Date/time formatting
+│       ├── theme.js                # Theme switching
+│       ├── headerWidgets.js        # Live clock widget
+│       └── googleCalendar.js       # Google Calendar OAuth
+├── CODING_PREFERENCES.md           # Development guidelines
+├── PROJECT_DOCUMENTATION.md        # Comprehensive technical docs
+├── LICENSE                         # MIT License
+└── README.md                       # This file
 ```
 
-## How to Use
+## Technology Stack
 
-### Creating Tasks
-1. Enter task text in the input field at the top
-2. Select a priority level (High, Medium, or Low)
-3. Choose the initial column (To Do, In Progress, or Done)
-4. Click "Add Note" to open the task editor modal
-5. Add optional description and due date
-6. Click "Add Task" to create the task
+- **Frontend**: Vanilla JavaScript (ES6+)
+- **Styling**: Modular CSS with custom properties
+- **Storage**: Browser localStorage
+- **APIs**: Google Calendar API, Google Identity Services
+- **Architecture**: Event-driven with modular design
 
-### Managing Tasks
-- **Move Tasks**: Click and drag any task card between columns
-- **Edit Task**: Click the edit icon (pencil) on any task card
-- **View Details**: Click anywhere on a task card to view full details
-- **Delete Task**: Click the delete icon (trash) on any task card
+## Browser Compatibility
 
-### Time Tracking
-- Tasks automatically start tracking time when moved to In Progress
-- The timer displays elapsed time in real-time (HH:MM:SS format)
-- Time tracking continues even when browser is closed (tracks real-world time)
-- Time accumulates across multiple sessions and persists through page refreshes
-- Timer continues accurately even when adding, editing, or deleting other tasks
-- Completed tasks show total time spent in a human-readable format (e.g., "2 hours 15 minutes 30 seconds")
+- Chrome/Edge 88+
+- Firefox 75+
+- Safari 13.1+
+- iOS Safari 13.4+
+- Android Chrome 88+
 
-### Google Calendar
-1. Click the live clock widget to view the public holiday calendar
-2. Click "My Events" button in the header to connect your personal calendar
-3. Authorize the application to access your calendar (OAuth 2.0)
-4. View your upcoming events with title, date, time, and location
-5. Switch between holiday calendar iframe and personal events list
+## Responsive Breakpoints
 
-### Theme Switching
-- Click the theme toggle button in the header to switch between dark and light modes
-- Your preference is automatically saved and persists across sessions
-
-## Technical Details
-
-### Architecture
-The application follows a modular architecture with clear separation of concerns:
-- **State Management**: Centralized notes state in `notes.js`
-- **Rendering**: DOM manipulation isolated in `rendering.js`
-- **Modals**: Dialog management in `modals.js`
-- **Formatting**: Date/time utilities in `formatters.js`
-- **Orchestration**: Main application logic in `main.js`
-- **Time Tracking**: TimerManager class in `timer.js` with persistent state
-- **Storage**: localStorage operations with migration in `storage.js`
-- **Drag & Drop**: HTML5 drag-and-drop API in `dragDrop.js`
-- **Theme**: Dark/light mode switching in `theme.js`
-- **Event-Driven**: Custom events for cross-module communication
-
-### Browser Compatibility
-Works in all modern browsers that support:
-- HTML5 Drag and Drop API
-- ES6 Modules
-- localStorage API
-- CSS Grid and Flexbox
-- CSS Custom Properties (CSS Variables)
-
-### Storage
-All task data is stored locally in the browser's localStorage, including:
-- Task details (text, description, priority, due date)
-- Time tracking data (timeSpent, inProgressSince, timerStartTime)
-- Task metadata (createdAt, lastEditedAt, startedAt, completedAt)
-
-No data is sent to external servers except when using Google Calendar integration (which requires explicit user authorization). The application works completely offline once loaded.
+- **Desktop** (> 1280px): Full 3-column layout with wider spacing
+- **Large Laptop** (1024px - 1280px): 2-column layout, proportional scaling
+- **Tablet Landscape** (768px - 1024px): Single column, stacked layout
+- **Mobile Landscape** (640px - 890px): Compact spacing, optimized heights
+- **Mobile Portrait** (430px - 768px): Touch-optimized layout
+- **Small Mobile** (375px - 430px): Compact padding and spacing
+- **Extra Small** (≤ 375px): Minimal spacing, ultra-compact
 
 ## Development
 
-### Running Tests
-```bash
-npm test
-```
-
 ### Code Style
-- JavaScript: camelCase for variables and functions, PascalCase for classes
-- CSS: camelCase for class names (e.g., `.appHeader`, `.taskCard`, `.priorityBadge`)
-- CSS Variables: kebab-case with double dashes (e.g., `--priority-high`, `--bg-card`)
+- JavaScript: camelCase for variables/functions, PascalCase for classes
+- CSS: camelCase for class names (e.g., `.appHeader`, `.taskCard`)
 - Comments: File headers and concise single-line comments
-- Consistent 2-space indentation throughout
 - ES6+ features (arrow functions, template literals, destructuring)
 
-## License
-
-This project is open source and available for educational use. See the LICENSE file for details.
+### Key Principles
+- Modular architecture with clear separation of concerns
+- Event-driven communication between modules
+- Mobile-first responsive design
+- Accessibility compliance
+- Clean, professional code without decorative elements
 
 ## Contributing
 
-Contributions are welcome. Please ensure your code follows the existing style guidelines and includes appropriate comments.
+Contributions are welcome! Please ensure your code follows the existing style guidelines in CODING_PREFERENCES.md.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Font Awesome for icons
+- Google for Calendar API and Identity Services
+- Modern CSS techniques for glassmorphism and neon effects
+
+## Support
+
+For issues, questions, or suggestions, please open an issue on the GitHub repository.

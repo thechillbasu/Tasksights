@@ -362,7 +362,7 @@ body:not(.darkMode) .dueDateGroup {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 430px) {
   .formGroup {
     margin-bottom: var(--space-md);
   }
@@ -424,7 +424,7 @@ body:not(.darkMode) .dueDateGroup {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 375px) {
   .formGroup input,
   .formGroup textarea,
   .formGroup select {
