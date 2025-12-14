@@ -404,21 +404,72 @@ async function handleAddTask(e) {
   }
 }
 
+// View task details modal
+window.viewKanbanTaskDetails = function(taskId) {
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
+  
+  openTaskDetailsModal(task, timerManager);
+};
+
+// Edit task modal
 window.editKanbanTask = async function(taskId) {
   const task = tasks.find(t => t.id === taskId);
   if (!task) return;
   
-  const newText = prompt('Task name:', task.text);
-  if (newText) {
-    await updateKanbanTask(taskId, { text: newText, lastEditedAt: Date.now() });
+  openTaskEditorModal(task, async (updatedData) => {
+    const updates = {
+      text: updatedData.text,
+      description: updatedData.description,
+      priority: updatedData.priority,
+      dueDate: updatedData.dueDate,
+      lastEditedAt: Date.now()
+    };
+    
+    // Handle column/status change
+    const oldColumn = task.column;
+    const newColumn = updatedData.column;
+    
+    if (oldColumn !== newColumn) {
+      updates.column = newColumn;
+      
+      // Stop timer when leaving In Progress
+      if (oldColumn === 'inprogress' && newColumn !== 'inprogress') {
+        if (task.inProgressSince) {
+          const sessionTime = Date.now() - task.inProgressSince;
+          updates.timeSpent = (task.timeSpent || 0) + sessionTime;
+        }
+        updates.timerStartTime = null;
+        updates.inProgressSince = null;
+        timerManager.stopTimer(taskId);
+        
+        if (newColumn === 'done') {
+          updates.completedAt = Date.now();
+        }
+      }
+      
+      // Start timer when moving to In Progress
+      if (newColumn === 'inprogress' && oldColumn !== 'inprogress') {
+        if (!task.startedAt) {
+          updates.startedAt = Date.now();
+        }
+        updates.inProgressSince = Date.now();
+        const previousTimeSpent = task.timeSpent || 0;
+        const adjustedStartTime = Date.now() - previousTimeSpent;
+        updates.timerStartTime = adjustedStartTime;
+        timerManager.startTimer(taskId, adjustedStartTime);
+      }
+    }
+    
+    await updateKanbanTask(taskId, updates);
     await loadTasks();
     initializeTimers();
     renderTasks();
-  }
+  });
 };
 
 window.deleteKanbanTask = async function(taskId) {
-  if (confirm('Delete this task?')) {
+  if (confirm('Delete this task? This action cannot be undone.')) {
     timerManager.stopTimer(taskId);
     await deleteKanbanTask(taskId);
     await loadTasks();
