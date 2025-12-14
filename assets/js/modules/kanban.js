@@ -298,15 +298,20 @@ function createTaskCard(task) {
     <div class=\"flex items-start justify-between mb-2\">
       <span class=\"${priorityClasses[task.priority]} text-xs\" data-testid=\"task-priority-badge\">${task.priority.toUpperCase()}</span>
       <div class=\"flex gap-1\">
-        <button class=\"btn btn-ghost btn-xs\" onclick=\"window.editKanbanTask('${task.id}')\" data-testid=\"edit-task-button\">
+        <button class=\"btn btn-ghost btn-xs\" onclick=\"window.viewKanbanTaskDetails('${task.id}')\" data-testid=\"view-task-button\" title=\"View Details\">
+          <i class=\"fas fa-eye\"></i>
+        </button>
+        <button class=\"btn btn-ghost btn-xs\" onclick=\"window.editKanbanTask('${task.id}')\" data-testid=\"edit-task-button\" title=\"Edit Task\">
           <i class=\"fas fa-edit\"></i>
         </button>
-        <button class=\"btn btn-ghost btn-xs text-error\" onclick=\"window.deleteKanbanTask('${task.id}')\" data-testid=\"delete-task-button\">
+        <button class=\"btn btn-ghost btn-xs text-error\" onclick=\"window.deleteKanbanTask('${task.id}')\" data-testid=\"delete-task-button\" title=\"Delete Task\">
           <i class=\"fas fa-trash\"></i>
         </button>
       </div>
     </div>
-    <p class=\"font-medium mb-2\" data-testid=\"task-text\">${task.text}</p>
+    <div class=\"task-content cursor-pointer\" onclick=\"window.viewKanbanTaskDetails('${task.id}')\">
+      <p class=\"font-medium mb-2\" data-testid=\"task-text\">${task.text}</p>
+    </div>
   `;
   
   // Show creation timestamp for To Do
