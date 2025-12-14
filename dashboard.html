@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="tasksights">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - TaskSights</title>
+  <link rel="stylesheet" href="./src/css/output.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="bg-base-100">
+  
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar" data-testid="sidebar">
+    <div class="flex flex-col h-full">
+      <!-- Logo Header -->
+      <div class="p-4 border-b border-base-300">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fas fa-chart-line text-2xl text-primary"></i>
+            <h1 class="sidebar-item-text text-xl font-bold">TaskSights</h1>
+          </div>
+          <button id="sidebarToggle" class="btn btn-ghost btn-sm lg:hidden">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Navigation -->
+      <nav class="flex-1 p-2 overflow-y-auto custom-scrollbar">
+        <div class="sidebar-item active" data-section="profile" data-testid="nav-profile">
+          <i class="sidebar-item-icon fas fa-user"></i>
+          <span class="sidebar-item-text">Profile</span>
+        </div>
+        
+        <div class="sidebar-item" data-section="kanban" data-testid="nav-kanban">
+          <i class="sidebar-item-icon fas fa-th"></i>
+          <span class="sidebar-item-text">Kanban Board</span>
+        </div>
+        
+        <div class="sidebar-item" data-section="tracker" data-testid="nav-tracker">
+          <i class="sidebar-item-icon fas fa-stopwatch"></i>
+          <span class="sidebar-item-text">Time Tracker</span>
+        </div>
+        
+        <div class="sidebar-item" data-section="insights" data-testid="nav-insights">
+          <i class="sidebar-item-icon fas fa-chart-bar"></i>
+          <span class="sidebar-item-text">Insights</span>
+        </div>
+        
+        <div class="sidebar-item" data-section="journal" data-testid="nav-journal">
+          <i class="sidebar-item-icon fas fa-book"></i>
+          <span class="sidebar-item-text">Daily Journal</span>
+        </div>
+      </nav>
+      
+      <!-- Logout Button -->
+      <div class="p-2 border-t border-base-300">
+        <button id="logoutBtn" class="sidebar-item w-full text-error hover:bg-error/10" data-testid="logout-button">
+          <i class="sidebar-item-icon fas fa-sign-out-alt"></i>
+          <span class="sidebar-item-text">Logout</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+  
+  <!-- Mobile Menu Toggle -->
+  <button id="mobileMenuToggle" class="btn btn-primary fixed top-4 left-4 z-40 lg:hidden" data-testid="mobile-menu-toggle">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <!-- Main Content -->
+  <main id="mainContent" class="main-content" data-testid="main-content">
+    <div class="container mx-auto p-4 lg:p-8">
+      
+      <!-- Profile Section -->
+      <div id="profileSection" class="section active" data-testid="profile-section">
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold mb-2">Profile</h2>
+          <p class="text-base-content/70">Manage your account and preferences</p>
+        </div>
+        <div id="profileContent" class="space-y-6"></div>
+      </div>
+      
+      <!-- Kanban Board Section -->
+      <div id="kanbanSection" class="section hidden" data-testid="kanban-section">
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold mb-2">Kanban Board</h2>
+          <p class="text-base-content/70">Organize your tasks visually</p>
+        </div>
+        <div id="kanbanContent"></div>
+      </div>
+      
+      <!-- Time Tracker Section -->
+      <div id="trackerSection" class="section hidden" data-testid="tracker-section">
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold mb-2">Time Tracker</h2>
+          <p class="text-base-content/70">Track your activities and time</p>
+        </div>
+        <div id="trackerContent"></div>
+      </div>
+      
+      <!-- Insights Section -->
+      <div id="insightsSection" class="section hidden" data-testid="insights-section">
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold mb-2">Insights</h2>
+          <p class="text-base-content/70">Analyze your productivity patterns</p>
+        </div>
+        <div id="insightsContent"></div>
+      </div>
+      
+      <!-- Daily Journal Section -->
+      <div id="journalSection" class="section hidden" data-testid="journal-section">
+        <div class="mb-6">
+          <h2 class="text-3xl font-bold mb-2">Daily Journal</h2>
+          <p class="text-base-content/70">Reflect on your day</p>
+        </div>
+        <div id="journalContent"></div>
+      </div>
+      
+    </div>
+  </main>
+  
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+    <div class="bg-base-100 rounded-lg p-8 flex flex-col items-center">
+      <span class="loading loading-spinner loading-lg text-primary"></span>
+      <p class="mt-4 text-lg">Loading...</p>
+    </div>
+  </div>
+  
+  <script type="module" src="./src/js/dashboard.js"></script>
+</body>
+</html>
