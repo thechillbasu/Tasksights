@@ -101,6 +101,11 @@ export async function initProfile(user) {
       preferences: { ...profile.preferences, notifications: e.target.checked }
     });
   });
+  
+  // Dark mode toggle
+  document.getElementById('darkModeToggle')?.addEventListener('change', (e) => {
+    toggleTheme();
+  });
 }
 
 function renderGoals(goals) {
