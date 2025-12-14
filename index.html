@@ -62,6 +62,10 @@
   <!-- Auto-redirect script -->
   <script type="module">
     import { onAuthChange } from './assets/js/auth.js';
+    import { initTheme } from './assets/js/theme.js';
+    
+    // Initialize theme
+    initTheme();
     
     // Check if user is already logged in
     onAuthChange((user) => {
