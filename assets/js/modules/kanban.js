@@ -141,7 +141,45 @@ export async function initKanban(user) {
   
   // Set up event listeners
   document.getElementById('addTaskForm')?.addEventListener('submit', handleAddTask);
+  document.getElementById('addTaskModalBtn')?.addEventListener('click', handleAddTaskModal);
   setupDragAndDrop();
+}
+
+// Add task via modal (with description, due date, etc.)
+function handleAddTaskModal() {
+  openTaskEditorModal(null, async (taskData) => {
+    const now = Date.now();
+    const column = taskData.column;
+    
+    const newTaskData = {
+      text: taskData.text,
+      description: taskData.description,
+      priority: taskData.priority,
+      column: column,
+      dueDate: taskData.dueDate,
+      createdAt: now,
+      lastEditedAt: null,
+      startedAt: column === 'inprogress' ? now : null,
+      completedAt: column === 'done' ? now : null,
+      timeSpent: 0,
+      timerStartTime: column === 'inprogress' ? now : null,
+      inProgressSince: column === 'inprogress' ? now : null
+    };
+    
+    const result = await createKanbanTask(currentUser.uid, newTaskData);
+    
+    if (result.success) {
+      if (column === 'inprogress') {
+        const newTask = { id: result.id, ...newTaskData };
+        tasks.push(newTask);
+        timerManager.startTimer(result.id, now);
+      }
+      
+      await loadTasks();
+      initializeTimers();
+      renderTasks();
+    }
+  });
 }
 
 async function loadTasks() {
