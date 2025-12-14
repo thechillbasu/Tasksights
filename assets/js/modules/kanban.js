@@ -62,23 +62,28 @@ export async function initKanban(user) {
     <!-- Add Task Form -->
     <div class=\"card bg-base-200 shadow-md mb-6\" data-testid=\"add-task-form\">
       <div class=\"card-body\">
-        <form id=\"addTaskForm\" class=\"flex flex-col md:flex-row gap-4\">
-          <input type=\"text\" placeholder=\"Task name...\" class=\"input input-bordered flex-1\" 
-            id=\"taskNameInput\" data-testid=\"task-name-input\" required>
-          <select class=\"select select-bordered\" id=\"taskPriority\" data-testid=\"task-priority-select\">
-            <option value=\"high\">High Priority</option>
-            <option value=\"medium\" selected>Medium Priority</option>
-            <option value=\"low\">Low Priority</option>
-          </select>
-          <select class=\"select select-bordered\" id=\"taskColumn\" data-testid=\"task-column-select\">
-            <option value=\"todo\">To Do</option>
-            <option value=\"inprogress\">In Progress</option>
-            <option value=\"done\">Done</option>
-          </select>
-          <button type=\"submit\" class=\"btn btn-primary\" data-testid=\"add-task-button\">
-            <i class=\"fas fa-plus\"></i> Add Task
+        <div class=\"flex flex-col md:flex-row gap-4\">
+          <form id=\"addTaskForm\" class=\"flex flex-col md:flex-row gap-4 flex-1\">
+            <input type=\"text\" placeholder=\"Task name...\" class=\"input input-bordered flex-1\" 
+              id=\"taskNameInput\" data-testid=\"task-name-input\" required>
+            <select class=\"select select-bordered\" id=\"taskPriority\" data-testid=\"task-priority-select\">
+              <option value=\"high\">High Priority</option>
+              <option value=\"medium\" selected>Medium Priority</option>
+              <option value=\"low\">Low Priority</option>
+            </select>
+            <select class=\"select select-bordered\" id=\"taskColumn\" data-testid=\"task-column-select\">
+              <option value=\"todo\">To Do</option>
+              <option value=\"inprogress\">In Progress</option>
+              <option value=\"done\">Done</option>
+            </select>
+            <button type=\"submit\" class=\"btn btn-primary\" data-testid=\"add-task-button\">
+              <i class=\"fas fa-plus\"></i> Quick Add
+            </button>
+          </form>
+          <button type=\"button\" class=\"btn btn-secondary\" id=\"addTaskModalBtn\" data-testid=\"add-task-modal-button\">
+            <i class=\"fas fa-plus-circle\"></i> Add with Details
           </button>
-        </form>
+        </div>
       </div>
     </div>
     
