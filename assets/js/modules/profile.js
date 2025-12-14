@@ -1,6 +1,7 @@
 // Profile Module for TaskSights
 import { getCurrentUser } from '../auth.js';
 import { getUserProfile, updateUserProfile } from '../firestore-helpers.js';
+import { getCurrentTheme, toggleTheme } from '../theme.js';
 
 export async function initProfile(user) {
   console.log('Initializing Profile module');
