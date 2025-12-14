@@ -136,6 +136,18 @@ html:not(.darkMode) {
     0%, 100% { opacity: 0.5; }
     50% { opacity: 0.7; }
   }
+
+  /* Light mode background */
+  html:not(.darkMode) body {
+    background: linear-gradient(135deg, #fafbfc 0%, #f0f6ff 50%, #fff8dc 100%);
+  }
+
+  html:not(.darkMode) body::before {
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(9, 105, 218, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(130, 80, 223, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(26, 127, 55, 0.04) 0%, transparent 50%);
+  }
 }
 
 @layer components {
