@@ -1,6 +1,7 @@
 // Kanban Board Module for TaskSights - Based on Kanby Logic
 // Implements exact time tracking, drag-drop, and task management from Kanby
 import { getKanbanTasks, createKanbanTask, updateKanbanTask, deleteKanbanTask } from '../firestore-helpers.js';
+import { openTaskEditorModal, openTaskDetailsModal } from '../modals.js';
 
 let tasks = [];
 let currentUser = null;
