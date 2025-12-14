@@ -83,7 +83,8 @@ export async function initProfile(user) {
         <div class="form-control">
           <label class="label cursor-pointer">
             <span class="label-text">Dark Mode</span>
-            <input type="checkbox" class="toggle toggle-primary" id="darkModeToggle">
+            <input type="checkbox" class="toggle toggle-primary" id="darkModeToggle"
+              ${getCurrentTheme() === 'dark' ? 'checked' : ''}>
           </label>
         </div>
       </div>
