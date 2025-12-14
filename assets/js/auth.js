@@ -15,6 +15,10 @@ import {
 
 // Google OAuth provider
 const googleProvider = new GoogleAuthProvider();
+// Force account selection on every login
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
 
 // Sign in with Google
 export async function signInWithGoogle() {
@@ -23,6 +27,16 @@ export async function signInWithGoogle() {
     return { success: true, user: result.user };
   } catch (error) {
     console.error('Google sign-in error:', error);
+    // Handle specific error codes
+    if (error.code === 'auth/popup-blocked') {
+      return { success: false, error: 'Popup was blocked. Please allow popups for this site.' };
+    }
+    if (error.code === 'auth/popup-closed-by-user') {
+      return { success: false, error: 'Sign-in was cancelled.' };
+    }
+    if (error.code === 'auth/unauthorized-domain') {
+      return { success: false, error: 'This domain is not authorized. Please contact support.' };
+    }
     return { success: false, error: error.message };
   }
 }
