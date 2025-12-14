@@ -1,0 +1,414 @@
+/* Header Responsive Styles
+ * 
+ * Media queries for responsive header layout across different screen sizes.
+ * Handles mobile, tablet, and desktop breakpoints for all header components.
+ */
+
+/* Fluid typography for smooth scaling between breakpoints */
+@media (min-width: 431px) and (max-width: 1280px) {
+  .appTitle {
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+  }
+  
+  .clockTime {
+    font-size: clamp(12px, 2vw + 0.25rem, 1.25rem);
+  }
+}
+
+/* Medium desktop - proportionally smaller elements */
+@media (max-width: 1280px) {
+
+  /* Smaller title */
+  .appTitle {
+    font-size: 3rem;
+  }
+
+  .titleUnderline {
+    width: 160px;
+  }
+
+  /* Smaller clock capsule */
+  .liveClock {
+    height: 70px;
+    padding: var(--space-sm) var(--space-lg);
+    justify-content: center;
+  }
+
+  .clockTime {
+    font-size: var(--font-size-lg);
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+
+  .clockDate {
+    font-size: 10px;
+    margin-bottom: 0;
+  }
+
+  /* Smaller buttons */
+  .themeToggle,
+  .myEventsBtn {
+    height: 70px;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .themeToggle i,
+  .myEventsBtn i {
+    font-size: var(--font-size-lg);
+  }
+
+  .themeToggleLabel,
+  .myEventsBtnLabel {
+    font-size: 15px;
+  }
+}
+
+/* Tablet - Proportional scaling (≤1024px) */
+@media (max-width: 1024px) {
+  .appTitle {
+    font-size: 3rem;
+  }
+
+  .titleUnderline {
+    width: 160px;
+  }
+
+  .liveClock {
+    height: 70px;
+  }
+
+  .clockTime {
+    font-size: var(--font-size-lg);
+  }
+
+  .clockDate {
+    font-size: 10px;
+  }
+
+  .themeToggle,
+  .myEventsBtn {
+    height: 70px;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .themeToggle i,
+  .myEventsBtn i {
+    font-size: var(--font-size-lg);
+  }
+
+  .themeToggleLabel,
+  .myEventsBtnLabel {
+    font-size: 15px;
+  }
+
+  .clockHint {
+    display: none;
+  }
+}
+
+/* Mobile Landscape - Further reduction (≤890px) */
+@media (max-width: 890px) {
+  .appHeader {
+    min-height: 60px;
+    flex-wrap: nowrap;
+  }
+
+
+  .appTitle {
+    font-size: 2.5rem;
+  }
+
+  .titleUnderline {
+    width: 130px;
+  }
+
+  .liveClock {
+    height: 60px;
+  }
+
+  .clockTime {
+    font-size: var(--font-size-base);
+  }
+
+  .clockDate {
+    font-size: 9px;
+  }
+
+  .themeToggle,
+  .myEventsBtn {
+    height: 60px;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .themeToggle i,
+  .myEventsBtn i {
+    font-size: var(--font-size-base);
+  }
+
+  .themeToggleLabel,
+  .myEventsBtnLabel {
+    font-size: 13px;
+  }
+}
+
+/* Mobile Portrait - Compact (≤768px) */
+@media (max-width: 768px) {
+  .appHeader {
+    min-height: 55px;
+    flex-wrap: nowrap;
+  }
+  
+  .appHeaderRight {
+    gap: var(--space-sm);
+  }
+
+  .appTitle {
+    font-size: 2.25rem;
+  }
+
+  .titleUnderline {
+    width: 125px;
+  }
+
+  .liveClock {
+    height: 55px;
+    white-space: nowrap;
+    max-width: 180px;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .clockTime {
+    font-size: 14px;
+  }
+
+  .clockDate {
+    font-size: 8px;
+  }
+
+  .themeToggle,
+  .myEventsBtn {
+    height: 55px;
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .themeToggle i,
+  .myEventsBtn i {
+    font-size: 14px;
+  }
+
+  .themeToggleLabel,
+  .myEventsBtnLabel {
+    font-size: 12px;
+  }
+}
+
+/* Mobile Compact - (≤640px) */
+@media (max-width: 640px) {
+  .appHeader {
+    min-height: 58px;
+    flex-wrap: nowrap;
+  }
+
+  .appHeaderLeft {
+    flex-shrink: 1;
+    flex-basis: auto;
+    min-width: 0;
+  }
+
+  .appTitle {
+    font-size: 2.15rem;
+  }
+
+  .titleUnderline {
+    width: 120px;
+  }
+
+  .liveClock {
+    height: 58px;
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .clockTime {
+    font-size: var(--font-size-base);
+  }
+
+  .clockDate {
+    font-size: 9px;
+  }
+
+  .themeToggle,
+  .myEventsBtn {
+    height: 58px;
+    width: 58px;
+    padding: var(--space-sm);
+    flex-shrink: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .themeToggle i,
+  .myEventsBtn i {
+    font-size: var(--font-size-base);
+  }
+
+  .themeToggleLabel,
+  .myEventsBtnLabel {
+    display: none;
+  }
+}
+
+/* Mobile Small - (≤430px) */
+@media (max-width: 430px) {
+  .appHeader {
+    min-height: 54px;
+    margin: 0;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .appHeaderRight {
+    gap: 4px;
+    /* Tighter gap since buttons are just icons now */
+  }
+
+  .appTitle {
+    font-size: 2rem;
+  }
+
+  .titleUnderline {
+    width: 115px;
+  }
+
+  /* Unified Single Box Look: Remove individual borders/bg from children */
+  .liveClock,
+  .themeToggle,
+  .myEventsBtn {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    height: 54px;
+    padding: 0;
+  }
+
+  .liveClock:hover,
+  .themeToggle:hover,
+  .myEventsBtn:hover {
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.8;
+  }
+
+  /* Adjust clock text alignment since padding is gone */
+  .liveClock {
+    align-items: flex-start;
+    /* Align left in its grid cell */
+    padding-left: var(--space-xs);
+    width: auto;
+  }
+
+  .clockTime {
+    font-size: 14px;
+    margin-bottom: 3px;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .clockDate {
+    font-size: 8px;
+  }
+
+  .themeToggle,
+  .myEventsBtn {
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+  }
+  
+  /* Click feedback - visual indication */
+  .themeToggle:active,
+  .myEventsBtn:active {
+    background: rgba(0, 240, 255, 0.2);
+    transform: scale(0.95);
+  }
+  
+  .liveClock:active {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+
+  .themeToggle i,
+  .myEventsBtn i {
+    font-size: 20px;
+  }
+}
+
+/* Extra Small Mobile - Minimal (≤375px) */
+@media (max-width: 375px) {
+  .appHeader {
+    min-height: 54px;
+    flex-wrap: nowrap;
+  }
+
+  .appTitle {
+    font-size: 1.5rem;
+  }
+
+  .titleUnderline {
+    width: 80px;
+  }
+
+  .liveClock {
+    height: 54px;
+  }
+
+  .clockTime {
+    font-size: 13px;
+  }
+
+  .clockDate {
+    font-size: 8px;
+  }
+
+  .themeToggle,
+  .myEventsBtn {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+  }
+  
+  /* Click feedback - visual indication */
+  .themeToggle:active,
+  .myEventsBtn:active {
+    background: rgba(0, 240, 255, 0.2);
+    transform: scale(0.95);
+  }
+  
+  .liveClock:active {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+
+  .themeToggle i,
+  .myEventsBtn i {
+    font-size: 18px;
+  }
+
+  .themeToggleLabel,
+  .myEventsBtnLabel {
+    display: none;
+  }
+}

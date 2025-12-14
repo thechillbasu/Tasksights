@@ -1,0 +1,87 @@
+/* Priority Badge Styles
+ * 
+ * Color-coded badges that display task priority levels (High, Medium, Low).
+ * Each priority has unique colors with neon accents and glow effects.
+ * Badges appear on task cards and in modal dialogs with consistent styling.
+ */
+
+/* Base priority badge */
+.priorityBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all var(--transition-base);
+  backdrop-filter: blur(10px);
+}
+
+/* Responsive adjustment for mobile - smaller size */
+@media (max-width: 430px) {
+  .priorityBadge {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+}
+
+.priorityHigh {
+  background: var(--priority-high-bg);
+  color: var(--priority-high);
+  border: 1px solid var(--priority-high);
+  box-shadow: 0 0 10px var(--priority-high-glow);
+}
+
+.priorityHigh:hover {
+  box-shadow: 0 0 20px var(--priority-high-glow);
+  transform: scale(1.05);
+}
+
+.priorityMedium {
+  background: var(--priority-medium-bg);
+  color: var(--priority-medium);
+  border: 1px solid var(--priority-medium);
+  box-shadow: 0 0 10px var(--priority-medium-glow);
+}
+
+.priorityMedium:hover {
+  box-shadow: 0 0 20px var(--priority-medium-glow);
+  transform: scale(1.05);
+}
+
+.priorityLow {
+  background: var(--priority-low-bg);
+  color: var(--priority-low);
+  border: 1px solid var(--priority-low);
+  box-shadow: 0 0 10px var(--priority-low-glow);
+}
+
+.priorityLow:hover {
+  box-shadow: 0 0 20px var(--priority-low-glow);
+  transform: scale(1.05);
+}
+
+/* Disable hover effects in details modal */
+.detailsView .priorityBadge.priorityHigh:hover,
+.detailsView .priorityBadge.priorityMedium:hover,
+.detailsView .priorityBadge.priorityLow:hover {
+  transform: none;
+}
+
+.detailsView .priorityBadge.priorityHigh:hover {
+  box-shadow: 0 0 10px var(--priority-high-glow);
+}
+
+.detailsView .priorityBadge.priorityMedium:hover {
+  box-shadow: 0 0 10px var(--priority-medium-glow);
+}
+
+.detailsView .priorityBadge.priorityLow:hover {
+  box-shadow: 0 0 10px var(--priority-low-glow);
+}

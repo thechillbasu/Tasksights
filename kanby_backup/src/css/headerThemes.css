@@ -1,0 +1,227 @@
+/* Header Light Mode Theme Overrides
+ * 
+ * Light mode styling overrides for all header components providing
+ * alternative color schemes and styling for light theme.
+ */
+
+/* Header container light mode */
+body:not(.darkMode) .appHeader {
+  background: linear-gradient(180deg, 
+    #ffffff 0%, 
+    #f8f9fa 50%, 
+    #ffffff 100%
+  );
+  border-bottom: 1px solid rgba(9, 105, 218, 0.2);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(9, 105, 218, 0.1),
+    0 4px 24px rgba(31, 35, 40, 0.08);
+}
+
+body:not(.darkMode) .appHeader::after {
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(9, 105, 218, 0.3) 20%,
+    rgba(26, 127, 55, 0.2) 50%,
+    rgba(130, 80, 223, 0.3) 80%,
+    transparent 100%
+  );
+}
+
+/* Clock light mode */
+body:not(.darkMode) .liveClock {
+  background: linear-gradient(135deg, 
+    rgba(9, 105, 218, 0.08) 0%,
+    rgba(130, 80, 223, 0.08) 100%
+  );
+  border-color: rgba(9, 105, 218, 0.25);
+}
+
+body:not(.darkMode) .liveClock:hover {
+  border-color: rgba(0, 240, 255, 0.5);
+  background: linear-gradient(135deg, 
+    rgba(9, 105, 218, 0.18) 0%,
+    rgba(130, 80, 223, 0.18) 100%
+  );
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.1),
+    inset 0 -1px 0 rgba(9, 105, 218, 0.2),
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(9, 105, 218, 0.25);
+  transform: translateY(-2px);
+}
+
+body:not(.darkMode) .clockTime {
+  color: #0969da;
+  text-shadow: 0 0 10px rgba(9, 105, 218, 0.2);
+}
+
+body:not(.darkMode) .clockDate {
+  color: #57606a;
+}
+
+body:not(.darkMode) .clockHint {
+  color: #57606a;
+  opacity: 0.8;
+}
+
+body:not(.darkMode) .liveClock:hover .clockHint {
+  opacity: 1;
+}
+
+/* Title light mode */
+body:not(.darkMode) .appTitle .wordKanban {
+  background: linear-gradient(135deg, #0969da, #1a7f37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body:not(.darkMode) .appTitle .wordSticky {
+  background: linear-gradient(135deg, #1a7f37, #8250df);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body:not(.darkMode) .appTitle .wordNotes {
+  background: linear-gradient(135deg, #8250df, #0969da);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body:not(.darkMode) .titleUnderline {
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    #0969da 50%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px rgba(9, 105, 218, 0.3);
+}
+
+body:not(.darkMode) .appSubtitle {
+  color: #57606a;
+  opacity: 1;
+}
+
+/* Theme toggle light mode */
+body:not(.darkMode) .themeToggle {
+  border-color: rgba(9, 105, 218, 0.3);
+  background: linear-gradient(135deg, 
+    rgba(9, 105, 218, 0.08) 0%,
+    rgba(130, 80, 223, 0.08) 100%
+  );
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.1),
+    inset 0 -1px 0 rgba(9, 105, 218, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(9, 105, 218, 0.1);
+}
+
+body:not(.darkMode) .themeToggle:hover {
+  border-color: #0969da;
+  background: linear-gradient(135deg, 
+    rgba(9, 105, 218, 0.12) 0%,
+    rgba(130, 80, 223, 0.12) 100%
+  );
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.1),
+    inset 0 -1px 0 rgba(9, 105, 218, 0.2),
+    0 6px 16px rgba(0, 0, 0, 0.15),
+    0 0 30px rgba(9, 105, 218, 0.2);
+}
+
+/* Connect popup light mode */
+body:not(.darkMode) .googleCalendarPopup {
+  border-color: rgba(9, 105, 218, 0.3);
+  box-shadow: 0 8px 24px rgba(31, 35, 40, 0.15), 0 0 40px rgba(9, 105, 218, 0.08);
+}
+
+body:not(.darkMode) .btnConnectGoogle {
+  border-color: rgba(9, 105, 218, 0.3);
+  background: linear-gradient(135deg, 
+    rgba(9, 105, 218, 0.12) 0%,
+    rgba(130, 80, 223, 0.12) 100%
+  );
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body:not(.darkMode) .btnConnectGoogle:hover {
+  border-color: #0969da;
+  background: linear-gradient(135deg, 
+    rgba(9, 105, 218, 0.16) 0%,
+    rgba(130, 80, 223, 0.16) 100%
+  );
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(9, 105, 218, 0.2);
+}
+
+body:not(.darkMode) .btnCancelPopup {
+  border-color: rgba(31, 35, 40, 0.2);
+}
+
+body:not(.darkMode) .btnCancelPopup:hover {
+  border-color: rgba(31, 35, 40, 0.4);
+  background: rgba(31, 35, 40, 0.05);
+}
+
+/* Calendar panel light mode */
+body:not(.darkMode) .googleCalendarPanel {
+  border-color: rgba(9, 105, 218, 0.2);
+  box-shadow: 0 8px 24px rgba(31, 35, 40, 0.15), 0 0 40px rgba(9, 105, 218, 0.08);
+}
+
+body:not(.darkMode) .googleCalendarPanelHeader {
+  background: rgba(9, 105, 218, 0.05);
+  border-bottom-color: rgba(9, 105, 218, 0.1);
+}
+
+body:not(.darkMode) .closeBtn:hover {
+  background: rgba(9, 105, 218, 0.1);
+  color: #0969da;
+}
+
+body:not(.darkMode) .btnSignOut {
+  border-color: rgba(31, 35, 40, 0.2);
+  color: var(--text-secondary);
+}
+
+body:not(.darkMode) .btnSignOut:hover {
+  background: rgba(207, 34, 46, 0.1);
+  border-color: #cf222e;
+  color: #cf222e;
+}
+
+body:not(.darkMode) .myEventsBtn {
+  border-color: rgba(9, 105, 218, 0.3);
+  background: linear-gradient(135deg, 
+    rgba(9, 105, 218, 0.08) 0%,
+    rgba(130, 80, 223, 0.08) 100%
+  );
+}
+
+body:not(.darkMode) .myEventsBtn:hover {
+  border-color: #0969da;
+  background: linear-gradient(135deg, 
+    rgba(9, 105, 218, 0.12) 0%,
+    rgba(130, 80, 223, 0.12) 100%
+  );
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.1),
+    inset 0 -1px 0 rgba(9, 105, 218, 0.2),
+    0 6px 16px rgba(31, 35, 40, 0.15),
+    0 0 30px rgba(9, 105, 218, 0.15);
+}
+
+body:not(.darkMode) .googleEventItem {
+  border-color: rgba(9, 105, 218, 0.1);
+}
+
+body:not(.darkMode) .googleEventItem:hover {
+  border-color: rgba(9, 105, 218, 0.3);
+}

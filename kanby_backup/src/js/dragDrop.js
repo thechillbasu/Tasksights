@@ -1,0 +1,177 @@
+// Drag and Drop Functionality
+// 
+// Implements HTML5 drag and drop API for moving task cards between columns.
+// Handles drag start, drag over, drop, and drag end events. Automatically manages
+// timer state when tasks move to/from "In Progress" column. Provides visual feedback
+// during dragging with highlight effects on drop targets. Auto-scrolls viewport when
+// dragging near edges on devices ≤1280px.
+
+import { getNotes, setNotes, getTimerManager } from './main.js';
+import { saveNotes } from './storage.js';
+
+// Auto-scroll configuration
+let autoScrollInterval = null;
+const SCROLL_ZONE = 80; // Pixels from edge to trigger scroll
+const SCROLL_SPEED = 34; // Pixels per frame
+
+// Initialize drag and drop for all notes and columns
+export function initDragAndDrop() {
+  const allNotes = document.querySelectorAll('.stickyNote');
+  
+  // Make each note draggable
+  allNotes.forEach(note => {
+    note.setAttribute('draggable', 'true');
+    note.addEventListener('dragstart', handleDragStart);
+    note.addEventListener('dragend', handleDragEnd);
+  });
+  
+  // Set up drop zones on columns
+  const columns = document.querySelectorAll('.boardColumn');
+  columns.forEach(column => {
+    column.addEventListener('dragover', handleDragOver);
+    column.addEventListener('drop', handleDrop);
+    column.addEventListener('dragleave', handleDragLeave);
+  });
+  
+  // Add document-level drag listener for auto-scroll on devices ≤1280px
+  if (window.innerWidth <= 1280) {
+    document.addEventListener('drag', handleAutoScroll);
+  }
+}
+
+// Store note ID when drag starts
+function handleDragStart(event) {
+  const noteId = event.currentTarget.getAttribute('data-note-id');
+  event.dataTransfer.setData('text/plain', noteId);
+  event.currentTarget.classList.add('dragging');
+  
+  // Start auto-scroll monitoring on devices ≤1280px
+  if (window.innerWidth <= 1280) {
+    startAutoScrollMonitoring();
+  }
+}
+
+// Auto-scroll when dragging near viewport edges
+function handleAutoScroll(event) {
+  // Only on devices ≤1280px
+  if (window.innerWidth > 1280) return;
+  
+  const mouseY = event.clientY;
+  const viewportHeight = window.innerHeight;
+  
+  // Check if near top edge
+  if (mouseY < SCROLL_ZONE && mouseY > 0) {
+    window.scrollBy(0, -SCROLL_SPEED);
+  }
+  // Check if near bottom edge
+  else if (mouseY > viewportHeight - SCROLL_ZONE && mouseY < viewportHeight) {
+    window.scrollBy(0, SCROLL_SPEED);
+  }
+}
+
+// Start monitoring for auto-scroll
+function startAutoScrollMonitoring() {
+  if (autoScrollInterval) return;
+  
+  autoScrollInterval = setInterval(() => {
+    // Interval runs but actual scrolling happens in handleAutoScroll
+  }, 16); // ~60fps
+}
+
+// Stop auto-scroll monitoring
+function stopAutoScrollMonitoring() {
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+    autoScrollInterval = null;
+  }
+}
+
+// Allow drop by preventing default behavior
+function handleDragOver(event) {
+  event.preventDefault();
+  event.currentTarget.classList.add('dropTarget');
+}
+
+// Remove drop target styling when leaving column
+function handleDragLeave(event) {
+  if (event.currentTarget === event.target || !event.currentTarget.contains(event.relatedTarget)) {
+    event.currentTarget.classList.remove('dropTarget');
+  }
+}
+
+// Handle note drop - update column and manage timers
+function handleDrop(event) {
+  event.preventDefault();
+  
+  const column = event.currentTarget;
+  const newColumn = column.id;
+  const noteId = parseInt(event.dataTransfer.getData('text/plain'));
+  
+  const notes = getNotes();
+  const noteIndex = notes.findIndex(note => note.id === noteId);
+  
+  if (noteIndex !== -1) {
+    const note = notes[noteIndex];
+    const oldColumn = note.column;
+    note.column = newColumn;
+    
+    const timerManager = getTimerManager();
+    
+    // Start timer when moving to In Progress
+    if (newColumn === 'inprogress' && oldColumn !== 'inprogress') {
+      // Record the actual timestamp when task enters In Progress
+      if (!note.startedAt) {
+        note.startedAt = Date.now();
+      }
+      
+      // Store when this In Progress session started
+      note.inProgressSince = Date.now();
+      
+      // Calculate adjusted start time for timer display (accounts for previous time)
+      const previousTimeSpent = note.timeSpent || 0;
+      const adjustedStartTime = Date.now() - previousTimeSpent;
+      note.timerStartTime = adjustedStartTime;
+      
+      timerManager.startTimer(noteId, adjustedStartTime);
+    }
+    
+    // Stop timer and save elapsed time when leaving In Progress
+    if (oldColumn === 'inprogress' && newColumn !== 'inprogress') {
+      // Calculate actual elapsed time since task entered In Progress
+      if (note.inProgressSince) {
+        const sessionTime = Date.now() - note.inProgressSince;
+        note.timeSpent = (note.timeSpent || 0) + sessionTime;
+      } else {
+        // Fallback to timer manager if inProgressSince not set
+        const elapsedTime = timerManager.stopTimer(noteId);
+        note.timeSpent = elapsedTime;
+      }
+      
+      note.timerStartTime = null;
+      note.inProgressSince = null;
+      timerManager.stopTimer(noteId);
+      
+      // Mark as completed if moving to Done
+      if (newColumn === 'done') {
+        note.completedAt = Date.now();
+      }
+    }
+    
+    setNotes(notes);
+    saveNotes(notes);
+    window.dispatchEvent(new CustomEvent('notesUpdated'));
+  }
+  
+  column.classList.remove('dropTarget');
+}
+
+// Clean up styling when drag ends
+function handleDragEnd(event) {
+  event.currentTarget.classList.remove('dragging');
+  
+  const columns = document.querySelectorAll('.boardColumn');
+  columns.forEach(column => column.classList.remove('dropTarget'));
+  
+  // Stop auto-scroll monitoring
+  stopAutoScrollMonitoring();
+}

@@ -1,0 +1,38 @@
+{
+  "name": "kanby",
+  "version": "3.1.0",
+  "description": "A modern, feature-rich Kanban task management application with 7-tier responsive design, viewport auto-scroll drag-and-drop, time tracking, Google Calendar integration, and dark/light theme support",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "test": "vitest --run"
+  },
+  "keywords": [
+    "kanban",
+    "task-management",
+    "productivity",
+    "todo",
+    "project-management",
+    "drag-and-drop",
+    "time-tracking",
+    "google-calendar",
+    "responsive-design",
+    "mobile-first",
+    "localstorage",
+    "vanilla-javascript"
+  ],
+  "author": "thechillbasu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thechillbasu/Kanby"
+  },
+  "homepage": "https://thechillbasu.github.io/Kanby/",
+  "devDependencies": {
+    "vitest": "^1.0.0",
+    "fast-check": "^3.15.0",
+    "jsdom": "^23.0.0"
+  }
+}
