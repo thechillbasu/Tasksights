@@ -1,0 +1,9 @@
+{
+  "name": "tasksights-frontend",
+  "version": "1.0.0",
+  "description": "TaskSights static frontend",
+  "scripts": {
+    "start": "cd /app && python3 -m http.server 3000"
+  },
+  "dependencies": {}
+}
