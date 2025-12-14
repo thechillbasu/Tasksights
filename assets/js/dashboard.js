@@ -5,6 +5,10 @@ import { initKanban } from './modules/kanban.js';
 import { initTracker } from './modules/tracker.js';
 import { initInsights } from './modules/insights.js';
 import { initJournal } from './modules/journal.js';
+import { initTheme } from './theme.js';
+
+// Initialize theme on page load
+initTheme();
 
 // Check authentication
 onAuthChange((user) => {
