@@ -4,7 +4,7 @@ export default {
     "./index.html",
     "./login.html",
     "./dashboard.html",
-    "./src/**/*.{js,ts,jsx,tsx,html}",
+    "./assets/**/*.{js,ts,jsx,tsx,html}",
   ],
   theme: {
     extend: {
