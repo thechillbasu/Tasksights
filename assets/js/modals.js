@@ -1,409 +1,369 @@
-// Modal Management - Task Editor and Details Viewer
-// 
-// Handles all modal dialogs for task creation, editing, and viewing details.
-// Manages the task editor modal with date/time picker and the task details
-// viewer modal. Coordinates with notes and rendering modules.
+// Modal Management for TaskSights
+// Task Editor and Details Viewer Modals
 
-import { formatTimestamp, formatDateTimeLocal, formatDueDateDisplay } from './formatters.js';
-import { formatElapsedTime, formatCompletedTime } from './timer.js';
-
-// Open modal for adding or editing a task
-export function openTaskModal(note, taskText, taskColumn, taskPriority, taskDueDate, saveCallback) {
-  // Format due date for datetime-local input
-  const dueDateValue = note?.dueDate ? formatDateTimeLocal(note.dueDate) : (taskDueDate ? formatDateTimeLocal(taskDueDate) : '');
-  
-  // Create modal element with form
+// Open task editor modal (for creating or editing)
+export function openTaskEditorModal(task, onSave) {
   const modal = document.createElement('div');
-  modal.className = 'taskModal';
+  modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50 fade-in';
+  modal.id = 'taskEditorModal';
+  
   modal.innerHTML = `
-    <div class="modalContent">
-      <div class="modalHeader">
-        <h2>${note ? 'Edit Task' : 'Add Task Details'}</h2>
-        <button class="modalClose">&times;</button>
+    <div class="bg-base-200 rounded-2xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <!-- Header -->
+      <div class="flex items-center justify-between p-6 border-b border-base-300">
+        <h2 class="text-2xl font-bold">${task ? 'Edit Task' : 'Add Task'}</h2>
+        <button class="btn btn-ghost btn-sm btn-circle" id="closeModalBtn" data-testid="close-modal-button">
+          <i class="fas fa-times text-xl"></i>
+        </button>
       </div>
-      <div class="modalBody">
-        <div class="formGroup">
-          <label for="modalTaskName">Task Name *</label>
-          <input type="text" id="modalTaskName" value="${note ? note.text : taskText}" required>
-        </div>
-        <div class="formGroup">
-          <label for="modalTaskDescription">Description</label>
-          <textarea id="modalTaskDescription" rows="4" placeholder="Add task description...">${note ? (note.description || '') : ''}</textarea>
-        </div>
-        <div class="formGroup">
-          <label for="modalTaskPriority">Priority</label>
-          <select id="modalTaskPriority">
-            <option value="high" ${(note ? note.priority : taskPriority) === 'high' ? 'selected' : ''}>High</option>
-            <option value="medium" ${(note ? note.priority : taskPriority) === 'medium' ? 'selected' : ''}>Medium</option>
-            <option value="low" ${(note ? note.priority : taskPriority) === 'low' ? 'selected' : ''}>Low</option>
-          </select>
-        </div>
-        <div class="formGroup">
-          <label for="modalTaskStatus">Status</label>
-          <select id="modalTaskStatus">
-            <option value="todo" ${(note ? note.column : taskColumn) === 'todo' ? 'selected' : ''}>To Do</option>
-            <option value="inprogress" ${(note ? note.column : taskColumn) === 'inprogress' ? 'selected' : ''}>In Progress</option>
-            <option value="done" ${(note ? note.column : taskColumn) === 'done' ? 'selected' : ''}>Done</option>
-          </select>
-        </div>
-        <div class="formGroup dueDateGroup">
-          <label for="modalTaskDueDate">
-            <i class="fas fa-calendar-check"></i> Due Date & Time
+      
+      <!-- Body -->
+      <div class="p-6 space-y-6">
+        <!-- Task Name -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Task Name *</span>
           </label>
-          <div class="dueDateInputWrapper">
-            <input type="datetime-local" id="modalTaskDueDate" value="${dueDateValue}" style="display: none;">
-            <input type="text" id="dueDateDisplay" class="dueDateDisplay" placeholder="Due Date and Time not set" readonly>
-            <button type="button" class="btnSelectDateTime" id="btnSelectDateTime">
-              <i class="fas fa-calendar-alt"></i> Select Due Date & Time
-            </button>
-            <div class="dateTimePickerPopup" id="dateTimePickerPopup" style="display: none;">
-              <div class="dateTimePicker">
-                <div class="pickerLabel">Date:</div>
-                <input type="date" id="datePickerInput" class="dateInput">
-                <div class="pickerLabel">Time:</div>
-                <input type="time" id="timePickerInput" class="timeInput">
-                <button type="button" class="btnDonePicker" id="btnDonePicker">
-                  <i class="fas fa-check"></i> Done
-                </button>
-              </div>
-            </div>
-            <span class="dueDateHint">
-              <i class="fas fa-info-circle"></i>
-              Set when this task needs to be completed
-            </span>
-          </div>
-          ${note?.dueDate ? '<button type="button" class="btnClearDueDate" title="Clear due date"><i class="fas fa-times-circle"></i> Clear Due Date</button>' : ''}
+          <input 
+            type="text" 
+            class="input input-bordered w-full" 
+            id="modalTaskName"
+            placeholder="Enter task name..."
+            value="${task ? task.text : ''}"
+            data-testid="modal-task-name"
+            required
+          >
         </div>
-        ${note && note.lastEditedAt ? `
-          <div class="lastEdited">
-            Last edited: ${formatTimestamp(note.lastEditedAt)}
+        
+        <!-- Description -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Description</span>
+          </label>
+          <textarea 
+            class="textarea textarea-bordered h-24" 
+            id="modalTaskDescription"
+            placeholder="Add task description..."
+            data-testid="modal-task-description"
+          >${task ? (task.description || '') : ''}</textarea>
+        </div>
+        
+        <!-- Priority -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Priority</span>
+          </label>
+          <select class="select select-bordered w-full" id="modalTaskPriority" data-testid="modal-task-priority">
+            <option value="high" ${task && task.priority === 'high' ? 'selected' : ''}>High</option>
+            <option value="medium" ${!task || task.priority === 'medium' ? 'selected' : ''}>Medium</option>
+            <option value="low" ${task && task.priority === 'low' ? 'selected' : ''}>Low</option>
+          </select>
+        </div>
+        
+        <!-- Status/Column -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Status</span>
+          </label>
+          <select class="select select-bordered w-full" id="modalTaskStatus" data-testid="modal-task-status">
+            <option value="todo" ${!task || task.column === 'todo' ? 'selected' : ''}>To Do</option>
+            <option value="inprogress" ${task && task.column === 'inprogress' ? 'selected' : ''}>In Progress</option>
+            <option value="done" ${task && task.column === 'done' ? 'selected' : ''}>Done</option>
+          </select>
+        </div>
+        
+        <!-- Due Date -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">
+              <i class="fas fa-calendar-check"></i> Due Date & Time
+            </span>
+          </label>
+          <input 
+            type="datetime-local" 
+            class="input input-bordered w-full" 
+            id="modalTaskDueDate"
+            data-testid="modal-task-due-date"
+            value="${task && task.dueDate ? formatDateTimeLocal(task.dueDate) : ''}"
+          >
+          <label class="label">
+            <span class="label-text-alt">
+              <i class="fas fa-info-circle"></i> Set when this task needs to be completed
+            </span>
+          </label>
+        </div>
+        
+        ${task && task.lastEditedAt ? `
+          <div class="text-sm text-base-content/50">
+            Last edited: ${formatTimestamp(task.lastEditedAt)}
           </div>
         ` : ''}
       </div>
-      <div class="modalFooter">
-        <button class="btnCancel">Cancel</button>
-        <button class="btnSave">${note ? 'Save Changes' : 'Add Task'}</button>
+      
+      <!-- Footer -->
+      <div class="flex items-center justify-end gap-3 p-6 border-t border-base-300">
+        <button class="btn btn-ghost" id="cancelModalBtn" data-testid="cancel-modal-button">
+          Cancel
+        </button>
+        <button class="btn btn-primary" id="saveModalBtn" data-testid="save-modal-button">
+          <i class="fas fa-save"></i>
+          ${task ? 'Save Changes' : 'Add Task'}
+        </button>
       </div>
     </div>
   `;
+  
   document.body.appendChild(modal);
   
-  // Initialize custom date/time picker
-  initializeDateTimePicker(modal, dueDateValue);
-  
-  // Focus on task name input
+  // Focus on task name
   const taskNameInput = modal.querySelector('#modalTaskName');
-  taskNameInput.focus();
-  taskNameInput.select();
+  setTimeout(() => {
+    taskNameInput.focus();
+    taskNameInput.select();
+  }, 100);
   
-  // Get modal buttons
-  const closeBtn = modal.querySelector('.modalClose');
-  const cancelBtn = modal.querySelector('.btnCancel');
-  const saveBtn = modal.querySelector('.btnSave');
+  // Event listeners
+  const closeModal = () => modal.remove();
   
-  // Close modal function
-  const closeModal = () => {
-    modal.remove();
-  };
+  modal.querySelector('#closeModalBtn').addEventListener('click', closeModal);
+  modal.querySelector('#cancelModalBtn').addEventListener('click', closeModal);
   
-  // Save task function
-  const saveTask = () => {
-    // Get form values
-    const newText = taskNameInput.value.trim();
-    const newDescription = modal.querySelector('#modalTaskDescription').value.trim();
-    const newPriority = modal.querySelector('#modalTaskPriority').value;
-    const newStatus = modal.querySelector('#modalTaskStatus').value;
-    const dueDateInput = modal.querySelector('#modalTaskDueDate').value;
-    const newDueDate = dueDateInput ? new Date(dueDateInput).getTime() : null;
+  modal.querySelector('#saveModalBtn').addEventListener('click', () => {
+    const taskName = modal.querySelector('#modalTaskName').value.trim();
+    const description = modal.querySelector('#modalTaskDescription').value.trim();
+    const priority = modal.querySelector('#modalTaskPriority').value;
+    const status = modal.querySelector('#modalTaskStatus').value;
+    const dueDate = modal.querySelector('#modalTaskDueDate').value;
     
-    // Validate task name
-    if (newText.length === 0) {
-      taskNameInput.classList.add('invalidInput');
-      setTimeout(() => taskNameInput.classList.remove('invalidInput'), 500);
+    if (taskName.length === 0) {
+      taskNameInput.classList.add('input-error');
+      setTimeout(() => taskNameInput.classList.remove('input-error'), 500);
       return;
     }
     
-    if (saveCallback) {
-      saveCallback(note, newText, newDescription, newPriority, newDueDate, newStatus);
+    if (onSave) {
+      onSave({
+        text: taskName,
+        description,
+        priority,
+        column: status,
+        dueDate: dueDate ? new Date(dueDate).getTime() : null
+      });
     }
     
     closeModal();
-  };
-  
-  // Attach event listeners
-  closeBtn.addEventListener('click', closeModal);
-  cancelBtn.addEventListener('click', closeModal);
-  saveBtn.addEventListener('click', saveTask);
-  
-  // Clear due date button
-  const clearDueDateBtn = modal.querySelector('.btnClearDueDate');
-  if (clearDueDateBtn) {
-    clearDueDateBtn.addEventListener('click', () => {
-      modal.querySelector('#modalTaskDueDate').value = '';
-      const displayInput = modal.querySelector('#dueDateDisplay');
-      displayInput.value = '';
-      displayInput.classList.remove('hasValue');
-      clearDueDateBtn.remove();
-    });
-  }
+  });
   
   // Close on backdrop click
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
+    if (e.target === modal) closeModal();
   });
   
-  // Close on Escape key
-  document.addEventListener('keydown', function escapeHandler(e) {
+  // Close on Escape
+  document.addEventListener('keydown', function escHandler(e) {
     if (e.key === 'Escape') {
       closeModal();
-      document.removeEventListener('keydown', escapeHandler);
+      document.removeEventListener('keydown', escHandler);
     }
   });
   
-  // Save on Enter key in task name field
+  // Save on Enter in name field
   taskNameInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      saveTask();
+      modal.querySelector('#saveModalBtn').click();
     }
   });
 }
 
-// Initialize custom date/time picker in modal
-function initializeDateTimePicker(modal, initialValue) {
-  const btnSelectDateTime = modal.querySelector('#btnSelectDateTime');
-  const dateTimePickerPopup = modal.querySelector('#dateTimePickerPopup');
-  const datePickerInput = modal.querySelector('#datePickerInput');
-  const timePickerInput = modal.querySelector('#timePickerInput');
-  const btnDonePicker = modal.querySelector('#btnDonePicker');
-  const hiddenInput = modal.querySelector('#modalTaskDueDate');
-  const displayInput = modal.querySelector('#dueDateDisplay');
-  
-  // Set initial values if provided
-  if (initialValue) {
-    datePickerInput.value = initialValue.split('T')[0];
-    timePickerInput.value = initialValue.split('T')[1];
-    const date = new Date(initialValue);
-    displayInput.value = formatDueDateDisplay(date);
-    displayInput.classList.add('hasValue');
-  }
-  
-  // Toggle picker visibility
-  btnSelectDateTime.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isVisible = dateTimePickerPopup.style.display === 'block';
-    
-    if (isVisible) {
-      dateTimePickerPopup.style.display = 'none';
-      dateTimePickerPopup.classList.remove('active');
-    } else {
-      // Set current date/time if empty
-      if (!datePickerInput.value) {
-        const now = new Date();
-        datePickerInput.value = formatDateTimeLocal(now.getTime()).split('T')[0];
-        timePickerInput.value = formatDateTimeLocal(now.getTime()).split('T')[1];
-      }
-      dateTimePickerPopup.style.display = 'block';
-      dateTimePickerPopup.classList.add('active');
-      
-      // Scroll picker into view
-      setTimeout(() => {
-        dateTimePickerPopup.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 100);
-    }
-  });
-  
-  // Open native date picker on click
-  datePickerInput.addEventListener('click', (e) => {
-    e.stopPropagation();
-    datePickerInput.showPicker();
-  });
-  
-  // Open native time picker on click
-  timePickerInput.addEventListener('click', (e) => {
-    e.stopPropagation();
-    timePickerInput.showPicker();
-  });
-  
-  // Save selected date/time
-  btnDonePicker.addEventListener('click', () => {
-    if (datePickerInput.value && timePickerInput.value) {
-      const dateTimeValue = `${datePickerInput.value}T${timePickerInput.value}`;
-      hiddenInput.value = dateTimeValue;
-      const date = new Date(dateTimeValue);
-      displayInput.value = formatDueDateDisplay(date);
-      displayInput.classList.add('hasValue');
-      dateTimePickerPopup.style.display = 'none';
-      dateTimePickerPopup.classList.remove('active');
-    }
-  });
-  
-  // Close picker when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.dueDateInputWrapper')) {
-      dateTimePickerPopup.style.display = 'none';
-      dateTimePickerPopup.classList.remove('active');
-    }
-  });
-}
-
-// Open modal to view task details
-export function openTaskDetailsModal(note, getTimerManagerCallback, openTaskModalCallback, deleteNoteCallback) {
+// Open task details viewer modal
+export function openTaskDetailsModal(task, timerManager) {
   const modal = document.createElement('div');
-  modal.className = 'taskModal taskDetailsModal';
+  modal.className = 'fixed inset-0 bg-black/70 flex items-center justify-center z-50 fade-in';
+  modal.id = 'taskDetailsModal';
   
-  const priorityLabels = { high: 'High', medium: 'Medium', low: 'Low' };
-  const columnLabels = { todo: 'To Do', inprogress: 'In Progress', done: 'Done' };
-  const priorityClasses = { high: 'priorityHigh', medium: 'priorityMedium', low: 'priorityLow' };
-  const statusClasses = { todo: 'statusTodo', inprogress: 'statusInprogress', done: 'statusDone' };
-  
-  // Calculate time spent for display
-  let timeSpentDisplay = '';
-  if (note.startedAt && (note.timeSpent > 0 || note.column === 'inprogress')) {
-    if (note.column === 'inprogress' && getTimerManagerCallback) {
-      const timerManager = getTimerManagerCallback();
-      const elapsedTime = timerManager.getElapsedTime(note.id);
-      timeSpentDisplay = formatCompletedTime(elapsedTime);
-    } else {
-      timeSpentDisplay = formatCompletedTime(note.timeSpent);
-    }
+  // Calculate time info
+  let timeInfo = '';
+  if (task.column === 'inprogress') {
+    const elapsedTime = timerManager && timerManager.isTimerActive(task.id) 
+      ? timerManager.getElapsedTime(task.id) 
+      : (task.timeSpent || 0);
+    timeInfo = `<div class="stat">
+      <div class="stat-title">Time Tracking</div>
+      <div class="stat-value text-success">⏱ ${formatElapsedTime(elapsedTime)}</div>
+      <div class="stat-desc">Currently in progress</div>
+    </div>`;
+  } else if (task.column === 'done' && task.timeSpent) {
+    timeInfo = `<div class="stat">
+      <div class="stat-title">Completion Time</div>
+      <div class="stat-value text-success">${formatCompletedTime(task.timeSpent)}</div>
+      <div class="stat-desc">Total time tracked</div>
+    </div>`;
   }
+  
+  const priorityColors = {
+    high: 'badge-error',
+    medium: 'badge-warning',
+    low: 'badge-info'
+  };
+  
+  const statusColors = {
+    todo: 'badge-info',
+    inprogress: 'badge-warning',
+    done: 'badge-success'
+  };
+  
+  const statusLabels = {
+    todo: 'To Do',
+    inprogress: 'In Progress',
+    done: 'Done'
+  };
   
   modal.innerHTML = `
-    <div class="modalContent">
-      <div class="modalHeader">
-        <h2><i class="fas fa-info-circle"></i> Task Details</h2>
-        <button class="modalClose">&times;</button>
+    <div class="bg-base-200 rounded-2xl shadow-2xl w-full max-w-3xl mx-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <!-- Header -->
+      <div class="flex items-center justify-between p-6 border-b border-base-300">
+        <h2 class="text-2xl font-bold">Task Details</h2>
+        <button class="btn btn-ghost btn-sm btn-circle" id="closeDetailsBtn" data-testid="close-details-button">
+          <i class="fas fa-times text-xl"></i>
+        </button>
       </div>
-      <div class="modalBody">
-        <div class="detailsView">
-          <div class="detailSection">
-            <div class="detailLabel"><i class="fas fa-tasks"></i> Task Name</div>
-            <div class="detailValue taskName">${note.text}</div>
+      
+      <!-- Body -->
+      <div class="p-6 space-y-6">
+        <!-- Task Name -->
+        <div>
+          <h3 class="text-xl font-bold mb-2">${task.text}</h3>
+          <div class="flex gap-2">
+            <span class="badge ${priorityColors[task.priority]}">${task.priority.toUpperCase()}</span>
+            <span class="badge ${statusColors[task.column]}">${statusLabels[task.column]}</span>
           </div>
-          ${note.description ? `
-            <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-align-left"></i> Description</div>
-              <div class="detailValue description">${note.description}</div>
-            </div>
-          ` : ''}
-          <div class="detailRow">
-            <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-flag"></i> Priority</div>
-              <div class="detailValue">
-                <span class="priorityBadge ${priorityClasses[note.priority]}">${priorityLabels[note.priority]}</span>
-              </div>
-            </div>
-            <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-columns"></i> Status</div>
-              <div class="detailValue statusBadge ${statusClasses[note.column]}">${columnLabels[note.column]}</div>
-            </div>
+        </div>
+        
+        <!-- Description -->
+        ${task.description ? `
+          <div>
+            <h4 class="font-semibold mb-2"><i class="fas fa-align-left"></i> Description</h4>
+            <p class="text-base-content/80 whitespace-pre-wrap">${task.description}</p>
           </div>
-          ${note.dueDate ? `
-            <div class="detailSection highlight">
-              <div class="detailLabel"><i class="fas fa-calendar-check"></i> Due Date & Time</div>
-              <div class="detailValue dueDate">${formatDueDateDisplay(new Date(note.dueDate))}</div>
-            </div>
-          ` : ''}
-          <div class="detailSection">
-            <div class="detailLabel"><i class="fas fa-calendar-plus"></i> Created</div>
-            <div class="detailValue">${formatTimestamp(note.createdAt)}</div>
+        ` : ''}
+        
+        <!-- Due Date -->
+        ${task.dueDate ? `
+          <div>
+            <h4 class="font-semibold mb-2"><i class="fas fa-calendar-check"></i> Due Date</h4>
+            <p class="text-base-content/80">${formatDueDateDisplay(task.dueDate)}</p>
           </div>
-          ${note.lastEditedAt ? `
-            <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-edit"></i> Last Edited</div>
-              <div class="detailValue">${formatTimestamp(note.lastEditedAt)}</div>
+        ` : ''}
+        
+        <!-- Stats -->
+        <div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+          <div class="stat">
+            <div class="stat-title">Created</div>
+            <div class="stat-value text-sm">${task.createdAt ? formatTimestamp(task.createdAt) : 'Unknown'}</div>
+            <div class="stat-desc">Task creation date</div>
+          </div>
+          
+          ${task.startedAt ? `
+            <div class="stat">
+              <div class="stat-title">Started</div>
+              <div class="stat-value text-sm">${formatTimestamp(task.startedAt)}</div>
+              <div class="stat-desc">First time in progress</div>
             </div>
           ` : ''}
-          ${note.startedAt ? `
-            <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-play-circle"></i> First Started</div>
-              <div class="detailValue">${formatTimestamp(note.startedAt)}</div>
+          
+          ${task.completedAt ? `
+            <div class="stat">
+              <div class="stat-title">Completed</div>
+              <div class="stat-value text-sm">${formatTimestamp(task.completedAt)}</div>
+              <div class="stat-desc">Task completion date</div>
             </div>
           ` : ''}
-          ${timeSpentDisplay && note.column !== 'done' ? `
-            <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-hourglass-half"></i> Time Spent On Task</div>
-              <div class="detailValue">${timeSpentDisplay}</div>
-            </div>
-          ` : ''}
-          ${note.completedAt && note.column === 'done' ? `
-            <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-check-circle"></i> Completed</div>
-              <div class="detailValue">${formatTimestamp(note.completedAt)}</div>
-            </div>
-            <div class="detailSection">
-              <div class="detailLabel"><i class="fas fa-clock"></i> Total Time Spent On Task</div>
-              <div class="detailValue">${formatCompletedTime(note.timeSpent)}</div>
-            </div>
-          ` : ''}
+          
+          ${timeInfo}
         </div>
       </div>
-      <div class="modalFooter">
-        <button class="btnDelete" data-note-id="${note.id}">
-          <i class="fas fa-trash"></i> Delete Task
+      
+      <!-- Footer -->
+      <div class="flex items-center justify-end gap-3 p-6 border-t border-base-300">
+        <button class="btn btn-ghost" id="closeDetailsFooterBtn">
+          Close
         </button>
-        <button class="btnEdit" data-note-id="${note.id}">
-          <i class="fas fa-edit"></i> Edit Task
-        </button>
-        <button class="btnClose">Close</button>
       </div>
     </div>
   `;
+  
   document.body.appendChild(modal);
   
-  // Get modal buttons
-  const closeBtn = modal.querySelector('.modalClose');
-  const closeFooterBtn = modal.querySelector('.btnClose');
-  const editBtn = modal.querySelector('.btnEdit');
-  const deleteBtn = modal.querySelector('.btnDelete');
+  const closeModal = () => modal.remove();
   
-  const closeModal = () => {
-    modal.remove();
-  };
+  modal.querySelector('#closeDetailsBtn').addEventListener('click', closeModal);
+  modal.querySelector('#closeDetailsFooterBtn').addEventListener('click', closeModal);
   
-  // Attach event listeners
-  closeBtn.addEventListener('click', closeModal);
-  closeFooterBtn.addEventListener('click', closeModal);
-  
-  if (editBtn && openTaskModalCallback) {
-    editBtn.addEventListener('click', () => {
-      closeModal();
-      openTaskModalCallback(note);
-    });
-  }
-  
-  if (deleteBtn && deleteNoteCallback) {
-    deleteBtn.addEventListener('click', () => {
-      if (confirm('Are you sure you want to delete this task?')) {
-        deleteNoteCallback(note.id);
-        closeModal();
-      }
-    });
-  }
-  
-  // Close on backdrop click
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
+    if (e.target === modal) closeModal();
   });
   
-  // Close on Escape key
-  document.addEventListener('keydown', function escapeHandler(e) {
+  document.addEventListener('keydown', function escHandler(e) {
     if (e.key === 'Escape') {
       closeModal();
-      document.removeEventListener('keydown', escapeHandler);
+      document.removeEventListener('keydown', escHandler);
     }
   });
 }
 
+// Helper functions
+function formatDateTimeLocal(timestamp) {
+  const date = new Date(timestamp);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+}
 
+function formatTimestamp(timestamp) {
+  const date = timestamp?.toDate ? timestamp.toDate() : new Date(timestamp);
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
 
+function formatDueDateDisplay(timestamp) {
+  const date = new Date(timestamp);
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
 
+function formatElapsedTime(milliseconds) {
+  if (milliseconds < 0) return '00:00:00';
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
 
-
-
-
+function formatCompletedTime(milliseconds) {
+  if (!milliseconds || milliseconds <= 0) return 'No time tracked';
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const parts = [];
+  if (hours > 0) parts.push(`${hours} hour${hours !== 1 ? 's' : ''}`);
+  if (minutes > 0) parts.push(`${minutes} minute${minutes !== 1 ? 's' : ''}`);
+  if (seconds > 0 || parts.length === 0) parts.push(`${seconds} second${seconds !== 1 ? 's' : ''}`);
+  return parts.join(' ');
+}
