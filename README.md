@@ -1,197 +1,177 @@
-# Kanby
+# TaskSights
 
-**Version 3.1.0**
+**Version 1.0.0**
 
-A modern, feature-rich Kanban task management application with 7-tier responsive design, viewport auto-scroll drag-and-drop, time tracking, and Google Calendar integration. Built with vanilla JavaScript, HTML, and CSS.
+A unified productivity platform combining Kanban board, time tracking, AI-powered insights, and daily journaling. Built with vanilla JavaScript, Tailwind CSS, DaisyUI, Firebase, and Gemini AI.
 
-## Live Demo
+## 🎯 Features
 
-**[https://thechillbasu.github.io/Kanby/](https://thechillbasu.github.io/Kanby/)**
+- **Kanban Board** - Visual task management with drag-and-drop
+- **Time Tracker** - Track activities with live timer and goals
+- **AI Insights** - Gemini-powered productivity analysis with environmental impact
+- **Daily Journal** - Reflect on your day and track progress
+- **Profile Management** - Set goals and manage preferences
 
-## Documentation
+## 📁 Project Structure
 
-**[PROJECT_DOCUMENTATION.md](PROJECT_DOCUMENTATION.md)** - Comprehensive technical documentation covering architecture, modules, data flow, development guidelines, and complete version history.
+```
+/app/
+├── index.html              # Landing page
+├── login.html              # Authentication page
+├── dashboard.html          # Main application dashboard
+├── assets/                 # All application assets
+│   ├── css/
+│   │   ├── main.css       # Source CSS with Tailwind directives
+│   │   └── output.css     # Compiled Tailwind CSS
+│   └── js/
+│       ├── firebase-config.js    # Firebase initialization
+│       ├── auth.js               # Authentication logic
+│       ├── login.js              # Login page script
+│       ├── dashboard.js          # Dashboard navigation
+│       ├── firestore-helpers.js  # Database operations
+│       └── modules/              # Feature modules
+│           ├── profile.js        # Profile management
+│           ├── kanban.js         # Kanban board
+│           ├── tracker.js        # Time tracker
+│           ├── insights.js       # Analytics & AI
+│           └── journal.js        # Daily journal
+├── firebase.json           # Firebase hosting config
+├── firestore.rules         # Firestore security rules
+├── firestore.indexes.json  # Database indexes
+├── tailwind.config.js      # Tailwind configuration
+├── package.json            # Dependencies
+└── kanby_backup/           # Original Kanban app backup
+```
 
-## Features
-
-### Core Functionality
-- **Drag and Drop Interface** - Move tasks seamlessly between To Do, In Progress, and Done columns
-- **Priority Management** - Organize tasks with High, Medium, and Low priority levels with color-coded badges
-- **Time Tracking** - Automatic timer for tasks in progress with persistent tracking across sessions
-- **Task Details** - Add descriptions, due dates, and track completion times
-- **Local Storage** - All data persists in your browser with automatic saving
-
-### Advanced Features
-- **Google Calendar Integration** - View holiday calendar and connect your personal calendar via OAuth 2.0
-- **Dark/Light Theme** - Toggle between cyberpunk neon dark mode and clean professional light mode
-- **Live Clock Widget** - Real-time display with clickable access to calendar
-- **Responsive Design** - Fully optimized for desktop, tablet, and mobile devices
-- **Smart Sorting** - Tasks automatically sorted by priority within each column
-
-### Time Tracking Details
-- Automatic start when task moves to In Progress
-- Real-world time tracking (continues even when browser is closed)
-- Accumulative tracking across multiple sessions
-- Live timer display in HH:MM:SS format
-- Completion time summary for finished tasks
-
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 - Modern web browser (Chrome, Firefox, Safari, Edge)
-- Python 3 (optional, for local development server)
+- Python 3 (for local development server)
+- Node.js (for building Tailwind CSS)
 
 ### Installation
 
-1. Clone the repository:
+1. Install dependencies:
 ```bash
-git clone https://github.com/thechillbasu/Kanby.git
-cd Kanby
+npm install
 ```
 
-2. Open in browser:
-
-**Option 1: Direct file access**
+2. Build Tailwind CSS:
 ```bash
-# Simply open index.html in your browser
-open index.html
+npx tailwindcss -i ./assets/css/main.css -o ./assets/css/output.css --watch
 ```
 
-**Option 2: Local server (recommended)**
+3. Start development server:
 ```bash
-# Start a local server
+npm run dev
+# or
 python3 -m http.server 8000
-
-# Navigate to http://localhost:8000
 ```
 
-### Usage
-
-#### Creating Tasks
-1. Enter task name in the input field
-2. Select priority level (High, Medium, Low)
-3. Choose initial column (To Do, In Progress, Done)
-4. Click "Add Note" to open the editor
-5. Add optional description and due date
-6. Click "Add Task" to create
-
-#### Managing Tasks
-- **Move Tasks** - Drag and drop cards between columns
-- **Edit Task** - Click the pencil icon on any card
-- **View Details** - Click anywhere on a card to see full information
-- **Delete Task** - Click the trash icon on any card
-
-#### Time Tracking
-- Timer starts automatically when task moves to In Progress
-- Time accumulates across multiple sessions
-- Timer continues even when browser is closed
-- Completed tasks show total time spent
-
-#### Google Calendar
-1. Click the live clock widget to view holiday calendar
-2. Click "My Events" to connect your personal calendar
-3. Authorize the application (OAuth 2.0)
-4. View upcoming events with details
-
-#### Theme Switching
-- Click the theme toggle button in the header
-- Preference is saved automatically
-
-## Project Structure
-
+4. Open browser:
 ```
-Kanby/
-├── index.html                      # Main HTML structure
-├── src/
-│   ├── css/                        # Modular CSS files
-│   │   ├── variables.css           # Design tokens and CSS variables
-│   │   ├── base.css                # Global styles and resets
-│   │   ├── headerBase.css          # Header structure
-│   │   ├── headerCalendar.css      # Calendar integration styles
-│   │   ├── headerThemes.css        # Light mode overrides
-│   │   ├── headerResponsive.css    # Header responsive breakpoints
-│   │   ├── form.css                # Task creation form
-│   │   ├── board.css               # Kanban board layout
-│   │   ├── cards.css               # Task card styles
-│   │   ├── priority.css            # Priority badge styles
-│   │   ├── modalBase.css           # Base modal styles
-│   │   ├── detailsViewerModal.css  # Task details viewer
-│   │   ├── detailsEditorModal.css  # Task editor with date picker
-│   │   ├── utilities.css           # Utility classes
-│   │   └── responsive.css          # Additional responsive styles
-│   └── js/                         # JavaScript modules
-│       ├── main.js                 # Application orchestration
-│       ├── notes.js                # Task CRUD operations
-│       ├── rendering.js            # DOM manipulation
-│       ├── dragDrop.js             # Drag and drop functionality
-│       ├── storage.js              # localStorage management
-│       ├── timer.js                # Time tracking system
-│       ├── modals.js               # Modal dialogs
-│       ├── formatters.js           # Date/time formatting
-│       ├── theme.js                # Theme switching
-│       ├── headerWidgets.js        # Live clock widget
-│       └── googleCalendar.js       # Google Calendar OAuth
-├── CODING_PREFERENCES.md           # Development guidelines
-├── PROJECT_DOCUMENTATION.md        # Comprehensive technical docs
-├── LICENSE                         # MIT License
-└── README.md                       # This file
+http://localhost:8000
 ```
 
-## Technology Stack
+## 🔐 Authentication
 
-- **Frontend**: Vanilla JavaScript (ES6+)
-- **Styling**: Modular CSS with custom properties
-- **Storage**: Browser localStorage
-- **APIs**: Google Calendar API, Google Identity Services
-- **Architecture**: Event-driven with modular design
+TaskSights uses Firebase Authentication with two methods:
+- **Google OAuth** - Sign in with your Google account
+- **Email/Password** - Create account with email
 
-## Browser Compatibility
+## 🗄️ Database Structure
 
-- Chrome/Edge 88+
-- Firefox 75+
-- Safari 13.1+
-- iOS Safari 13.4+
-- Android Chrome 88+
+### Collections:
+- `users` - User profiles and preferences
+- `kanban_tasks` - Kanban board tasks
+- `activities` - Time tracker activities
+- `time_logs` - Time tracking logs
+- `journal_entries` - Daily journal entries
+- `user_goals` - User-defined goals
+- `ai_insights` - Cached AI-generated insights
 
-## Responsive Breakpoints
+## 🎨 Tech Stack
 
-- **Desktop** (> 1280px): Full 3-column layout with wider spacing
-- **Large Laptop** (1024px - 1280px): 2-column layout, proportional scaling
-- **Tablet Landscape** (768px - 1024px): Single column, stacked layout
-- **Mobile Landscape** (640px - 890px): Compact spacing, optimized heights
-- **Mobile Portrait** (430px - 768px): Touch-optimized layout
-- **Small Mobile** (375px - 430px): Compact padding and spacing
-- **Extra Small** (≤ 375px): Minimal spacing, ultra-compact
+- **Frontend**: Vanilla JavaScript (ES6+ modules)
+- **UI Framework**: Tailwind CSS + DaisyUI
+- **Authentication**: Firebase Auth
+- **Database**: Cloud Firestore
+- **Charts**: Chart.js
+- **AI**: Google Gemini (via Emergent LLM Key)
+- **Icons**: Font Awesome
 
-## Development
+## 🔧 Development
 
-### Code Style
-- JavaScript: camelCase for variables/functions, PascalCase for classes
-- CSS: camelCase for class names (e.g., `.appHeader`, `.taskCard`)
-- Comments: File headers and concise single-line comments
-- ES6+ features (arrow functions, template literals, destructuring)
+### Build CSS:
+```bash
+npx tailwindcss -i ./assets/css/main.css -o ./assets/css/output.css --minify
+```
 
-### Key Principles
-- Modular architecture with clear separation of concerns
-- Event-driven communication between modules
-- Mobile-first responsive design
-- Accessibility compliance
-- Clean, professional code without decorative elements
+### Start Dev Server:
+```bash
+npm run dev
+```
 
-## Contributing
+### Deploy to Firebase:
+```bash
+firebase deploy
+```
 
-Contributions are welcome! Please ensure your code follows the existing style guidelines in CODING_PREFERENCES.md.
+## 📱 Features Status
 
-## License
+- ✅ Authentication (Google OAuth + Email/Password)
+- ✅ Landing Page
+- ✅ Login/Signup Pages
+- ✅ Dashboard Structure
+- ✅ Navigation System
+- ✅ Firebase Integration
+- ✅ Firestore Security Rules
+- ⏳ Profile Module (in progress)
+- ⏳ Kanban Board Module (in progress)
+- ⏳ Time Tracker Module (in progress)
+- ⏳ Insights Module (in progress)
+- ⏳ Daily Journal Module (in progress)
+- ⏳ AI Integration (Gemini)
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 🔑 Environment Variables
 
-## Acknowledgments
+The Emergent LLM Key is already configured for AI features:
+```
+EMERGENT_LLM_KEY=sk-emergent-aBa07E05131441590E
+```
 
-- Font Awesome for icons
-- Google for Calendar API and Identity Services
-- Modern CSS techniques for glassmorphism and neon effects
+## 📖 Documentation
 
-## Support
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [DaisyUI Components](https://daisyui.com/components/)
+- [Chart.js](https://www.chartjs.org/docs/latest/)
 
-For issues, questions, or suggestions, please open an issue on the GitHub repository.
+## 🤝 Contributing
+
+This is a personal productivity platform. The original Kanban board code is preserved in `/app/kanby_backup/`.
+
+## 📄 License
+
+MIT License
+
+## 🎯 Next Steps
+
+1. Complete Profile module
+2. Migrate Kanban board from backup
+3. Build Time Tracker with live timer
+4. Create Insights dashboard with charts
+5. Implement AI analysis with Gemini
+6. Build Daily Journal feature
+7. Add environmental impact calculations
+8. Implement goal tracking and progress visualization
+
+## 🐛 Known Issues
+
+- Feature modules are currently placeholders
+- AI integration requires backend Python service (emergentintegrations)
+
+## 📞 Support
+
+For issues or questions, please refer to the Firebase and Tailwind documentation linked above.
