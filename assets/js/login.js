@@ -1,5 +1,9 @@
 // Login Page Logic for TaskSights
 import { signInWithGoogle, signInWithEmail, signUpWithEmail, resetPassword, onAuthChange } from './auth.js';
+import { initTheme } from './theme.js';
+
+// Initialize theme
+initTheme();
 
 // DOM Elements
 const loginTab = document.getElementById('loginTab');
