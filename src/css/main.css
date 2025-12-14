@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS for TaskSights */
+@layer components {
+  /* Sidebar Navigation */
+  .sidebar {
+    @apply fixed left-0 top-0 h-screen w-64 bg-base-200 shadow-xl z-50 transition-transform duration-300;
+  }
+  
+  .sidebar.collapsed {
+    @apply -translate-x-full lg:translate-x-0 lg:w-16;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 hover:bg-base-300 cursor-pointer transition-colors rounded-lg mx-2 my-1;
+  }
+  
+  .sidebar-item.active {
+    @apply bg-primary text-primary-content;
+  }
+  
+  .sidebar-item-icon {
+    @apply text-xl min-w-[24px];
+  }
+  
+  .sidebar-item-text {
+    @apply font-medium;
+  }
+  
+  /* Main Content Area */
+  .main-content {
+    @apply ml-0 lg:ml-64 min-h-screen bg-base-100 transition-all duration-300;
+  }
+  
+  .main-content.sidebar-collapsed {
+    @apply lg:ml-16;
+  }
+  
+  /* Kanban Board Specific */
+  .kanban-column {
+    @apply bg-base-200 rounded-lg p-4 min-h-[500px];
+  }
+  
+  .kanban-card {
+    @apply bg-base-100 rounded-lg p-4 mb-3 shadow-md hover:shadow-lg transition-shadow cursor-move;
+  }
+  
+  .kanban-card.dragging {
+    @apply opacity-50;
+  }
+  
+  .kanban-column.drop-target {
+    @apply ring-2 ring-primary;
+  }
+  
+  /* Time Tracker */
+  .timer-display {
+    @apply text-4xl font-mono font-bold text-primary;
+  }
+  
+  .activity-item {
+    @apply bg-base-200 rounded-lg p-4 mb-3 hover:bg-base-300 transition-colors;
+  }
+  
+  /* Insights Dashboard */
+  .insight-card {
+    @apply bg-base-100 rounded-lg p-6 shadow-md;
+  }
+  
+  .chart-container {
+    @apply bg-base-100 rounded-lg p-6 shadow-md;
+  }
+  
+  /* Daily Journal */
+  .journal-entry {
+    @apply bg-base-100 rounded-lg p-6 shadow-md mb-4;
+  }
+  
+  /* Priority Badges */
+  .priority-high {
+    @apply badge badge-error gap-1;
+  }
+  
+  .priority-medium {
+    @apply badge badge-warning gap-1;
+  }
+  
+  .priority-low {
+    @apply badge badge-info gap-1;
+  }
+  
+  /* Status Badges */
+  .status-todo {
+    @apply badge badge-primary gap-1;
+  }
+  
+  .status-inprogress {
+    @apply badge badge-warning gap-1;
+  }
+  
+  .status-done {
+    @apply badge badge-success gap-1;
+  }
+  
+  /* Loading States */
+  .skeleton-loader {
+    @apply animate-pulse bg-base-300 rounded;
+  }
+  
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-base-200;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-base-300 rounded-full hover:bg-base-content/20;
+  }
+  
+  /* Animation Classes */
+  .fade-in {
+    animation: fadeIn 0.3s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .sidebar {
+    @apply -translate-x-full;
+  }
+  
+  .sidebar.open {
+    @apply translate-x-0;
+  }
+  
+  .main-content {
+    @apply ml-0;
+  }
+}
